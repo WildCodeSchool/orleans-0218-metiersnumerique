@@ -1,0 +1,35 @@
+#intro {
+    height: 50vh;
+    width: 100%;
+    background-image: url("business.jpg");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
+    background-size: cover;
+    text-align: center;
+    vertical-align: baseline;
+    margin-bottom: 50px;
+}
+
+.accueil {
+    color:white;
+}
+
+#bandeau {
+    position:relative;
+    top:20vh;
+}
+
+#enter {
+    position: relative;
+    color:white;
+    background-color: #f9a02e;
+    top: 40px;
+}
+.iframe {
+    padding:10px;
+    max-height: 360px;
+}
+.center {
+    text-align: center;
+}

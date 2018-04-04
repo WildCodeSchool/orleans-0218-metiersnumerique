@@ -1,0 +1,34 @@
+{% extends "layout.html.twig" %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/public/assets/css/index.css">
+{% endblock %}
+{% block navbar %}
+    {% include 'navbar.html.twig' %}
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div id="intro">
+            <div id=bandeau>
+                <h1><span class="accueil">La Wild Code School vous informe ...</span></h1>
+                <a id="enter" href="#" class="btn-lg" role="button">Découvrir les métiers du numérique</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-sm-12 col-md-6">
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe width="560" height="315" class="iframe embed-responsive-item" frameborder="0" src="https://www.youtube.com/embed/dn2c61VGCoQ"></iframe>
+            </div>
+            <h4>Interview de John Devos, campus manager à Orléans</h4>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe width="560" height="315" class="iframe embed-responsive-item" frameborder="0" src="https://www.youtube.com/embed/dn2c61VGCoQ"></iframe>
+            </div>
+            <h4>Interview de Nicolas Vincent, formateur à Orléans</h4>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}
+    {% include 'footer.html.twig' %}
+{% endblock %}
