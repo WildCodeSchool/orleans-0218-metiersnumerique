@@ -1,0 +1,44 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/themes.css">
+{% endblock %}
+
+{% block navbar %}
+    {% include 'navbar.html.twig' %}
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-lg-offset-3">
+                <ul class="nav nav-pills" role="tablist">
+                    {% for theme in themes %}
+                        <li role="presentation" {% if (loop.index==1) %}class="active"{% endif %}>
+                            <a href="#{{ theme.id }}" role="pill" data-toggle="tab">{{ theme.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="tab-content">
+                    {% for theme in themes %}
+                        <div class="pannel pannel-default tab-pane fade{% if (loop.index==1) %} in active{% endif %}" role="tabpanel" id="{{ theme.id }}">
+                            <div class="pannel-body">
+                                {% for job in jobs if (job.themeId == theme.id) %}
+                                    <p><a href="#Job{{ job.id }}">{{ job.name }}</a></p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
