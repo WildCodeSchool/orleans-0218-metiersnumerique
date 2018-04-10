@@ -1,33 +1,27 @@
-#intro {
+.header {
     height: 50vh;
-    width: 100%;
-    background-image: url("business.jpg");
+    background-image: url("https://wildcodeschool.fr/wp-content/uploads/2017/01/header_background.jpg");
     background-repeat: no-repeat;
-    background-position: right top;
-    background-attachment: fixed;
+    background-position: center;
     background-size: cover;
     text-align: center;
     vertical-align: baseline;
     margin-bottom: 50px;
 }
 
-.accueil {
-    color:white;
-}
-
-#bandeau {
-    position:relative;
-    top:20vh;
-}
-
-#enter {
+.header-content {
     position: relative;
-    color:white;
-    background-color: #f9a02e;
-    top: 40px;
+    top: 150px;
 }
+
+.home {
+    /*font-size: 40px;*/
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
 .iframe {
-    padding:10px;
+    padding: 10px;
     max-height: 360px;
 }
 .center {
