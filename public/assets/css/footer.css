@@ -9,7 +9,7 @@ footer {
     padding: 30px 50px;
 }
 
-footer h2 {
+footer h4 {
     font-size: calc(1vw + 1vh + 1vmin);
 }
 
@@ -31,19 +31,6 @@ footer .logo {
     box-shadow: none;
 }
 
-.btn {
-    background-color: #fba858;
-    color: white;
-    border-radius: 0;
-    border-bottom: 1px solid #1FA597;
-    margin-top: 10px;
-}
-
-.btn:hover {
-    background-color: #f9a02e;
-    color: white;
-}
-
 #network {
     display: flex;
     flex-direction: row;
@@ -61,49 +48,49 @@ footer .logo {
 }
 
 #hover-fb {
-    background-image: url("/public/assets/images/footer/facebook_gris.png");
+    background-image: url("/assets/images/footer/facebook_gris.png");
 }
 
 #hover-tw {
-    background-image: url("/public/assets/images/footer/twitter_gris.png");
+    background-image: url("/assets/images/footer/twitter_gris.png");
 }
 
 #hover-lk {
-    background-image: url("/public/assets/images/footer/linkedin_gris.png");
+    background-image: url("/assets/images/footer/linkedin_gris.png");
 }
 
 #hover-yt {
-    background-image: url("/public/assets/images/footer/youtube_gris.png");
+    background-image: url("/assets/images/footer/youtube_gris.png");
 }
 
 #hover-in {
-    background-image: url("/public/assets/images/footer/instagram_gris.png");
+    background-image: url("/assets/images/footer/instagram_gris.png");
 }
 
 #hover-gh {
-    background-image: url("/public/assets/images/footer/github_gris.png");
+    background-image: url("/assets/images/footer/github_gris.png");
 }
 
 #hover-fb:hover {
-    background-image: url("/public/assets/images/footer/facebook.png");
+    background-image: url("/assets/images/footer/facebook.png");
 }
 
 #hover-tw:hover {
-    background-image: url("/public/assets/images/footer/twitter.png");
+    background-image: url("/assets/images/footer/twitter.png");
 }
 
 #hover-lk:hover {
-    background-image: url("/public/assets/images/footer/linkedin.png");
+    background-image: url("/assets/images/footer/linkedin.png");
 }
 
 #hover-yt:hover {
-    background-image: url("/public/assets/images/footer/youtube.png");
+    background-image: url("/assets/images/footer/youtube.png");
 }
 
 #hover-in:hover {
-    background-image: url("/public/assets/images/footer/instagram.png");
+    background-image: url("/assets/images/footer/instagram.png");
 }
 
 #hover-gh:hover {
-    background-image: url("/public/assets/images/footer/github.png");
+    background-image: url("/assets/images/footer/github.png");
 }
