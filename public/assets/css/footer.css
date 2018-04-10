@@ -1,0 +1,96 @@
+footer {
+    background-color: #35383A;
+    text-align: center;
+    color: white;
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 30px 50px;
+}
+
+footer h4 {
+    font-size: calc(1vw + 1vh + 1vmin);
+}
+
+footer .logo {
+    width: 80px;
+}
+
+.blue {
+    color: #1FA597;
+}
+
+.form-control {
+    border-radius: 0;
+    border-bottom: 1px solid #1FA597;
+    margin-top: 10px;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+#network {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#network div{
+    border-radius: 100px;
+    min-width: 40px;
+    min-height: 40px;
+    margin: 5px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    box-shadow: 0 5px 5px 0 #272727;
+}
+
+#hover-fb {
+    background-image: url("/assets/images/footer/facebook_gris.png");
+}
+
+#hover-tw {
+    background-image: url("/assets/images/footer/twitter_gris.png");
+}
+
+#hover-lk {
+    background-image: url("/assets/images/footer/linkedin_gris.png");
+}
+
+#hover-yt {
+    background-image: url("/assets/images/footer/youtube_gris.png");
+}
+
+#hover-in {
+    background-image: url("/assets/images/footer/instagram_gris.png");
+}
+
+#hover-gh {
+    background-image: url("/assets/images/footer/github_gris.png");
+}
+
+#hover-fb:hover {
+    background-image: url("/assets/images/footer/facebook.png");
+}
+
+#hover-tw:hover {
+    background-image: url("/assets/images/footer/twitter.png");
+}
+
+#hover-lk:hover {
+    background-image: url("/assets/images/footer/linkedin.png");
+}
+
+#hover-yt:hover {
+    background-image: url("/assets/images/footer/youtube.png");
+}
+
+#hover-in:hover {
+    background-image: url("/assets/images/footer/instagram.png");
+}
+
+#hover-gh:hover {
+    background-image: url("/assets/images/footer/github.png");
+}
