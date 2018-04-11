@@ -29,9 +29,9 @@ class CommentController extends AbstractController
             $firstname = $_POST['firstname'];
             $email = $_POST['email'];
             if (isset($_POST['wilder'])) {
-                $wilder = $_POST['wilder'];
+                $wilder = 1;
             } else {
-                $wilder = 'off';
+                $wilder = 0;
             }
             $profession = $_POST['profession'];
             $company = $_POST['company'];
