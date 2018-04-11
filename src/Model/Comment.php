@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: wilder4
- * Date: 04/04/18
- * Time: 14:41
+ * User: wilder12
+ * Date: 10/04/18
+ * Time: 17:39
  */
 
 namespace Model;
@@ -25,7 +25,8 @@ class Comment
     private $question1;
     private $question2;
     private $question3;
-    private $jobId;
+    private $job_id;
+    private $name;
 
     /**
      * @return mixed
@@ -34,7 +35,6 @@ class Comment
     {
         return $this->id;
     }
-
     /**
      * @param mixed $id
      * @return Comment
@@ -44,7 +44,6 @@ class Comment
         $this->id = $id;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -52,7 +51,6 @@ class Comment
     {
         return $this->firstname;
     }
-
     /**
      * @param mixed $firstname
      * @return Comment
@@ -62,7 +60,6 @@ class Comment
         $this->firstname = $firstname;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -70,7 +67,6 @@ class Comment
     {
         return $this->lastname;
     }
-
     /**
      * @param mixed $lastname
      * @return Comment
@@ -80,7 +76,6 @@ class Comment
         $this->lastname = $lastname;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -88,7 +83,6 @@ class Comment
     {
         return $this->date;
     }
-
     /**
      * @param mixed $date
      * @return Comment
@@ -98,7 +92,6 @@ class Comment
         $this->date = $date;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -106,7 +99,6 @@ class Comment
     {
         return $this->email;
     }
-
     /**
      * @param mixed $email
      * @return Comment
@@ -116,7 +108,6 @@ class Comment
         $this->email = $email;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -124,7 +115,6 @@ class Comment
     {
         return $this->wilder;
     }
-
     /**
      * @param mixed $wilder
      * @return Comment
@@ -134,7 +124,6 @@ class Comment
         $this->wilder = $wilder;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -142,7 +131,6 @@ class Comment
     {
         return $this->avatar;
     }
-
     /**
      * @param mixed $avatar
      * @return Comment
@@ -152,7 +140,6 @@ class Comment
         $this->avatar = $avatar;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -160,7 +147,6 @@ class Comment
     {
         return $this->profession;
     }
-
     /**
      * @param mixed $profession
      * @return Comment
@@ -170,7 +156,6 @@ class Comment
         $this->profession = $profession;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -178,7 +163,6 @@ class Comment
     {
         return $this->company;
     }
-
     /**
      * @param mixed $company
      * @return Comment
@@ -188,7 +172,6 @@ class Comment
         $this->company = $company;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -196,7 +179,6 @@ class Comment
     {
         return $this->valid;
     }
-
     /**
      * @param mixed $valid
      * @return Comment
@@ -206,7 +188,6 @@ class Comment
         $this->valid = $valid;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -214,7 +195,6 @@ class Comment
     {
         return $this->like;
     }
-
     /**
      * @param mixed $like
      * @return Comment
@@ -224,7 +204,6 @@ class Comment
         $this->like = $like;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -232,7 +211,6 @@ class Comment
     {
         return $this->question1;
     }
-
     /**
      * @param mixed $question1
      * @return Comment
@@ -242,7 +220,6 @@ class Comment
         $this->question1 = $question1;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -250,7 +227,6 @@ class Comment
     {
         return $this->question2;
     }
-
     /**
      * @param mixed $question2
      * @return Comment
@@ -260,7 +236,6 @@ class Comment
         $this->question2 = $question2;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -268,7 +243,6 @@ class Comment
     {
         return $this->question3;
     }
-
     /**
      * @param mixed $question3
      * @return Comment
@@ -278,22 +252,36 @@ class Comment
         $this->question3 = $question3;
         return $this;
     }
-
     /**
      * @return mixed
      */
     public function getJobId()
     {
-        return $this->jobId;
+        return $this->job_id;
     }
-
     /**
      * @param mixed $jobId
      * @return Comment
      */
     public function setJobId($jobId)
     {
-        $this->jobId = $jobId;
+        $this->job_id = $jobId;
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getJobName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setJobName($name): void
+    {
+        $this->name = $name;
     }
 }

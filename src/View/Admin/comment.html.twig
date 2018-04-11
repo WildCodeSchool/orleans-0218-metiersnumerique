@@ -1,0 +1,44 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/admin/comment.css">
+{% endblock %}
+{% block navbar %}
+    {% include 'navbar.html.twig' %}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Gestion des commentaires</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Fiche associée</th>
+                            <th>Date</th>
+                            <th>Auteur</th>
+                            <th class="text-center">Voir</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for comment in comments %}
+                            {% if comment.valid == 0 %}<tr class="warning">{% else %}<tr class="success">{% endif %}
+                                <td>{{ comment.jobName }}</td>
+                                <td>{{ comment.date|date("d/m/Y") }}</td>
+                                <td>{{ comment.firstname }} {{ comment.lastname }}</td>
+                                <td class="text-center">
+                                    <a href="/admin/comment-view/{{ comment.id }}">
+                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
