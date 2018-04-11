@@ -22,4 +22,5 @@ class JobController extends AbstractController
     {
         return $this->twig->render('comment.html.twig', ['jobId' => $id]);
     }
+
 }
