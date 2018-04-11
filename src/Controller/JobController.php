@@ -9,7 +9,17 @@
 namespace Controller;
 
 
-class JobController
+class JobController extends AbstractController
 {
+    public function getAllJobs()
+    {
+        $jobManager = new JobManager();
+        $jobs = $jobManager->selectAllOrderByThemeId();
+        return $jobs;
+    }
 
+    public function addComment(int $id)
+    {
+        return $this->twig->render('comment.html.twig', ['jobId' => $id]);
+    }
 }
