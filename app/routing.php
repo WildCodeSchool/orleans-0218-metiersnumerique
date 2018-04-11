@@ -12,5 +12,6 @@
 $routes = [
     'Index' => [ // Controller
         ['index', '/', 'GET'], // action, url, method
+        ['job', '/job', 'GET'], // action, url, method
     ],
 ];

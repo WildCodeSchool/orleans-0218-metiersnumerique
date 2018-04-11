@@ -1,0 +1,14 @@
+#titre-metier {
+    background-image: url("https://wildcodeschool.fr/wp-content/uploads/2017/01/header_background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    color: white;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 30px 50px;
+}
+

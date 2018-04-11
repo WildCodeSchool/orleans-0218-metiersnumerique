@@ -21,4 +21,9 @@ class IndexController extends AbstractController
     {
         return $this->twig->render('index.html.twig');
     }
+
+    public function job()
+    {
+        return $this->twig->render('job.html.twig');
+    }
 }

@@ -1,0 +1,35 @@
+{% extends "layout.html.twig" %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/index.css">
+    <link rel="stylesheet" href="/assets/css/job.css">
+{% endblock %}
+{% block navbar %}
+    {% include 'navbar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <div id="titre-metier" class=""container-fluid">
+        <h1>Wildcoder</h1>
+    </div>
+    <div class="container">
+        <a href="#"><button class="btn btn-lg">retour</button></a>
+        <div id="description" class="page-header">
+            <div class="col-sm-12 col-md-8">
+                <h3>Wildcoder</h3>
+                    <p>Utque proeliorum periti rector res primo catervas densas opponunt et fortes, deinde leves armaturas, post iaculatores ultimasque subsidiales acies, si fors adegerit, iuvaturas, ita praepositis urbanae familiae suspensae digerentibus sollicite, quos insignes faciunt virgae dexteris aptatae velut tessera data castrensi iuxta vehiculi frontem omne textrinum incedit: huic atratum coquinae iungitur ministerium, dein totum promiscue servitium cum otiosis plebeiis de vicinitate coniunctis: postrema multitudo spadonum a senibus in pueros desinens, obluridi distortaque lineamentorum conpage deformes, ut quaqua incesserit quisquam cernens mutilorum hominum agmina detestetur memoriam Samiramidis reginae illius veteris, quae teneros mares castravit omnium prima velut vim iniectans naturae, eandemque ab instituto cursu retorquens, quae inter ipsa oriundi crepundia per primigenios seminis fontes tacita quodam modo lege vias propagandae posteritatis ostendit.</p>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="embed-responsive embed-responsive-4by3">
+                    <iframe width="560" height="315" class="iframe embed-responsive-item" frameborder="0" src="https://www.youtube.com/embed/dn2c61VGCoQ"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <--! limite content-->
+
+{% endblock %}
+
+
+{% block footer %}
+    {% include 'footer.html.twig' %}
+{% endblock %}
