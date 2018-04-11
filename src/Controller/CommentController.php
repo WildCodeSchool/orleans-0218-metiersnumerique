@@ -11,6 +11,8 @@ namespace Controller;
 
 use Model\Comment;
 use Model\CommentManager;
+use Model\Job;
+use Model\JobManager;
 
 class CommentController extends AbstractController
 {
@@ -22,9 +24,14 @@ class CommentController extends AbstractController
      */
     public function getComment()
     {
-        $commentManager = new CommentManager();
-        $commentsWithJobName = $commentManager->selectAllCommentsByJob();
+        /*$commentManager = new CommentManager();
+        $commentsWithJobName = $commentManager->selectAllCommentsByJob();*/
 
-        return $this->twig->render('Admin/comment.html.twig', ['comments' => $commentsWithJobName]);
+        $comments = new CommentManager();
+        $comments = $comments->selectAllOrderByState();
+        $jobs = new JobManager();
+        $jobs = $jobs->selectAll();
+//        var_dump($jobs); die();
+        return $this->twig->render('Admin/comment.html.twig', ['comments' => $comments, 'jobs' => $jobs]);
     }
 }
