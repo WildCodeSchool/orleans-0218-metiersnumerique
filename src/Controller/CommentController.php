@@ -9,9 +9,10 @@
 namespace Controller;
 
 
+use Model\Comment;
 use Model\CommentManager;
 
-class AdminController extends AbstractController
+class CommentController extends AbstractController
 {
     /**
      * @return string
@@ -19,11 +20,11 @@ class AdminController extends AbstractController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function comment()
+    public function getComment()
     {
         $commentManager = new CommentManager();
-        $comments = $commentManager->selectAllCommentsByJob();
+        $commentsWithJobName = $commentManager->selectAllCommentsByJob();
 
-        return $this->twig->render('Admin/comment.html.twig', ['comments' => $comments]);
+        return $this->twig->render('Admin/comment.html.twig', ['comments' => $commentsWithJobName]);
     }
 }

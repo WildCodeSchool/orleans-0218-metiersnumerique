@@ -35,6 +35,7 @@ class CommentManager extends AbstractManager
         $query = 'SELECT comment.id, comment.firstname, comment.lastname, comment.date, comment.valid, job.name FROM comment
                   JOIN job ON comment.job_id = job.id
                   ORDER BY comment.valid ASC, comment.date DESC';
-        return $this->pdoConnection->query($query, \PDO::FETCH_CLASS, $this->className)->fetchAll();
+
+        return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
     }
 }

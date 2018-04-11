@@ -26,7 +26,7 @@
                     <tbody>
                         {% for comment in comments %}
                             {% if comment.valid == 0 %}<tr class="not-valid">{% else %}<tr class="valid">{% endif %}
-                                <td>{{ comment.jobName }}</td>
+                                <td>{{ comment.name }}</td>
                                 <td>{{ comment.date|date("d/m/Y") }}</td>
                                 <td>{{ comment.firstname }} {{ comment.lastname }}</td>
                                 <td class="text-center">
