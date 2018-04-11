@@ -11,7 +11,8 @@ namespace Model;
 
 class CommentManager extends AbstractManager
 {
-    const TABLE = 'job';
+    const TABLE = 'comment';
+
     /**
      *  Initializes this class.
      */
@@ -19,11 +20,21 @@ class CommentManager extends AbstractManager
     {
         parent::__construct(self::TABLE);
     }
+
+    /**
+     * @return array
+     */
     public function selectNbCommentsByJob(): array
     {
         $query = 'SELECT count(id) FROM ' . $this->table . ' INNER JOIN job ON job.id = ' . $this->table . '.job_id ';
         return $this->pdoConnection->query($query, \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
-
+    public function selectAllCommentsByJob(): array
+    {
+        $query = 'SELECT comment.id, comment.firstname, comment.lastname, comment.date, comment.valid, job.name FROM comment
+                  JOIN job ON comment.job_id = job.id
+                  ORDER BY comment.valid ASC';
+        return $this->pdoConnection->query($query, \PDO::FETCH_CLASS, $this->className)->fetchAll();
+    }
 }

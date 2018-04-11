@@ -63,7 +63,7 @@ abstract class AbstractManager
     }
 
     /**
-     * DELETE on row in dataase by ID
+     * DELETE on row in database by ID
      *
      * @param int $id
      */
@@ -76,7 +76,7 @@ abstract class AbstractManager
     /**
      * INSERT one row in dataase
      *
-     * @param Array $data
+     * @param array $data
      */
     public function insert(array $data)
     {

@@ -1,0 +1,10 @@
+body {
+    padding-top: 70px;
+}
+
+h1 {
+    padding-bottom: 25px;
+}
+.view a:hover {
+    color: #F9A02E;
+}

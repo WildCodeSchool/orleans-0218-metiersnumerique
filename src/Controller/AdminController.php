@@ -9,6 +9,8 @@
 namespace Controller;
 
 
+use Model\CommentManager;
+
 class AdminController extends AbstractController
 {
     /**
@@ -19,6 +21,9 @@ class AdminController extends AbstractController
      */
     public function comment()
     {
-        return $this->twig->render('Admin/comment.html.twig');
+        $commentManager = new CommentManager();
+        $comments = $commentManager->selectAllCommentsByJob();
+
+        return $this->twig->render('Admin/comment.html.twig', ['comments' => $comments]);
     }
 }
