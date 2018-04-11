@@ -15,6 +15,7 @@ $routes = [
     ],
     'Job' => [ // Controller
         ['getJob', '/job', 'GET'], // action, url, method
+    ],
     'Admin' => [ // Controller
         ['comment', '/admin/comment', 'GET'], // action, url, method
         ['commentView', '/admin/comment-view/{id:\d+}', 'GET'], // action, url, method
