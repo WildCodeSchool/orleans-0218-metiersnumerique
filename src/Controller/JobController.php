@@ -14,8 +14,6 @@ use Model\ThemeManager;
 
 class JobController extends AbstractController
 {
-
-
     public function showJobs()
     {
         $themeManager = new ThemeManager();
@@ -25,5 +23,13 @@ class JobController extends AbstractController
         $jobs = $jobController->selectAllOrderByThemeId();
 
         return $this->twig->render('Jobs/jobs.html.twig', ['themes' => $themes, 'jobs' => $jobs]);
+    }
+
+    public function getOneJobById(int $id)
+    {
+        $jobManager = new JobManager();
+        $job = $jobManager->selectOneById($id);
+
+        return $this->twig->render('job.html.twig', ['job' => $job]);
     }
 }
