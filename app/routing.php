@@ -10,7 +10,7 @@
  */
 
 $routes = [
-    'Index' => [ // Controller
-        ['index', '/', 'GET'], // action, url, method
+    'Job' => [ // Controller
+        ['showJobs', '/jobs', 'GET'], // action, url, method
     ],
 ];
