@@ -17,7 +17,7 @@ class Format
 {
     /**
      * Formate des données provenant d'une jointure Comment / Job
-     * @param array $data
+     * @param array $rows
      * @return array
      */
     public function commentJob(array $rows) :array

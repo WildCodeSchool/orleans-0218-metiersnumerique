@@ -9,10 +9,8 @@
 namespace Controller;
 
 
-use Model\Comment;
 use Model\CommentManager;
 use Model\Format;
-use Model\Job;
 
 class CommentController extends AbstractController
 {
