@@ -22,13 +22,7 @@ class CommentController extends AbstractController
 
     public function addComment()
     {
-        if (!empty($_POST)) {
-
-        } else {
-            $errors[] = 'Il ne faut pas de champ vide !';
-        }
-
-        if(empty($errors)) {
+        if(!empty($_POST)) {
             $datas['job_id'] = intval($_POST['idJob']);
             $datas['lastname'] = trim($_POST['lastname']);
             $datas['firstname'] = trim($_POST['firstname']);
@@ -51,7 +45,6 @@ class CommentController extends AbstractController
             $commentManager->insert($datas);
 
             header('Location: /job/comment/'.$datas['job_id']);
-            exit();
         }
     }
 }
