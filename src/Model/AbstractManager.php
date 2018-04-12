@@ -89,10 +89,14 @@ abstract class AbstractManager
         $statement = $this->pdoConnection->prepare($query);
 
         foreach ($datas as $field => $value) {
-            if(gettype($value) == 'integer') {
+            if(gettype($value) == 'integer' || gettype($value) == 'double') {
                 $statement->bindValue($field, $value, \PDO::PARAM_INT);
             } elseif (gettype($value) == 'string') {
                 $statement->bindValue($field, $value, \PDO::PARAM_STR);
+            } elseif (gettype($value) == 'boolean') {
+                $statement->bindValue($field, $value, \PDO::PARAM_BOOL);
+            } elseif (gettype($value) == 'NULL') {
+                $statement->bindValue($field, $value, \PDO::PARAM_NULL);
             }
         }
 

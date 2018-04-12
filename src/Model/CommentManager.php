@@ -19,10 +19,4 @@ class CommentManager extends AbstractManager
     {
         parent::__construct(self::TABLE);
     }
-
-    public function selectNbCommentsByJob(): array
-    {
-        $query = 'SELECT count(id) FROM ' . $this->table . ' INNER JOIN job ON job.id = ' . $this->table . '.job_id ';
-        return $this->pdoConnection->query($query, \PDO::FETCH_CLASS, $this->className)->fetchAll();
-    }
 }

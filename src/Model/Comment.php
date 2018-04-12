@@ -25,7 +25,7 @@ class Comment
     private $question1;
     private $question2;
     private $question3;
-    private $job_id;
+    private $jobId;
 
     /**
      * @return mixed
@@ -284,16 +284,16 @@ class Comment
      */
     public function getJobId()
     {
-        return $this->job_id;
+        return $this->jobId;
     }
 
     /**
      * @param mixed $jobId
      * @return Comment
      */
-    public function setJobId($job_id)
+    public function setJobId($jobId)
     {
-        $this->job_id = $job_id;
+        $this->jobId = $jobId;
         return $this;
     }
 }
