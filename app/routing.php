@@ -16,4 +16,7 @@ $routes = [
     'Job' => [
         ['getOneJobById', '/job/{id}', 'GET'], // action, url, method
     ]
+    'Comment' => [
+        ['addComment', '/job/{id:\d+}/add-comment', ['POST','GET']],
+    ],
 ];
