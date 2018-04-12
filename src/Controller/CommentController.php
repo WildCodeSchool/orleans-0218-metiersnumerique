@@ -9,8 +9,10 @@
 namespace Controller;
 
 
+use Model\Comment;
 use Model\CommentManager;
-use Model\JobManager;
+use Model\Format;
+use Model\Job;
 
 class CommentController extends AbstractController
 {
@@ -20,13 +22,14 @@ class CommentController extends AbstractController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function getCommentWithJobName()
+    public function getComments()
     {
-        $comments = new CommentManager();
-        $comments = $comments->selectAllCommentOrderByStateAndDate();
-        $jobs = new JobManager();
-        $jobs = $jobs->selectAll();
+        $commentsManager = new CommentManager();
+        $results = $commentsManager->selectAllCommentAndJob();
 
-        return $this->twig->render('Admin/comment.html.twig', ['comments' => $comments, 'jobs' => $jobs]);
+        $formater = new Format();
+        $datas = $formater->commentJob($results);
+
+        return $this->twig->render('Admin/comment.html.twig', ['datas' => $datas]);
     }
 }

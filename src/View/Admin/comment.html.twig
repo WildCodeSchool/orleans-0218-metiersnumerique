@@ -24,19 +24,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for comment in comments %}
-                            {% if comment.valid == 0 %}<tr class="not-valid">{% else %}<tr class="valid">{% endif %}
+                        {% for data in datas %}
+                            <tr class="{% if data.comment.valid == 0 %}not-valid{% else %}valid{% endif %}">
                                 <td>
-                                    {% for job in jobs %}
-                                        {% if comment.jobId == job.id %}
-                                            {{ job.name }}
-                                        {% endif %}
-                                    {% endfor %}
+                                    {{ data.job.name }}
                                 </td>
-                                <td>{{ comment.date|date("d/m/Y") }}</td>
-                                <td>{{ comment.firstname }} {{ comment.lastname }}</td>
+                                <td>{{ data.comment.date|date("d/m/Y") }}</td>
+                                <td>{{ data.comment.firstname }} {{ data.comment.lastname }}</td>
                                 <td class="text-center">
-                                    <a href="/admin/comment-view/{{ comment.id }}">
+                                    <a href="/admin/comment-view/{{ data.comment.id }}">
                                         <i class="glyphicon glyphicon-eye-open"></i>
                                     </a>
                                 </td>

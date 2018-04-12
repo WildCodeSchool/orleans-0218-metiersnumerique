@@ -267,4 +267,53 @@ class Comment
         $this->job_id = $jobId;
         return $this;
     }
+
+    public function hydrate(array $datas)
+    {
+        if (isset($datas['id'])) {
+            $this->setId($datas['id']);
+        }
+        if (isset($datas['firstname'])) {
+            $this->setFirstname($datas['firstname']);
+        }
+        if (isset($datas['lastname'])) {
+            $this->setLastname($datas['lastname']);
+        }
+        if (isset($datas['date'])) {
+            $this->setDate($datas['date']);
+        }
+        if (isset($datas['email'])) {
+            $this->setEmail($datas['email']);
+        }
+        if (isset($datas['wilder'])) {
+            $this->setWilder($datas['wilder']);
+        }
+        if (isset($datas['avatar'])) {
+            $this->setAvatar($datas['avatar']);
+        }
+        if (isset($datas['profession'])) {
+            $this->setProfession($datas['profession']);
+        }
+        if (isset($datas['company'])) {
+            $this->setCompany($datas['company']);
+        }
+        if (isset($datas['valid'])) {
+            $this->setValid($datas['valid']);
+        }
+        if (isset($datas['like'])) {
+            $this->setLike($datas['like']);
+        }
+        if (isset($datas['question1'])) {
+            $this->setQuestion1($datas['question1']);
+        }
+        if (isset($datas['question2'])) {
+            $this->setQuestion2($datas['question2']);
+        }
+        if (isset($datas['question3'])) {
+            $this->setQuestion3($datas['question3']);
+        }
+        if (isset($datas['job_id'])) {
+            $this->setJobId($datas['job_id']);
+        }
+    }
 }

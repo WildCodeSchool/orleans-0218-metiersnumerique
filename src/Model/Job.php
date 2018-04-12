@@ -199,5 +199,40 @@ class Job
         $this->theme_id = $theme_id;
     }
 
-
+    public function hydrate(array $datas)
+    {
+        if (isset($datas['id'])) {
+            $this->setId($datas['id']);
+        }
+        if (isset($datas['name'])) {
+            $this->setName($datas['name']);
+        }
+        if (isset($datas['resum'])) {
+            $this->setResum($datas['resum']);
+        }
+        if (isset($datas['description'])) {
+            $this->setDescription($datas['description']);
+        }
+        if (isset($datas['image'])) {
+            $this->setImage($datas['image']);
+        }
+        if (isset($datas['video'])) {
+            $this->setVideo($datas['video']);
+        }
+        if (isset($datas['thumbnail'])) {
+            $this->setThumbnail($datas['thumbnail']);
+        }
+        if (isset($datas['question1'])) {
+            $this->setQuestion1($datas['question1']);
+        }
+        if (isset($datas['question2'])) {
+            $this->setQuestion2($datas['question2']);
+        }
+        if (isset($datas['question3'])) {
+            $this->setQuestion3($datas['question3']);
+        }
+        if (isset($datas['theme_id'])) {
+            $this->setThemeId($datas['theme_id']);
+        }
+    }
 }
