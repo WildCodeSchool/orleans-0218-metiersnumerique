@@ -1,15 +1,17 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: wilder4
  * Date: 04/04/18
  * Time: 10:27
  */
+
 namespace Model;
+
 class JobManager extends AbstractManager
 {
     const TABLE = 'job';
+
     /**
      *  Initializes this class.
      */
@@ -17,6 +19,7 @@ class JobManager extends AbstractManager
     {
         parent::__construct(self::TABLE);
     }
+
     /**
      * Get all row from database.
      *

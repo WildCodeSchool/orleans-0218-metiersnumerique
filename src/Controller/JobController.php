@@ -5,16 +5,24 @@
  * Date: 04/04/18
  * Time: 11:30
  */
+
 namespace Controller;
+
 use Model\Job;
 use Model\JobManager;
+use Model\ThemeManager;
+
 class JobController extends AbstractController
 {
-    public function getAllJobs()
+    public function showJobs()
     {
-        $jobManager = new JobManager();
-        $jobs = $jobManager->selectAllOrderByThemeId();
-        return $jobs;
+        $themeManager = new ThemeManager();
+        $themes = $themeManager->selectAll();
+
+        $jobController = new JobManager();
+        $jobs = $jobController->selectAllOrderByThemeId();
+
+        return $this->twig->render('Jobs/jobs.html.twig', ['themes' => $themes, 'jobs' => $jobs]);
     }
 
     public function getOneJobById(int $id)
