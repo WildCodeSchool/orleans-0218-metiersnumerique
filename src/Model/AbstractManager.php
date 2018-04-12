@@ -78,9 +78,25 @@ abstract class AbstractManager
      *
      * @param Array $data
      */
-    public function insert()
+    public function insert(array $datas)
     {
-        //TODO : Implements SQL INSERT request
+        $fields = array_keys($datas);
+
+        $query = "INSERT INTO $this->table 
+                  (" . implode(',' . $this->table .'.', $fields) . ")
+                  VALUES  (:" . implode(', :', $fields) . ")";
+
+        $statement = $this->pdoConnection->prepare($query);
+
+        foreach ($datas as $field => $value) {
+            if(gettype($value) == 'integer') {
+                $statement->bindValue($field, $value, \PDO::PARAM_INT);
+            } elseif (gettype($value) == 'string') {
+                $statement->bindValue($field, $value, \PDO::PARAM_STR);
+            }
+        }
+
+        $statement->execute();
     }
 
 

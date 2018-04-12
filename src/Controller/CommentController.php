@@ -22,32 +22,36 @@ class CommentController extends AbstractController
 
     public function addComment()
     {
-        $errors = '';
         if (!empty($_POST)) {
-            $idJob = intval($_POST['idJob']);
-            $lastname = $_POST['lastname'];
-            $firstname = $_POST['firstname'];
-            $email = $_POST['email'];
-            if (isset($_POST['wilder'])) {
-                $wilder = 1;
-            } else {
-                $wilder = 0;
-            }
-            $profession = $_POST['profession'];
-            $company = $_POST['company'];
-            $q1 = $_POST['q1'];
-            $q2 = $_POST['q2'];
-            $q3 = $_POST['q3'];
-            $like = 0;
-            $date = date("Y-m-d H:i:s"); //(le format DATETIME de MySQL)
-            $valid = 0;
-            $avatar = "default value";
-            $commentManager = new CommentManager();
-            $commentManager->insertComment($idJob, $lastname, $firstname, $email, $wilder, $profession, $company, $q1, $q2, $q3, $like, $date, $valid, $avatar);
+
         } else {
-            $errors = 'il ne faut pas de champ vide !';
+            $errors[] = 'Il ne faut pas de champ vide !';
         }
 
-        //return $errors;
+        if(empty($errors)) {
+            $datas['job_id'] = intval($_POST['idJob']);
+            $datas['lastname'] = trim($_POST['lastname']);
+            $datas['firstname'] = trim($_POST['firstname']);
+            $datas['email'] = trim($_POST['email']);
+            if (isset($_POST['wilder'])) {
+                $datas['wilder'] = 1;
+            } else {
+                $datas['wilder'] = 0;
+            }
+            $datas['profession'] = trim($_POST['profession']);
+            $datas['company'] = trim($_POST['company']);
+            $datas['question1'] = trim($_POST['q1']);
+            $datas['question2'] = trim($_POST['q2']);
+            $datas['question3'] = trim($_POST['q3']);
+            $datas['like'] = 0;
+            $datas['date'] = date("Y-m-d H:i:s"); //(le format DATETIME de MySQL)
+            $datas['valid'] = 0;
+            $datas['avatar'] = "default value";
+            $commentManager = new CommentManager();
+            $commentManager->insert($datas);
+
+            header('Location: /job/comment/'.$datas['job_id']);
+            exit();
+        }
     }
 }

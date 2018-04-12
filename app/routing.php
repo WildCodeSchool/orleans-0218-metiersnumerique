@@ -14,7 +14,7 @@ $routes = [
         ['index', '/', 'GET'], // action, url, method
     ],
     'Job' => [
-        ['addComment', '/job/addComment/{id:\d+}', 'GET'],
+        ['addComment', '/job/comment/{id:\d+}', 'GET'],
     ],
     'Comment' => [
         ['addComment', '/comment/add', 'POST'],
