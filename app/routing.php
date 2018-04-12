@@ -13,10 +13,8 @@ $routes = [
     'Index' => [ // Controller
         ['index', '/', 'GET'], // action, url, method
     ],
-    'Job' => [
-        ['addComment', '/job/comment/{id:\d+}', 'GET'],
-    ],
     'Comment' => [
-        ['addComment', '/comment/add', 'POST'],
+        ['addComment', '/job/{id:\d+}/add-comment', ['POST','GET']],
     ],
+
 ];

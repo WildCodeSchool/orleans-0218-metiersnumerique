@@ -13,38 +13,34 @@ use Model\CommentManager;
 
 class CommentController extends AbstractController
 {
-    public function getAllCommentByJob(): array
-    {
-        $commentManager = new CommentManager();
-        $comments = $commentManager->selectAllCommentsByJob();
-        return $comments;
-    }
-
-    public function addComment()
+    public function addComment(int $jobId)
     {
         if(!empty($_POST)) {
-            $datas['job_id'] = intval($_POST['idJob']);
-            $datas['lastname'] = trim($_POST['lastname']);
-            $datas['firstname'] = trim($_POST['firstname']);
-            $datas['email'] = trim($_POST['email']);
+            $data['job_id'] = intval($_POST['idJob']);
+            $data['lastname'] = trim($_POST['lastname']);
+            $data['firstname'] = trim($_POST['firstname']);
+            $data['email'] = trim($_POST['email']);
             if (isset($_POST['wilder'])) {
-                $datas['wilder'] = 1;
+                $data['wilder'] = 1;
             } else {
-                $datas['wilder'] = 0;
+                $data['wilder'] = 0;
             }
-            $datas['profession'] = trim($_POST['profession']);
-            $datas['company'] = trim($_POST['company']);
-            $datas['question1'] = trim($_POST['q1']);
-            $datas['question2'] = trim($_POST['q2']);
-            $datas['question3'] = trim($_POST['q3']);
-            $datas['like'] = 0;
-            $datas['date'] = date("Y-m-d H:i:s"); //(le format DATETIME de MySQL)
-            $datas['valid'] = 0;
-            $datas['avatar'] = "default value";
+            $data['profession'] = trim($_POST['profession']);
+            $data['company'] = trim($_POST['company']);
+            $data['question1'] = trim($_POST['q1']);
+            $data['question2'] = trim($_POST['q2']);
+            $data['question3'] = trim($_POST['q3']);
+            $data['like'] = 0;
+            $data['date'] = date("Y-m-d H:i:s"); //(le format DATETIME de MySQL)
+            $data['valid'] = 0;
+            $data['avatar'] = "default value";
             $commentManager = new CommentManager();
-            $commentManager->insert($datas);
+            $commentManager->insert($data);
 
-            header('Location: /job/comment/'.$datas['job_id']);
+            header('Location:/job/'.$data['job_id'].'/add-comment');
+            exit();
         }
+
+        return $this->twig->render('comment.html.twig', ['jobId' => $jobId]);
     }
 }
