@@ -1,7 +1,5 @@
 {% extends 'layout.html.twig' %}
 
-
-
 {% block stylesheet %}
     <link rel="stylesheet" href="/assets/css/themes.css">
     <link rel="stylesheet" href="/assets/css/global.css">
@@ -15,8 +13,6 @@
 {% block bandeau %}
     {% include 'bandeau.html.twig' %}
 {% endblock %}
-
-
 
 
 {% block content %}
@@ -33,31 +29,31 @@
             </div>
         </div>
         <div class="row">
-                <div class="tab-content">
-                    {% for theme in themes %}
-                        <div class="pannel pannel-default tab-pane fade{% if (loop.index==1) %} in active{% endif %}" role="tabpanel" id="{{ theme.id }}">
-                            <div class="pannel-body">
-                                {% for job in jobs if (job.theme_id == theme.id) %}
-                                    <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="tab-content">
+                {% for theme in themes %}
+                    <div class="pannel pannel-default tab-pane fade{% if (loop.index==1) %} in active{% endif %}" role="tabpanel" id="{{ theme.id }}">
+                        <div class="pannel-body">
+                            {% for job in jobs if (job.themeId == theme.id) %}
+                                <div class="col-xs-12 col-sm-6 col-md-4">
                                     <figure class="info-card">
                                         <img src="{{ job.thumbnail }}" width="100%">
                                         <figcaption class="info-card-details animate">
                                             <div class="info-card-header">
                                                 <div class="metacard"><h3 class="metacard">{{ job.name }}</h3><img src="assets/images/icon-comment.png" width="18px" class="bulle-card metacard">3</div>
+                                                <p></p>
                                             </div>
                                             <div class="info-card-detail">
-                                                <!-- Description -->
                                                 <p>{{ job.resum }}...</p>
-                                                <a href="#Job{{ job.id }}" class=""><button type="button" class="btn">Voir la fiche </button></a>
+                                                <a href="job/{{ job.id }}" class=""><button type="button" class="btn">Voir la fiche </button></a>
                                             </div>
                                         </figcaption>
                                     </figure>
                                 </div>
-                                {% endfor %}
-                            </div>
+                            {% endfor %}
                         </div>
-                    {% endfor %}
-                </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}
