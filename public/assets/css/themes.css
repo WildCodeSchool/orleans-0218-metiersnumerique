@@ -61,7 +61,7 @@
     width: 100%;
     border: 1px solid rgb(215, 215, 215);
     position: relative;
-
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-bottom: 20px;
     overflow: hidden;
 }
@@ -70,7 +70,7 @@
 
 .info-card > img {
     width: 100%;
-    margin-bottom: 60px;
+
 }
 .info-card .info-card-details,
 .info-card .info-card-details .info-card-header  {
