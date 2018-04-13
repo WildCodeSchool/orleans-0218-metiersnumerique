@@ -21,8 +21,6 @@ class JobController extends AbstractController
 
         $jobController = new JobManager();
         $jobs = $jobController->selectAllOrderByThemeId();
-//        var_dump($jobs);
-//        die();
 
         return $this->twig->render('Jobs/jobs.html.twig', ['themes' => $themes, 'jobs' => $jobs]);
     }
