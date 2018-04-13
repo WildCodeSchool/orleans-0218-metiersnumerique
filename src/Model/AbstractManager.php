@@ -63,7 +63,7 @@ abstract class AbstractManager
     }
 
     /**
-     * DELETE on row in dataase by ID
+     * DELETE on row in database by ID
      *
      * @param int $id
      */
@@ -76,11 +76,31 @@ abstract class AbstractManager
     /**
      * INSERT one row in dataase
      *
-     * @param Array $data
+     * @param array $data
      */
     public function insert(array $data)
     {
-        //TODO : Implements SQL INSERT request
+        $fields = array_keys($data);
+
+        $query = "INSERT INTO $this->table 
+                  (" . implode(',' . $this->table .'.', $fields) . ")
+                  VALUES  (:" . implode(', :', $fields) . ")";
+
+        $statement = $this->pdoConnection->prepare($query);
+
+        foreach ($data as $field => $value) {
+            if(gettype($value) == 'integer' || gettype($value) == 'double') {
+                $statement->bindValue($field, $value, \PDO::PARAM_INT);
+            } elseif (gettype($value) == 'string') {
+                $statement->bindValue($field, $value, \PDO::PARAM_STR);
+            } elseif (gettype($value) == 'boolean') {
+                $statement->bindValue($field, $value, \PDO::PARAM_BOOL);
+            } elseif (gettype($value) == 'NULL') {
+                $statement->bindValue($field, $value, \PDO::PARAM_NULL);
+            }
+        }
+
+        $statement->execute();
     }
 
 

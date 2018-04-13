@@ -1,0 +1,105 @@
+{% extends "layout.html.twig" %}
+
+{% block navbar %}
+    {% include 'navbar.html.twig' %}
+{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/form.css">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form action="/job/{{ jobId }}/add-comment" method="post">
+            <div class="row">
+                <div class="col-xs-offset-1 col-xs-11 col-sm-offset-2 col-sm-10 col-md-6">
+                    <div class="form-group">
+                        <input type="hidden" name="idJob" value="{{ jobId }}">
+                        <h1>Commentaire de la fiche {{ jobId }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-inline">
+                    <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-4">
+                        <div class="form-group">
+                            <label class="sr-only" for="lastname">Nom</label>
+                            <input class="form-control" type="text" id="lastname" name="lastname"
+                                   placeholder="Votre nom ici ..">
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-1 col-sm-offset-0 col-xs-10 col-sm-4">
+                        <div class="form-group">
+                            <label class="sr-only" for="firstname">Prénom</label>
+                            <input class="form-control" type="text" id="firstname" name="firstname"
+                                   placeholder="Votre prénom ici ..">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-inline">
+                    <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-5">
+                        <div class="form-group">
+                            <label class="sr-only" for="email">Nom</label>
+                            <input class="form-control" type="text" id="email" name="email"
+                                   placeholder="Adresse email ..">
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-5 col-sm-offset-1 col-xs-4 col-sm-3 checkbox">
+                        <div class="form-group">
+                            <label for="wilder">
+                                <input type="checkbox" id="wilder" name="wilder"> Wilder
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-inline">
+                    <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-4">
+                        <div class="form-group">
+                            <label class="sr-only" for="profession">Profession</label>
+                            <input class="form-control" type="text" id="profession" name="profession"
+                                   placeholder="Votre profession ici ..">
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-1 col-sm-offset-0 col-xs-10 col-sm-4">
+                        <div class="form-group">
+                            <label class="sr-only" for="company">Entreprise</label>
+                            <input class="form-control" type="text" id="company" name="company"
+                                   placeholder="Votre entreprise ici ..">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row firstTextarea">
+                <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
+                    <p>Question 1</p>
+                    <textarea name="q1" id="q1" cols="0" rows="0" placeholder="Votre réponse ici .."></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
+                    <p>Question 2</p>
+                    <textarea name="q2" id="q2" cols="0" rows="0" placeholder="Votre réponse ici .."></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
+                    <p>Question 3</p>
+                    <textarea name="q3" id="q3" cols="0" rows="0" placeholder="Votre réponse ici .."></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-offset-2 col-sm-offset-4 col-md-offset-5 col-xs-5 col-sm-10 col-md-4">
+                    <input type="submit" value="Envoyer mon commentaire" class="btn btn-lg">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html.twig' %}
+{% endblock %}

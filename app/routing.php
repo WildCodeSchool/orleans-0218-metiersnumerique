@@ -10,7 +10,16 @@
  */
 
 $routes = [
-    'Index' => [ // Controller
-        ['index', '/', 'GET'], // action, url, method
+    'Index' => [
+        ['index', '/', 'GET'],
+    ],
+    'Job' => [ // Controller
+        ['showJobs', '/jobs', 'GET'], // action, url, method
+        ['getOneJobById', '/job/{id}', 'GET'], // action, url, method
+    ],
+    'Comment' => [ // Controller
+        ['getComments', '/admin/comment', 'GET'], // action, url, method
+        ['commentView', '/admin/comment-view/{id:\d+}', 'GET'], // action, url, method
+        ['addComment', '/job/{id:\d+}/add-comment', ['POST','GET']],
     ],
 ];

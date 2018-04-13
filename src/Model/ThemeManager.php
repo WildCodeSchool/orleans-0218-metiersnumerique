@@ -1,20 +1,17 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: sylvain
- * Date: 07/03/18
- * Time: 18:20
- * PHP version 7
+ * User: wilder4
+ * Date: 04/04/18
+ * Time: 10:23
  */
 
 namespace Model;
 
-/**
- *
- */
-class ItemManager extends AbstractManager
+
+class ThemeManager extends AbstractManager
 {
-    const TABLE = 'item';
+    const TABLE = 'theme';
 
     /**
      *  Initializes this class.
