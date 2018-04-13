@@ -1,0 +1,40 @@
+@media (min-width: 768px) {
+    .form-inline .form-group {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .form-inline .form-control {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .form-inline .checkbox, .form-inline .radio {
+        margin-top: 15px;
+    }
+}
+
+form {
+    margin-bottom: 2%;
+}
+
+.row {
+    margin-bottom: 1%;
+}
+
+.firstTextarea {
+    margin-top: 2%;
+}
+
+textarea {
+    width: 100%;
+    height: 15vh;
+}
+
+@media (max-width: 768px) {
+    textarea {
+        columns: 60;
+    }
+}

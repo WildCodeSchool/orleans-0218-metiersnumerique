@@ -8,7 +8,6 @@
 
 namespace Model;
 
-
 class JobManager extends AbstractManager
 {
     const TABLE = 'job';

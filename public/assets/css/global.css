@@ -18,11 +18,10 @@ body {
     line-height: 1.5;
 }
 
-a .btn:hover,
-a .btn:focus,
-a .btn:active,
-a .btn.active,
-.open .dropdown-toggle.btn {
+.btn:hover,
+.btn:focus,
+.btn:active,
+.btn.active {
     color: #FFFFFF;
     background-color: #F9A02E;
     border-color: #FBA858;
