@@ -21,4 +21,13 @@ class JobManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
+    /**
+     * Get all row from database.
+     *
+     * @return array
+     */
+    public function selectAllOrderByThemeId(): array
+    {
+        return $this->pdoConnection->query('SELECT * FROM ' . $this->table . ' ORDER BY theme_id', \PDO::FETCH_CLASS, $this->className)->fetchAll();
+    }
 }

@@ -8,7 +8,6 @@
 
 namespace Model;
 
-
 class CommentManager extends AbstractManager
 {
     const TABLE = 'comment';

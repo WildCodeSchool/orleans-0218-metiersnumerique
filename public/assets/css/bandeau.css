@@ -1,38 +1,26 @@
-* {
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Open Sans', sans-serif;
-    background-color: #f5f5f5;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.btn {
-    color: #FFFFFF;
-    background-color: #FBA858;
-    border-color: #FBA858;
+.bandeauheader {
+    height: 25vh;
+    background-image: url("https://wildcodeschool.fr/wp-content/uploads/2017/01/header_background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     text-align: center;
-    margin-top: 25px;
+    vertical-align: baseline;
+    margin-bottom: 50px;
+}
+
+.bandeauheader-content {
+    position: relative;
+    top: 150px;
+}
+
+.bandeauhome {
+    /*font-size: 40px;*/
     text-transform: uppercase;
-    font-size: 13px;
-    line-height: 1.5;
+    margin-bottom: 15px;
 }
 
-.btn:hover,
-.btn:focus,
-.btn:active,
-.btn.active {
-    color: #FFFFFF;
-    background-color: #F9A02E;
-    border-color: #FBA858;
-}
-
-.line-1{
+.bandeauline-1{
     position: relative;
     top: 50%;
     width: 24em;
@@ -48,14 +36,14 @@ a {
 }
 
 /* Animation */
-.anim-typewriter{
+.bandeauanim-typewriter{
     animation: typewriter 4s steps(44) 1s 1 normal both,
     blinkTextCursor 500ms steps(44) infinite normal;
     color: #fff;
 }
 @keyframes typewriter{
     from{width: 0;}
-    to{width: 21em;}
+    to{width: 15em;}
 }
 @keyframes blinkTextCursor{
     from{border-right-color: #FBA858;}

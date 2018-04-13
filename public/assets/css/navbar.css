@@ -1,4 +1,10 @@
 @media (max-width: 766px) {
+    body {
+        margin-top: 70px;
+    }
+}
+
+@media (max-width: 766px) {
     .navbar-collapse {
         box-shadow: 0 3px 3px rgba(0,0,0,.1);
     }

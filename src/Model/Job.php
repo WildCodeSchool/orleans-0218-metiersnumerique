@@ -33,10 +33,12 @@ class Job
 
     /**
      * @param mixed $id
+     * @return Job
      */
-    public function setId($id): void
+    public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
     /**
@@ -49,10 +51,12 @@ class Job
 
     /**
      * @param mixed $name
+     * @return Job
      */
-    public function setName($name): void
+    public function setName($name)
     {
         $this->name = $name;
+        return $this;
     }
 
     /**
@@ -65,10 +69,12 @@ class Job
 
     /**
      * @param mixed $resum
+     * @return Job
      */
-    public function setResum($resum): void
+    public function setResum($resum)
     {
         $this->resum = $resum;
+        return $this;
     }
 
     /**
@@ -81,10 +87,12 @@ class Job
 
     /**
      * @param mixed $description
+     * @return Job
      */
-    public function setDescription($description): void
+    public function setDescription($description)
     {
         $this->description = $description;
+        return $this;
     }
 
     /**
@@ -97,10 +105,12 @@ class Job
 
     /**
      * @param mixed $image
+     * @return Job
      */
-    public function setImage($image): void
+    public function setImage($image)
     {
         $this->image = $image;
+        return $this;
     }
 
     /**
@@ -113,10 +123,12 @@ class Job
 
     /**
      * @param mixed $video
+     * @return Job
      */
-    public function setVideo($video): void
+    public function setVideo($video)
     {
         $this->video = $video;
+        return $this;
     }
 
     /**
@@ -129,10 +141,12 @@ class Job
 
     /**
      * @param mixed $thumbnail
+     * @return Job
      */
-    public function setThumbnail($thumbnail): void
+    public function setThumbnail($thumbnail)
     {
         $this->thumbnail = $thumbnail;
+        return $this;
     }
 
     /**
@@ -145,10 +159,12 @@ class Job
 
     /**
      * @param mixed $question1
+     * @return Job
      */
-    public function setQuestion1($question1): void
+    public function setQuestion1($question1)
     {
         $this->question1 = $question1;
+        return $this;
     }
 
     /**
@@ -161,10 +177,12 @@ class Job
 
     /**
      * @param mixed $question2
+     * @return Job
      */
-    public function setQuestion2($question2): void
+    public function setQuestion2($question2)
     {
         $this->question2 = $question2;
+        return $this;
     }
 
     /**
@@ -177,10 +195,12 @@ class Job
 
     /**
      * @param mixed $question3
+     * @return Job
      */
-    public function setQuestion3($question3): void
+    public function setQuestion3($question3)
     {
         $this->question3 = $question3;
+        return $this;
     }
 
     /**
@@ -192,47 +212,49 @@ class Job
     }
 
     /**
-     * @param mixed $theme_id
+     * @param mixed $themeId
+     * @return Job
      */
-    public function setThemeId($theme_id): void
+    public function setThemeId($themeId)
     {
-        $this->theme_id = $theme_id;
+        $this->themeId = $themeId;
+        return $this;
     }
-
+  
     public function hydrate(array $datas)
     {
-        if (isset($datas['id'])) {
-            $this->setId($datas['id']);
-        }
-        if (isset($datas['name'])) {
-            $this->setName($datas['name']);
-        }
-        if (isset($datas['resum'])) {
-            $this->setResum($datas['resum']);
-        }
-        if (isset($datas['description'])) {
-            $this->setDescription($datas['description']);
-        }
-        if (isset($datas['image'])) {
-            $this->setImage($datas['image']);
-        }
-        if (isset($datas['video'])) {
-            $this->setVideo($datas['video']);
-        }
-        if (isset($datas['thumbnail'])) {
-            $this->setThumbnail($datas['thumbnail']);
-        }
-        if (isset($datas['question1'])) {
-            $this->setQuestion1($datas['question1']);
-        }
-        if (isset($datas['question2'])) {
-            $this->setQuestion2($datas['question2']);
-        }
-        if (isset($datas['question3'])) {
-            $this->setQuestion3($datas['question3']);
-        }
-        if (isset($datas['theme_id'])) {
-            $this->setThemeId($datas['theme_id']);
-        }
+          if (isset($datas['id'])) {
+              $this->setId($datas['id']);
+          }
+          if (isset($datas['name'])) {
+              $this->setName($datas['name']);
+          }
+          if (isset($datas['resum'])) {
+              $this->setResum($datas['resum']);
+          }
+          if (isset($datas['description'])) {
+              $this->setDescription($datas['description']);
+          }
+          if (isset($datas['image'])) {
+              $this->setImage($datas['image']);
+          }
+          if (isset($datas['video'])) {
+              $this->setVideo($datas['video']);
+          }
+          if (isset($datas['thumbnail'])) {
+              $this->setThumbnail($datas['thumbnail']);
+          }
+          if (isset($datas['question1'])) {
+              $this->setQuestion1($datas['question1']);
+          }
+          if (isset($datas['question2'])) {
+              $this->setQuestion2($datas['question2']);
+          }
+          if (isset($datas['question3'])) {
+              $this->setQuestion3($datas['question3']);
+          }
+          if (isset($datas['theme_id'])) {
+              $this->setThemeId($datas['theme_id']);
+          }
     }
 }

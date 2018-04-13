@@ -12,11 +12,12 @@
     <link rel="icon" href="/assets/images/favicon.png">
 </head>
 <body>
-    {% block navbar %}{% endblock %}
-    {% block content %}{% endblock %}
-    {% block footer %}{% endblock %}
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    {% block javascript %}{% endblock %}
+{% block navbar %}{% endblock %}
+{% block bandeau %}{% endblock %}
+{% block content %}{% endblock %}
+{% block footer %}{% endblock %}
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% block javascript %}{% endblock %}
 </body>
 </html>
