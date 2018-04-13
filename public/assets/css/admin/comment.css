@@ -1,0 +1,19 @@
+h1 {
+    padding-bottom: 25px;
+}
+
+.valid {
+    background-color: #C5E1A5;
+}
+
+.valid:hover {
+    background-color: #AED581;
+}
+
+.not-valid {
+    background-color: #FFCC80;
+}
+
+.not-valid:hover {
+    background-color: #FFB74D;
+}
