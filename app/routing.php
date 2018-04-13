@@ -10,10 +10,11 @@
  */
 
 $routes = [
+    'Index' => [
+        ['index', '/', 'GET'],
+    ],
     'Job' => [ // Controller
         ['showJobs', '/jobs', 'GET'], // action, url, method
-    ],
-    'Job' => [
         ['getOneJobById', '/job/{id}', 'GET'], // action, url, method
     ],
     'Comment' => [
