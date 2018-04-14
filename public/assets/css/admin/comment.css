@@ -17,3 +17,7 @@ h1 {
 .not-valid:hover {
     background-color: #FFB74D;
 }
+
+.nav-pagination {
+    text-align: center;
+}

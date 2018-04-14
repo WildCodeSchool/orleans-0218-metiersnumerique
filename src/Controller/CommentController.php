@@ -13,21 +13,27 @@ use Model\Format;
 
 class CommentController extends AbstractController
 {
+
     /**
+     * @param int $active
      * @return string
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function getComments()
+    public function getComments(int $offset = 1)
     {
-        $commentsManager = new CommentManager();
-        $results = $commentsManager->selectAllCommentAndJob();
+        $commentManager = new CommentManager();
+        $nbComments = count($commentManager->selectAll());
+
+        $limit = ceil($nbComments / 10);
+
+        $results = $commentManager->selectAllCommentAndJob($limit, $offset);
 
         $formater = new Format();
         $datas = $formater->commentJob($results);
 
-        return $this->twig->render('Admin/comment.html.twig', ['datas' => $datas]);
+        return $this->twig->render('Admin/comment.html.twig', ['datas' => $datas, 'offset' => $offset, 'active' => $active]);
     }
 
     public function addComment(int $jobId)
