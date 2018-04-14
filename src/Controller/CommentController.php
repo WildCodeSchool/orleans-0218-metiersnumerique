@@ -21,19 +21,22 @@ class CommentController extends AbstractController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function getComments(int $offset = 1)
+    public function getComments(int $active = 1)
     {
+        $limit = 10;
         $commentManager = new CommentManager();
         $nbComments = count($commentManager->selectAll());
 
-        $limit = ceil($nbComments / 10);
+        $nbPage = ceil($nbComments / 10);
+
+        $offset = $active * 10 - 10;
 
         $results = $commentManager->selectAllCommentAndJob($limit, $offset);
 
         $formater = new Format();
         $datas = $formater->commentJob($results);
 
-        return $this->twig->render('Admin/comment.html.twig', ['datas' => $datas, 'offset' => $offset, 'active' => $active]);
+        return $this->twig->render('Admin/comment.html.twig', ['datas' => $datas, 'nbPage' => $nbPage, 'active' => $active]);
     }
 
     public function addComment(int $jobId)

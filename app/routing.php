@@ -19,6 +19,7 @@ $routes = [
     ],
     'Comment' => [ // Controller
         ['getComments', '/admin/comment', 'GET'], // action, url, method
+        ['getComments', '/admin/comment/{id:\d+}', 'GET'], // action, url, method
         ['commentView', '/admin/comment-view/{id:\d+}', 'GET'], // action, url, method
         ['addComment', '/job/{id:\d+}/add-comment', ['POST','GET']],
     ],

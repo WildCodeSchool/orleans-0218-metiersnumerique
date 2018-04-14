@@ -29,11 +29,12 @@ class CommentManager extends AbstractManager
         return $this->pdoConnection->query($query, \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
-    public function selectAllCommentAndJob($offset): array
+    public function selectAllCommentAndJob($limit, $offset): array
     {
         $query = 'SELECT ' . $this->table . '.*, job.name  FROM ' . $this->table . '
                     JOIN job ON ' . $this->table . '.job_id = job.id
-                    ORDER BY ' . $this->table . '.valid ASC, ' . $this->table . '.date DESC';
+                    ORDER BY ' . $this->table . '.valid ASC, ' . $this->table . '.date DESC
+                    LIMIT ' . $offset . ', ' . $limit;
 
         return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
     }

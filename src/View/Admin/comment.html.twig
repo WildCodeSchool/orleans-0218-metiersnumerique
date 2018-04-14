@@ -46,15 +46,15 @@
             <nav class="nav-pagination" aria-label="Page navigation">
                 <ul class="pagination">
                     <li {% if active == 1 %}class="disabled"{% endif %}>
-                        <a href="#" aria-label="Previous">
+                        <a href="{% if active > 1 %}/admin/comment/{{ active - 1 }}{% else %}#{% endif %}" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    {% for i in 1..offset %}
-                        <li {% if i == active %} class="active" {% endif %}><a href="#">{{ loop.index }}</a></li>
+                    {% for i in 1..nbPage %}
+                        <li {% if i == active %} class="active" {% endif %}><a href="/admin/comment/{{ loop.index }}">{{ loop.index }}</a></li>
                     {% endfor %}
-                    <li {% if active == offset %}class="disabled"{% endif %}>
-                        <a href="#" aria-label="Next">
+                    <li {% if active == nbPage %}class="disabled"{% endif %}>
+                        <a href="{% if active < nbPage %}/admin/comment/{{ active + 1 }}{% else %}#{% endif %}" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
