@@ -21,7 +21,7 @@ class CommentController extends AbstractController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function getComments(int $active = 1)
+    public function getComments($active = 1)
     {
         $limit = 10;
         $commentManager = new CommentManager();
@@ -29,9 +29,11 @@ class CommentController extends AbstractController
 
         $nbPage = ceil($nbComments / 10);
 
+        $pattern = '/\D/';
+
         if ($active > $nbPage) {
             $active = $nbPage;
-        } elseif ($active < 1) {
+        } elseif ($active < 1 || preg_match($pattern, $active)) {
             $active = 1;
         }
 
