@@ -10,6 +10,7 @@ namespace Controller;
 
 use Model\CommentManager;
 use Model\Format;
+use Model\Paginator;
 
 class CommentController extends AbstractController
 {
@@ -21,30 +22,21 @@ class CommentController extends AbstractController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function getComments($active = 1)
+    public function getComments($pageId = 1)
     {
-        $limit = 10;
         $commentManager = new CommentManager();
-        $nbComments = count($commentManager->selectAll());
+        $nbComments = $commentManager->countNbComments();
 
-        $nbPage = ceil($nbComments / 10);
+        $nbPages = ceil($nbComments / LIMIT_PAGING_COMMENTS_ADMIN);
 
-        $pattern = '/\D/';
-
-        if ($active > $nbPage) {
-            $active = $nbPage;
-        } elseif ($active < 1 || preg_match($pattern, $active)) {
-            $active = 1;
-        }
-
-        $offset = $active * 10 - 10;
-
-        $results = $commentManager->selectAllCommentAndJob($limit, $offset);
+        $paginator = new Paginator();
+        $results = $paginator->paginateComments(LIMIT_PAGING_COMMENTS_ADMIN, $pageId, $nbPages);
 
         $formater = new Format();
         $datas = $formater->commentJob($results);
 
-        return $this->twig->render('Admin/comment.html.twig', ['datas' => $datas, 'nbPage' => $nbPage, 'active' => $active]);
+        return $this->twig->render('Admin/comment.html.twig',
+            ['datas' => $datas, 'nbPages' => $nbPages, 'active' => $pageId]);
     }
 
     public function addComment(int $jobId)

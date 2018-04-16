@@ -42,6 +42,6 @@ class CommentManager extends AbstractManager
     public function countNbComments()
     {
         $query = 'SELECT count(id) as nbComments FROM ' . $this->table . ';';
-        return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetch();
+        return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchColumn();
     }
 }

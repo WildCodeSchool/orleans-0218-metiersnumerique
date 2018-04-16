@@ -57,13 +57,13 @@
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    {% for i in 1..nbPage %}
+                    {% for i in 1..nbPages %}
                         <li {% if i == active %} class="active" {% endif %}>
                             <a href="/admin/comment/{{ loop.index }}">{{ loop.index }}</a>
                         </li>
                     {% endfor %}
-                    <li {% if active == nbPage %}class="disabled"{% endif %}>
-                        <a href="{% if active < nbPage %}/admin/comment/{{ active + 1 }}{% else %}#{% endif %}" aria-label="Next">
+                    <li {% if active == nbPages %}class="disabled"{% endif %}>
+                        <a href="{% if active < nbPages %}/admin/comment/{{ active + 1 }}{% else %}#{% endif %}" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
