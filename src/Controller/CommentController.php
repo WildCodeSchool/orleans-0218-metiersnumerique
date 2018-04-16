@@ -31,7 +31,7 @@ class CommentController extends AbstractController
 
         if ($active > $nbPage) {
             $active = $nbPage;
-        } else {
+        } elseif ($active < 1) {
             $active = 1;
         }
 
