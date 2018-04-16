@@ -1,10 +1,17 @@
 {% extends 'layout.html.twig' %}
+
 {% block stylesheet %}
     <link rel="stylesheet" href="/assets/css/admin/comment.css">
 {% endblock %}
+
 {% block navbar %}
     {% include 'navbar.html.twig' %}
 {% endblock %}
+
+{% block bandeau %}
+    {% include 'bandeau.html.twig' %}
+{% endblock %}
+
 {% block content %}
     <div class="container">
         <div class="row">
@@ -51,7 +58,9 @@
                         </a>
                     </li>
                     {% for i in 1..nbPage %}
-                        <li {% if i == active %} class="active" {% endif %}><a href="/admin/comment/{{ loop.index }}">{{ loop.index }}</a></li>
+                        <li {% if i == active %} class="active" {% endif %}>
+                            <a href="/admin/comment/{{ loop.index }}">{{ loop.index }}</a>
+                        </li>
                     {% endfor %}
                     <li {% if active == nbPage %}class="disabled"{% endif %}>
                         <a href="{% if active < nbPage %}/admin/comment/{{ active + 1 }}{% else %}#{% endif %}" aria-label="Next">

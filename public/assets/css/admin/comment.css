@@ -21,3 +21,26 @@ h1 {
 .nav-pagination {
     text-align: center;
 }
+
+.pagination>li>a {
+    color: black;
+}
+
+.pagination>.active>a {
+    background-color: #F9A02E;
+    border-color: #F9A02E;
+    color: white;
+}
+
+.pagination>.active>a:hover,
+.pagination>.active>a:focus {
+    background-color: #FBA858;
+    border-color: #FBA858;
+}
+
+.pagination>li>a:hover,
+.pagination>li>a:focus {
+    background-color: #FBA858;
+    border-color: #FBA858;
+    color: white;
+}
