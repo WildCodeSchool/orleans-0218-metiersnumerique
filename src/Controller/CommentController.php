@@ -29,14 +29,10 @@ class CommentController extends AbstractController
 
         $nbPage = ceil($nbComments / 10);
 
-        $pattern = "/[1-$nbPage]/";
-
-        if (!preg_match($pattern, $active)) {
-            if ($active > $nbPage) {
-                $active = $nbPage;
-            } else {
-                $active = 1;
-            }
+        if ($active > $nbPage) {
+            $active = $nbPage;
+        } else {
+            $active = 1;
         }
 
         $offset = $active * 10 - 10;
