@@ -60,4 +60,33 @@ class CommentController extends AbstractController
 
         return $this->twig->render('comment.html.twig', ['jobId' => $jobId]);
     }
+
+    public function commentView(int $id)
+    {
+        $commentManager = new CommentManager();
+        $results = $commentManager->selectCommentAndJob($id);
+
+        $formater = new Format();
+        $data = $formater->commentJob($results);
+
+        return $this->twig->render('Admin/view_comment.html.twig', ['data' => $data]);
+    }
+
+    public function commentUpdate()
+    {
+        if(!empty($_POST['id'])) {
+            $id = $_POST['id'];
+            $commentManager = new CommentManager();
+            if ($_POST['avatar'] == 'yes') {
+                $comment = $commentManager->selectOneById($id);
+                $data['avatar'] = $comment->getAvatar();
+            } else {
+                $data['avatar'] = '/assets/images/default_avatar.jpg';
+            }
+            $data['valid'] = 1;
+
+            $commentManager->update($id, $data);
+        }
+        return $this->getComments();
+    }
 }
