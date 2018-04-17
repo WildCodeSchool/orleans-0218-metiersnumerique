@@ -21,6 +21,7 @@ $routes = [
         ['getComments', '/admin/comment', 'GET'], // action, url, method
         ['getComments', '/admin/comment/{pageId:\d+}', 'GET'], // action, url, method
         ['commentView', '/admin/comment-view/{id:\d+}', 'GET'], // action, url, method
+        ['commentUpdate', '/admin/comment-update', 'POST'], // action, url, method
         ['addComment', '/job/{id:\d+}/add-comment', ['POST','GET']],
     ],
 ];

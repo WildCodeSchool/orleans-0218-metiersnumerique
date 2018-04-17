@@ -110,7 +110,27 @@ abstract class AbstractManager
      */
     public function update(int $id, array $data)
     {
-        //TODO : Implements SQL UPDATE request
+        $fields = array_keys($data);
+
+        $query = "UPDATE $this->table 
+                  SET " . implode(' = :' . implode(', ', $fields) . ' = :' , $fields ) . "
+                  WHERE id=$id";
+
+        $statement = $this->pdoConnection->prepare($query);
+
+        foreach ($data as $field => $value) {
+            if(gettype($value) == 'integer' || gettype($value) == 'double') {
+                $statement->bindValue($field, $value, \PDO::PARAM_INT);
+            } elseif (gettype($value) == 'string') {
+                $statement->bindValue($field, $value, \PDO::PARAM_STR);
+            } elseif (gettype($value) == 'boolean') {
+                $statement->bindValue($field, $value, \PDO::PARAM_BOOL);
+            } elseif (gettype($value) == 'NULL') {
+                $statement->bindValue($field, $value, \PDO::PARAM_NULL);
+            }
+        }
+
+        $statement->execute();
     }
 
 

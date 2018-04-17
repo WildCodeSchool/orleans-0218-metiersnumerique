@@ -43,5 +43,15 @@ class CommentManager extends AbstractManager
     {
         $query = 'SELECT count(id) as nbComments FROM ' . $this->table . ';';
         return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchColumn();
+
+    }
+
+    public function selectCommentAndJob(int $id): array
+    {
+        $query = 'SELECT ' . $this->table . '.*, job.name  FROM ' . $this->table . '
+                    JOIN job ON ' . $this->table . '.job_id = job.id
+                    WHERE '. $this->table . '.id=' . $id . ';';
+
+        return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
     }
 }
