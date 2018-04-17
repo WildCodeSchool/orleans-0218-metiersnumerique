@@ -9,7 +9,6 @@
 namespace Controller;
 
 use Model\CommentManager;
-use Model\Format;
 use Model\JobManager;
 use Model\Paginator;
 
@@ -27,19 +26,20 @@ class CommentController extends AbstractController
         $commentManager = new CommentManager();
         $nbComments = $commentManager->countNbComments();
 
-        $paginator = new Paginator($commentManager, $pageId, $nbComments);
+        $order = ['valid' => 'asc', 'date' => 'desc'];
+        $paginator = new Paginator($commentManager, $pageId, $nbComments, $order);
         $comments = $paginator->paginate();
 
+        $datas['nbPages'] = $comments['nbPages'];
+        $datas['pageId'] = $comments['pageId'];
+
         $jobManager = new JobManager();
-        foreach ($comments as $comment) {
-            $jobs[] = $jobManager->selectOneById($comment->getJobId());
+        foreach ($comments[0] as $comment) {
+            $datas['data'][] = ['comment' => $comment,
+                'job' => $jobManager->selectOneById($comment->getJobId())];
         }
 
-        $formater = new Format();
-        $datas = $formater->commentJob($comments, $jobs);
-
-        return $this->twig->render('Admin/comment.html.twig',
-            ['datas' => $datas, 'active' => $pageId]);
+        return $this->twig->render('Admin/comment.html.twig', ['datas' => $datas, 'pageId' => $pageId]);
     }
 
     public function addComment(int $jobId)

@@ -31,7 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for data in datas %}
+                        {% for data in datas.data %}
                             <tr class="{% if data.comment.valid == 0 %}not-valid{% else %}valid{% endif %}">
                                 <td>
                                     {{ data.job.name }}
@@ -52,18 +52,18 @@
         <div class="row">
             <nav class="nav-pagination" aria-label="Page navigation">
                 <ul class="pagination">
-                    <li {% if active == 1 %}class="disabled"{% endif %}>
-                        <a href="{% if active > 1 %}/admin/comment/{{ active - 1 }}{% else %}#{% endif %}" aria-label="Previous">
+                    <li {% if datas.pageId == 1 %}class="disabled"{% endif %}>
+                        <a href="{% if datas.pageId > 1 %}/admin/comment/{{ datas.pageId - 1 }}{% else %}#{% endif %}" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    {% for i in 1..nbPages %}
-                        <li {% if i == active %} class="active" {% endif %}>
+                    {% for i in 1..datas.nbPages %}
+                        <li {% if i == datas.pageId %} class="active" {% endif %}>
                             <a href="/admin/comment/{{ loop.index }}">{{ loop.index }}</a>
                         </li>
                     {% endfor %}
-                    <li {% if active == nbPages %}class="disabled"{% endif %}>
-                        <a href="{% if active < nbPages %}/admin/comment/{{ active + 1 }}{% else %}#{% endif %}" aria-label="Next">
+                    <li {% if datas.pageId == datas.nbPages %}class="disabled"{% endif %}>
+                        <a href="{% if datas.pageId < datas.nbPages %}/admin/comment/{{ datas.pageId + 1 }}{% else %}#{% endif %}" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

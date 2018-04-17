@@ -27,12 +27,17 @@ class Paginator
      * @var AbstractManager
      */
     private $manager;
+    /**
+     * @var array
+     */
+    private $order;
 
-    public function __construct(AbstractManager $manager, int $pageId, int $nbElements)
+    public function __construct(AbstractManager $manager, int $pageId, int $nbElements, array $order)
     {
         $this->setPageId($pageId);
         $this->setNbElements($nbElements);
         $this->setManager($manager);
+        $this->setOrder($order);
     }
 
     /**
@@ -107,6 +112,23 @@ class Paginator
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param mixed $order
+     * @return Paginator
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+        return $this;
+    }
 
     /**
      * @return array
@@ -124,7 +146,9 @@ class Paginator
         }
 
         $offset = $this->pageId * $this->limit - $this->limit;
+        $result = [$this->getManager()->select($this->limit, $offset, $this->order),
+            'nbPages' => $nbPages, 'pageId' => $this->pageId];
 
-        return $this->getManager()->select($this->limit, $offset);
+        return $result;
     }
 }
