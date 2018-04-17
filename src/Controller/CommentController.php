@@ -10,38 +10,41 @@ namespace Controller;
 
 use Model\CommentManager;
 use Model\Format;
+use Model\JobManager;
 use Model\Paginator;
 
 class CommentController extends AbstractController
 {
-
     /**
-     * @param int $active
+     * @param int $pageId
      * @return string
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function getComments($pageId = 1)
+    public function getComments(int $pageId = 1)
     {
         $commentManager = new CommentManager();
         $nbComments = $commentManager->countNbComments();
 
-        $nbPages = ceil($nbComments / LIMIT_PAGING_COMMENTS_ADMIN);
+        $paginator = new Paginator($commentManager, $pageId, $nbComments);
+        $comments = $paginator->paginate();
 
-        $paginator = new Paginator();
-        $results = $paginator->paginateComments(LIMIT_PAGING_COMMENTS_ADMIN, $pageId, $nbPages);
+        $jobManager = new JobManager();
+        foreach ($comments as $comment) {
+            $jobs[] = $jobManager->selectOneById($comment->getJobId());
+        }
 
         $formater = new Format();
-        $datas = $formater->commentJob($results);
+        $datas = $formater->commentJob($comments, $jobs);
 
         return $this->twig->render('Admin/comment.html.twig',
-            ['datas' => $datas, 'nbPages' => $nbPages, 'active' => $pageId]);
+            ['datas' => $datas, 'active' => $pageId]);
     }
 
     public function addComment(int $jobId)
     {
-        if(!empty($_POST)) {
+        if (!empty($_POST)) {
             $data['job_id'] = intval($_POST['idJob']);
             $data['lastname'] = trim($_POST['lastname']);
             $data['firstname'] = trim($_POST['firstname']);
@@ -63,7 +66,7 @@ class CommentController extends AbstractController
             $commentManager = new CommentManager();
             $commentManager->insert($data);
 
-            header('Location:/job/'.$data['job_id'].'/add-comment');
+            header('Location:/job/' . $data['job_id'] . '/add-comment');
             exit();
         }
 

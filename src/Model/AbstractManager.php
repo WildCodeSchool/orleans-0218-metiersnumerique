@@ -112,4 +112,11 @@ abstract class AbstractManager
     {
         //TODO : Implements SQL UPDATE request
     }
+
+
+    public function select(int $limit, int $offset): array
+    {
+        return $this->pdoConnection->query('SELECT * FROM ' . $this->table . ' LIMIT ' . $offset . ', ' . $limit,
+                                            \PDO::FETCH_CLASS, $this->className)->fetchAll();
+    }
 }
