@@ -22,7 +22,7 @@ class ThemeController extends AbstractController
     public function addTheme()
     {
         if (!empty($_POST['themeName'])) {
-            session_start();
+
             if (isset($_SESSION['addTheme'])) {
                 unset($_SESSION['addTheme']);
             }

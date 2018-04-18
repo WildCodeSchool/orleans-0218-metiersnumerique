@@ -22,8 +22,6 @@ class AdminController extends AbstractController
      */
     public function showThemesAndJobs()
     {
-        session_start();
-
         $themeManager = new ThemeManager();
         $themes = $themeManager->selectAll();
 
