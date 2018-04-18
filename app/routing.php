@@ -24,4 +24,10 @@ $routes = [
         ['commentUpdate', '/admin/comment-update', 'POST'], // action, url, method
         ['addComment', '/job/{id:\d+}/add-comment', ['POST','GET']],
     ],
+    'Admin' => [
+        ['showThemesAndJobs', '/admin/themes-jobs', 'GET'],
+    ],
+    'Theme' => [
+        ['addTheme', '/admin/add-theme', 'POST'],
+    ],
 ];
