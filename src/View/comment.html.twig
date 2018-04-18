@@ -4,18 +4,23 @@
     {% include 'navbar.html.twig' %}
 {% endblock %}
 
+{% block bandeau %}
+    {% include 'bandeau.html.twig' %}
+{% endblock %}
+
 {% block stylesheet %}
     <link rel="stylesheet" href="/assets/css/form.css">
 {% endblock %}
 
 {% block content %}
+    {{ dump(inputs) }}
     <div class="container">
-        <form action="/job/{{ jobId }}/add-comment" method="post">
+        <form action="/job/{{ job.id }}/add-comment" method="post" novalidate>
             <div class="row">
-                <div class="col-xs-offset-1 col-xs-11 col-sm-offset-2 col-sm-10 col-md-6">
+                <div class="col-xs-offset-1 col-xs-11 col-sm-offset-2 col-sm-10 col-md-10">
                     <div class="form-group">
-                        <input type="hidden" name="idJob" value="{{ jobId }}">
-                        <h1>Commentaire de la fiche {{ jobId }}</h1>
+                        <input type="hidden" name="idJob" value="{{ job.id }}">
+                        <h1>Commentaire de la fiche <span class="orange">{{ job.name }}</span></h1>
                     </div>
                 </div>
             </div>
@@ -23,16 +28,28 @@
                 <div class="form-inline">
                     <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-4">
                         <div class="form-group">
+                            {% for error in errors.lastname %}
+                                {% for err in error %}
+                                    <span class="red">{{ err }}</span><br/>
+                                {% endfor %}
+                            {% endfor %}
                             <label class="sr-only" for="lastname">Nom</label>
                             <input class="form-control" type="text" id="lastname" name="lastname"
-                                   placeholder="Votre nom ici ..">
+                                   placeholder="Votre nom ici .." required
+                                    {% if inputs.lastname is not empty %}value="{{ inputs.lastname }}"{% endif %}>
                         </div>
                     </div>
                     <div class="col-xs-offset-1 col-sm-offset-0 col-xs-10 col-sm-4">
                         <div class="form-group">
+                            {% for error in errors.firstname%}
+                                {% for err in error %}
+                                    <span class="red">{{ err }}</span><br/>
+                                {% endfor %}
+                            {% endfor %}
                             <label class="sr-only" for="firstname">Prénom</label>
                             <input class="form-control" type="text" id="firstname" name="firstname"
-                                   placeholder="Votre prénom ici ..">
+                                   placeholder="Votre prénom ici .." required
+                                   {% if inputs.firstname is not empty %}value="{{ inputs.firstname }}"{% endif %}>
                         </div>
                     </div>
                 </div>
@@ -41,15 +58,21 @@
                 <div class="form-inline">
                     <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-5">
                         <div class="form-group">
-                            <label class="sr-only" for="email">Nom</label>
+                            {% for error in errors.email %}
+                                {% for err in error %}
+                                    <span class="red">{{ err }}</span><br/>
+                                {% endfor %}
+                            {% endfor %}
+                            <label class="sr-only" for="email">Email</label>
                             <input class="form-control" type="text" id="email" name="email"
-                                   placeholder="Adresse email ..">
+                                   placeholder="Adresse email .." required
+                                   {% if inputs.email is not empty %}value="{{ inputs.email }}"{% endif %}>
                         </div>
                     </div>
                     <div class="col-xs-offset-5 col-sm-offset-1 col-xs-4 col-sm-3 checkbox">
                         <div class="form-group">
                             <label for="wilder">
-                                <input type="checkbox" id="wilder" name="wilder"> Wilder
+                                <input type="checkbox" id="wilder" name="wilder" value="on"> Wilder
                             </label>
                         </div>
                     </div>
@@ -59,36 +82,74 @@
                 <div class="form-inline">
                     <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-4">
                         <div class="form-group">
+                            {% for error in errors.profession %}
+                                {% for err in error %}
+                                    <span class="red">{{ err }}</span><br/>
+                                {% endfor %}
+                            {% endfor %}
                             <label class="sr-only" for="profession">Profession</label>
                             <input class="form-control" type="text" id="profession" name="profession"
-                                   placeholder="Votre profession ici ..">
+                                   placeholder="Votre profession ici .." required
+                                   {% if inputs.profession is not empty %}value="{{ inputs.profession }}"{% endif %}>
                         </div>
                     </div>
                     <div class="col-xs-offset-1 col-sm-offset-0 col-xs-10 col-sm-4">
                         <div class="form-group">
+                            {% for error in errors.company %}
+                                {% for err in error %}
+                                    <span class="red">{{ err }}</span><br/>
+                                {% endfor %}
+                            {% endfor %}
                             <label class="sr-only" for="company">Entreprise</label>
                             <input class="form-control" type="text" id="company" name="company"
-                                   placeholder="Votre entreprise ici ..">
+                                   placeholder="Votre entreprise ici .." required
+                                   {% if inputs.company is not empty %}value="{{ inputs.company }}"{% endif %}>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row upload-file">
+                <div class="col-xs-offset-1 col-sm-offset-4 col-xs-10 col-sm-4">
+                    <input name="monFichier" type="file">
+                </div>
+            </div>
             <div class="row firstTextarea">
                 <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
-                    <p>Question 1</p>
-                    <textarea name="q1" id="q1" cols="0" rows="0" placeholder="Votre réponse ici .."></textarea>
+                    <h3>Question 1</h3>
+                    {% for error in errors.question1 %}
+                        {% for err in error %}
+                            <span class="red">{{ err }}</span><br/>
+                        {% endfor %}
+                    {% endfor %}
+                    <textarea name="q1" id="q1" cols="0" rows="0" maxlength="255"
+                              placeholder="Votre réponse ici .." required
+                    >{% if inputs.question1 is not empty %}{{ inputs.question1 }}{% endif %}</textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
-                    <p>Question 2</p>
-                    <textarea name="q2" id="q2" cols="0" rows="0" placeholder="Votre réponse ici .."></textarea>
+                    <h3>Question 2</h3>
+                    {% for error in errors.question2 %}
+                        {% for err in error %}
+                            <span class="red">{{ err }}</span><br/>
+                        {% endfor %}
+                    {% endfor %}
+                    <textarea name="q2" id="q2" cols="0" rows="0"  maxlength="255"
+                              placeholder="Votre réponse ici .." required
+                    >{% if inputs.question2 is not empty %}{{ inputs.question2 }}{% endif %}</textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
-                    <p>Question 3</p>
-                    <textarea name="q3" id="q3" cols="0" rows="0" placeholder="Votre réponse ici .."></textarea>
+                    <h3>Question 3</h3>
+                    {% for error in errors.question3 %}
+                        {% for err in error %}
+                            <span class="red">{{ err }}</span><br/>
+                        {% endfor %}
+                    {% endfor %}
+                    <textarea name="q3" id="q3" cols="0" rows="0"  maxlength="255"
+                              placeholder="Votre réponse ici .." required
+                    >{% if inputs.question3 is not empty %}{{ inputs.question3 }}{% endif %}</textarea>
                 </div>
             </div>
             <div class="row">

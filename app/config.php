@@ -20,3 +20,8 @@ define('APP_CACHE_PATH', __DIR__ . '/../temp/cache/');
 //Controller
 define('APP_CONTROLLER_NAMESPACE', '\Controller\\');
 define('APP_CONTROLLER_SUFFIX', 'Controller');
+
+//AbstractValidator
+define('VALID_MAX_LENGTH_INPUTS', 45);
+define('VALID_MAX_LENGTH_EMAIL', 255);
+define('VALID_MAX_LENGTH_TEXTAREA', 255);

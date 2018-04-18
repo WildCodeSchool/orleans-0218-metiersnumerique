@@ -38,3 +38,12 @@ textarea {
         columns: 60;
     }
 }
+
+.upload-file {
+    margin-top: 2vw;
+}
+
+span.red {
+    color: red;
+    font-weight: bold;
+}

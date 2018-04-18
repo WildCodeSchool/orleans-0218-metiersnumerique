@@ -61,3 +61,7 @@ a {
     from{border-right-color: #FBA858;}
     to{border-right-color: transparent;}
 }
+
+span.orange {
+    color: orange;
+}
