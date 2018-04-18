@@ -12,19 +12,30 @@
         <h1>{{ job.name }}</h1>
     </div>
     <div class="container">
-        <a href="/jobs">
-            <button class="btn btn-lg">retour</button>
-        </a>
+
+        <a href="/jobs"><button class="btn btn-lg">retour</button></a>
+        <h3>{{job.name}}</h3>
+
         <div id="description" class="page-header">
+            {% if job.video is empty and job.image is empty %}
+            <div class="col-sm-12 col-md-12">
+            {% endif %}
+            {% if job.video is not empty or job.image is not empty %}
             <div class="col-sm-12 col-md-8">
-                <h3>{{ job.name }}</h3>
-                <p>{{ job.description }}</p>
+            {% endif %}
+                <p>{{job.description}}</p>
             </div>
             <div class="col-sm-12 col-md-4">
+                {% if job.video %}
                 <div class="embed-responsive embed-responsive-4by3">
                     <iframe width="560" height="315" class="iframe embed-responsive-item" frameborder="0"
                             src="{{ job.video }}"></iframe>
                 </div>
+                {% endif %}
+                {% if job.video is empty and job.image is not empty %}
+                    <img src="{{ job.image }}" alt="image du métier en cours" class="img-responsive" style="margin-bottom: 5vh">
+                {% endif %}
+
             </div>
         </div>
     </div>
