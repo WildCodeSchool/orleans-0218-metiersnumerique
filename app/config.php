@@ -20,3 +20,6 @@ define('APP_CACHE_PATH', __DIR__ . '/../temp/cache/');
 //Controller
 define('APP_CONTROLLER_NAMESPACE', '\Controller\\');
 define('APP_CONTROLLER_SUFFIX', 'Controller');
+
+define('LIMIT_PAGING_COMMENTS_ADMIN', 10);
+define('LIMIT_PAGING_COMMENTS_USER', 3);
