@@ -102,4 +102,5 @@ class CommentController extends AbstractController
         }
         return $this->getComments();
     }
+
 }

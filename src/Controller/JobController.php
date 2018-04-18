@@ -23,7 +23,10 @@ class JobController extends AbstractController
         $jobController = new JobManager();
         $jobs = $jobController->selectAllOrderByThemeId();
 
-        return $this->twig->render('Jobs/jobs.html.twig', ['themes' => $themes, 'jobs' => $jobs]);
+        $commentManager = new CommentManager();
+        $comments = $commentManager->selectNbCommentsByJob();
+
+        return $this->twig->render('Jobs/jobs.html.twig', ['themes' => $themes, 'jobs' => $jobs, 'comments' => $comments ]);
     }
 
     public function getOneJobById(int $id)
