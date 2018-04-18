@@ -4,15 +4,13 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    text-align: center;
-    vertical-align: baseline;
     margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.bandeauheader-content {
-    position: relative;
-    top: 150px;
-}
+
 
 .bandeauhome {
     /*font-size: 40px;*/
