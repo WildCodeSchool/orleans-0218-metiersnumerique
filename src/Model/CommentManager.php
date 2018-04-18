@@ -25,8 +25,11 @@ class CommentManager extends AbstractManager
      */
     public function selectNbCommentsByJob(): array
     {
-        $query = 'SELECT count(id) FROM ' . $this->table . ' INNER JOIN job ON job.id = ' . $this->table . '.job_id ';
-        return $this->pdoConnection->query($query, \PDO::FETCH_CLASS, $this->className)->fetchAll();
+        $query = 'SELECT  job_id, count('.$this->table.'.id) as nbrComments 
+        FROM ' . $this->table . ' 
+        INNER JOIN job ON job.id = ' . $this->table . '.job_id 
+        GROUP BY job_id';
+        return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
     }
 
     public function selectAllCommentAndJob(): array
@@ -46,4 +49,6 @@ class CommentManager extends AbstractManager
 
         return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
     }
+
+
 }
