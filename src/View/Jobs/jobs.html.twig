@@ -36,6 +36,7 @@
                             {% for job in jobs if (job.themeId == theme.id) %}
                                 <div class="col-xs-12 col-sm-6 col-md-4">
                                     <figure class="info-card">
+                                        <div class="titre-card-responsive text-center">{{ theme.name }}</div>
                                         <img class="img-responsive" src="{{ job.thumbnail }}">
                                         <figcaption class="info-card-details animate">
                                             <div class="info-card-header">

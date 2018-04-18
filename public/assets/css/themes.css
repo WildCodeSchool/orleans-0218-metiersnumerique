@@ -5,19 +5,20 @@
     .button-pills {
         display: none;
     }
+
+
 }
 .nav-pills li.active a,
 .nav-pills li.active a:focus,
 .nav-pills>li.active>a,
 .nav-pills>li.active>a:focus,
-.nav-pills>li.active>a:hover{
+.nav-pills>li.active>a:hover
+{
     background-color: #F3A61F;
 }
 
 .nav-pills li:hover a{
-    color:
-            #F3A61F
-;
+    color: #F3A61F;
 }
 
 .nav-pills li a {
@@ -49,6 +50,7 @@
 
 .theme{
 
+    margin-top: 0px;
     margin-bottom: 35px;
 
 }
@@ -155,5 +157,21 @@
 .metacard{
 
     display: inline;
+
+}
+
+.titre-card-responsive{
+    display: none;
+    padding: 10px 0 10px 0;
+    background-color: #f9a02e;
+    color: white;
+
+}
+
+@media (max-width: 766px) {
+
+    .titre-card-responsive{
+        display: block;
+    }
 
 }

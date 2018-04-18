@@ -10,7 +10,12 @@
     justify-content: center;
 }
 
+@media (max-width: 766px) {
+    .bandeauheader {
+        margin-bottom: 25px;
+    }
 
+}
 
 .bandeauhome {
     /*font-size: 40px;*/
