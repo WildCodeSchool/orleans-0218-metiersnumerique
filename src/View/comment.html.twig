@@ -13,7 +13,6 @@
 {% endblock %}
 
 {% block content %}
-    {{ dump(inputs) }}
     <div class="container">
         <form action="/job/{{ job.id }}/add-comment" method="post" novalidate>
             <div class="row">

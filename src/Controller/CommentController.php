@@ -96,18 +96,9 @@ class CommentController extends AbstractController
 
             $commentValidator = new Comment($toValidate);
 
-            $commentValidator->isValid();
+            $boolErrors = $commentValidator->isValid();
+
             $errors = $commentValidator->getErrors();
-
-            $boolErrors = true;
-
-            foreach ($errors as $error) {
-                foreach ($error as $err) {
-                    if (!empty($err)) {
-                        $boolErrors = false;
-                    }
-                }
-            }
 
             if (!$boolErrors) {
                 return $this->twig->render('comment.html.twig', ['job' => $job, 'inputs' => $data, 'errors' => $errors]);

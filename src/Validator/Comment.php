@@ -47,6 +47,15 @@ class Comment implements ValidatorInterface
                 $this->errors[$key][] = $validator->getErrors();
             }
         }
+
+        foreach ($this->errors as $error) {
+            foreach ($error as $err) {
+                if (!empty($err)) {
+                    return false;
+                }
+            }
+        }
+
         return true;
     }
 
