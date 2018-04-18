@@ -23,10 +23,10 @@
                         <button type="submit" class="btn btn-default">Envoyer</button>
                     </div>
                 </form>
-                {% if (insertReturn is defined) and (insertReturn == true) %}
-                    <p class="text-success">Le théme a été ajouté !</p>
-                {% elseif (insertReturn is defined) and (insertReturn == false) %}
-                    <p class="text-danger">Echec de l'ajout du théme ...</p>
+                {% if (session.success is defined) %}
+                    <p class="text-success">{{ session.success }}</p>
+                {% elseif (session.danger is defined) %}
+                    <p class="text-danger">{{ session.danger }}</p>
                 {% endif %}
             </div>
         </div>
