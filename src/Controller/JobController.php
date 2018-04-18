@@ -8,6 +8,7 @@
 
 namespace Controller;
 
+use Model\CommentManager;
 use Model\Job;
 use Model\JobManager;
 use Model\ThemeManager;
@@ -29,7 +30,9 @@ class JobController extends AbstractController
     {
         $jobManager = new JobManager();
         $job = $jobManager->selectOneById($id);
+        $commentManager = new CommentManager();
+        $comments = $commentManager->selectCommentsByJobId($id);
 
-        return $this->twig->render('job.html.twig', ['job' => $job]);
+        return $this->twig->render('job.html.twig', ['job' => $job, 'comments' => $comments]);
     }
 }

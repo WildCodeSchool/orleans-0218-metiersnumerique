@@ -10,29 +10,42 @@ namespace Controller;
 
 use Model\CommentManager;
 use Model\Format;
+use Model\JobManager;
+use Model\Paginator;
 
 class CommentController extends AbstractController
 {
     /**
+     * @param int $pageId
      * @return string
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function getComments()
+    public function getComments(int $pageId = 1)
     {
-        $commentsManager = new CommentManager();
-        $results = $commentsManager->selectAllCommentAndJob();
+        $commentManager = new CommentManager();
+        $nbComments = $commentManager->countNbComments();
 
-        $formater = new Format();
-        $datas = $formater->commentJob($results);
+        $order = ['valid' => 'asc', 'date' => 'desc'];
+        $paginator = new Paginator($commentManager, $pageId, $nbComments, $order);
+        $comments = $paginator->paginate();
 
-        return $this->twig->render('Admin/comment.html.twig', ['datas' => $datas]);
+        $datas['nbPages'] = $comments['nbPages'];
+        $datas['pageId'] = $comments['pageId'];
+
+        $jobManager = new JobManager();
+        foreach ($comments[0] as $comment) {
+            $datas['data'][] = ['comment' => $comment,
+                'job' => $jobManager->selectOneById($comment->getJobId())];
+        }
+
+        return $this->twig->render('Admin/comment.html.twig', ['datas' => $datas, 'pageId' => $pageId]);
     }
 
     public function addComment(int $jobId)
     {
-        if(!empty($_POST)) {
+        if (!empty($_POST)) {
             $data['job_id'] = intval($_POST['idJob']);
             $data['lastname'] = trim($_POST['lastname']);
             $data['firstname'] = trim($_POST['firstname']);
@@ -54,7 +67,7 @@ class CommentController extends AbstractController
             $commentManager = new CommentManager();
             $commentManager->insert($data);
 
-            header('Location:/job/'.$data['job_id'].'/add-comment');
+            header('Location:/job/' . $data['job_id'] . '/add-comment');
             exit();
         }
 

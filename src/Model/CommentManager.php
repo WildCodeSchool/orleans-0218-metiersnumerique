@@ -29,13 +29,21 @@ class CommentManager extends AbstractManager
         return $this->pdoConnection->query($query, \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
-    public function selectAllCommentAndJob(): array
+    public function selectAllCommentAndJob(int $limit, int $offset): array
     {
         $query = 'SELECT ' . $this->table . '.*, job.name  FROM ' . $this->table . '
                     JOIN job ON ' . $this->table . '.job_id = job.id
-                    ORDER BY ' . $this->table . '.valid ASC, ' . $this->table . '.date DESC';
+                    ORDER BY ' . $this->table . '.valid ASC, ' . $this->table . '.date DESC
+                    LIMIT ' . $offset . ', ' . $limit;
 
         return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
+    }
+
+    public function countNbComments()
+    {
+        $query = 'SELECT count(id) as nbComments FROM ' . $this->table . ';';
+        return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchColumn();
+
     }
 
     public function selectCommentAndJob(int $id): array
@@ -45,5 +53,14 @@ class CommentManager extends AbstractManager
                     WHERE '. $this->table . '.id=' . $id . ';';
 
         return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
+    }
+
+    public function selectCommentsByJobId(int $jobId): array
+    {
+        $query = 'SELECT * FROM ' . $this->table . '
+                    WHERE job_id=' . $jobId
+                    .' AND valid = 1 LIMIT 3'.';';
+
+        return $this->pdoConnection->query($query, \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 }
