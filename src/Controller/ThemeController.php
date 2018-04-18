@@ -9,7 +9,6 @@
 namespace Controller;
 
 
-use Model\Session;
 use Model\ThemeManager;
 
 class ThemeController extends AbstractController
