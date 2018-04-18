@@ -132,4 +132,20 @@ abstract class AbstractManager
 
         $statement->execute();
     }
+
+
+    public function select(int $limit, int $offset, $order=[]): array
+    {
+        $orderStr = ' ORDER BY ';
+        $sep = '';
+        foreach ($order as $col => $val) {
+            $orderStr .= $sep . $col .' '. $val;
+            $sep = ', ';
+        }
+
+        $sql = 'SELECT * FROM ' . $this->table . $orderStr . ' LIMIT ' . $offset . ', ' . $limit;
+
+        return $this->pdoConnection->query($sql,
+                                            \PDO::FETCH_CLASS, $this->className)->fetchAll();
+    }
 }
