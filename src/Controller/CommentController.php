@@ -75,7 +75,7 @@ class CommentController extends AbstractController
             $data['like'] = 0;
             $data['date'] = date("Y-m-d H:i:s"); //(le format DATETIME de MySQL)
             $data['valid'] = 0;
-            $data['avatar'] = '/assets/images/default_avatar.png';
+            $data['avatar'] = '/assets/images/default_avatar.jpg';
 
             $toValidate = [
                 'lastname' => [new NotEmptyValidator($data['lastname']),
