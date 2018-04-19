@@ -16,24 +16,36 @@ use Validator\Comment;
 use Validator\EmailValidator;
 use Validator\NotEmptyValidator;
 use Validator\MaxLengthValidator;
+use Model\Paginator;
 
 class CommentController extends AbstractController
 {
     /**
+     * @param int $pageId
      * @return string
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function getComments()
+    public function getComments(int $pageId = 1)
     {
-        $commentsManager = new CommentManager();
-        $results = $commentsManager->selectAllCommentAndJob();
+        $commentManager = new CommentManager();
+        $nbComments = $commentManager->countNbComments();
 
-        $formater = new Format();
-        $datas = $formater->commentJob($results);
+        $order = ['valid' => 'asc', 'date' => 'desc'];
+        $paginator = new Paginator($commentManager, $pageId, $nbComments, $order);
+        $comments = $paginator->paginate();
 
-        return $this->twig->render('Admin/comment.html.twig', ['datas' => $datas]);
+        $datas['nbPages'] = $comments['nbPages'];
+        $datas['pageId'] = $comments['pageId'];
+
+        $jobManager = new JobManager();
+        foreach ($comments[0] as $comment) {
+            $datas['data'][] = ['comment' => $comment,
+                'job' => $jobManager->selectOneById($comment->getJobId())];
+        }
+
+        return $this->twig->render('Admin/comment.html.twig', ['datas' => $datas, 'pageId' => $pageId]);
     }
 
     /**
