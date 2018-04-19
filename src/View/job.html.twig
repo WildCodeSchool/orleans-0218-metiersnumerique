@@ -9,20 +9,85 @@
 
 {% block content %}
     <div id="titre-metier" class="container-fluid">
-        <h1>{{job.name}}</h1>
+        <h1>{{ job.name }}</h1>
     </div>
     <div class="container">
+
         <a href="/jobs"><button class="btn btn-lg">retour</button></a>
+        <h3>{{job.name}}</h3>
+
         <div id="description" class="page-header">
+            {% if job.video is empty and job.image is empty %}
+            <div class="col-sm-12 col-md-12">
+            {% endif %}
+            {% if job.video is not empty or job.image is not empty %}
             <div class="col-sm-12 col-md-8">
-                <h3>{{job.name}}</h3>
-                    <p>{{job.description}}</p>
+            {% endif %}
+                <p>{{job.description}}</p>
             </div>
             <div class="col-sm-12 col-md-4">
+                {% if job.video %}
                 <div class="embed-responsive embed-responsive-4by3">
-                    <iframe width="560" height="315" class="iframe embed-responsive-item" frameborder="0" src="{{job.video}}"></iframe>
+                    <iframe width="560" height="315" class="iframe embed-responsive-item" frameborder="0"
+                            src="{{ job.video }}"></iframe>
                 </div>
+                {% endif %}
+                {% if job.video is empty and job.image is not empty %}
+                    <img src="{{ job.image }}" alt="image du métier en cours" class="img-responsive" style="margin-bottom: 5vh">
+                {% endif %}
+
             </div>
+        </div>
+    </div>
+
+    <div class="container" id="comments">
+        <div class="row">
+            {% for comment in comments %}
+                <div class="col-md-4">
+                    <div class="row row-height">
+                        <div class="col-md-3">
+                            <img src="{{ comment.avatar }}" class="circle-avatar">
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <p class="p-margin">{{ comment.firstname }} {{ comment.lastname }}</p>
+                            </div>
+                            <div class="row">
+                                {% if comment.wilder == 1 %}
+                                    <p class="p-margin">Ancien wilder</p>
+                                {% endif %}
+                            </div>
+                            <div class="row">
+                                <p class="p-margin">Travaille à : {{ comment.company }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="../../assets/images/quotes.png" alt="guillemets" width=60">
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <h3>Question 1</h3>
+                                <p>{{ comment.question1 }}</p>
+                            </div>
+                            <div class="row">
+                                <h3>Question 2</h3>
+                                <p>{{ comment.question2 }}</p>
+                            </div>
+                            <div class="row">
+                                <h3>Question 3</h3>
+                                <p>{{ comment.question3 }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row align-center">
+            <a href="#">
+                <button class="btn btn-lg">Voir plus de commentaires</button>
+            </a>
         </div>
     </div>
 

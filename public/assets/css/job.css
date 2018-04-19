@@ -10,5 +10,36 @@
     flex-direction: column;
     justify-content: space-around;
     padding: 30px 50px;
+    margin-bottom: 50px;
 }
 
+.btn {
+    margin-top: 25px;
+}
+
+#comments {
+    margin-top: 120px;
+    margin-bottom: 80px;
+}
+
+.comment {
+    padding: 0px 20px;
+}
+
+.p-margin {
+    margin: 0px;
+}
+
+.row-height {
+    height: 90px;
+}
+
+.align-center {
+    display: flex;
+    justify-content: center;
+}
+
+.circle-avatar {
+    width: 70px;
+    border-radius: 50%;
+}

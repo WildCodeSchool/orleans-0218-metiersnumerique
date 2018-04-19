@@ -74,9 +74,10 @@ abstract class AbstractManager
 
 
     /**
-     * INSERT one row in dataase
+     * INSERT one row in database
      *
      * @param array $data
+     * @return bool
      */
     public function insert(array $data)
     {
@@ -100,13 +101,15 @@ abstract class AbstractManager
             }
         }
 
-        $statement->execute();
+        $resultQuery = $statement->execute();
+        return $resultQuery;
     }
 
 
     /**
-     * @param int   $id   Id of the row to update
+     * @param int $id Id of the row to update
      * @param array $data $data to update
+     * @return bool
      */
     public function update(int $id, array $data)
     {
@@ -130,10 +133,16 @@ abstract class AbstractManager
             }
         }
 
-        $statement->execute();
+        $resultQuery = $statement->execute();
+        return $resultQuery;
     }
 
-
+    /**
+     * @param int $limit
+     * @param int $offset
+     * @param array $order
+     * @return array
+     */
     public function select(int $limit, int $offset, $order=[]): array
     {
         $orderStr = ' ORDER BY ';
@@ -145,7 +154,6 @@ abstract class AbstractManager
 
         $sql = 'SELECT * FROM ' . $this->table . $orderStr . ' LIMIT ' . $offset . ', ' . $limit;
 
-        return $this->pdoConnection->query($sql,
-                                            \PDO::FETCH_CLASS, $this->className)->fetchAll();
+        return $this->pdoConnection->query($sql,\PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 }
