@@ -51,23 +51,14 @@ class CommentController extends AbstractController
 
             $cleaner = new CleanInput();
 
-            $data['job_id'] = $_POST['idJob'];
-            $data['lastname'] = $_POST['lastname'];
-            $data['firstname'] = $_POST['firstname'];
-            $data['email'] = $_POST['email'];
+            $data = $cleaner->clean($_POST);
 
-            $data['profession'] = $_POST['profession'];
-            $data['company'] = $_POST['company'];
-            $data['question1'] = $_POST['q1'];
-            $data['question2'] = $_POST['q2'];
-            $data['question3'] = $_POST['q3'];
             if (isset($_POST['wilder'])) {
                 $data['wilder'] = $_POST['wilder'];
             } else {
                 $data['wilder'] = 0;
             }
 
-            $data = $cleaner->clean($data);
 
             $data['like'] = 0;
             $data['date'] = date("Y-m-d H:i:s"); //(le format DATETIME de MySQL)
@@ -76,22 +67,22 @@ class CommentController extends AbstractController
 
             $toValidate = [
                 'lastname' => [new NotEmptyValidator($data['lastname']),
-                                new MaxLengthValidator($data['lastname'], VALID_MAX_LENGTH_INPUTS)],
+                                new MaxLengthValidator($data['lastname'], 45)],
                 'firstname' => [new NotEmptyValidator($data['firstname']),
-                                new MaxLengthValidator($data['firstname'], VALID_MAX_LENGTH_INPUTS)],
+                                new MaxLengthValidator($data['firstname'], 45)],
                 'email' => [new NotEmptyValidator($data['email']),
-                            new MaxLengthValidator($data['email'], VALID_MAX_LENGTH_EMAIL),
+                            new MaxLengthValidator($data['email'], 255),
                             new EmailValidator($data['email'])],
                 'profession' => [new NotEmptyValidator($data['profession']),
-                                new MaxLengthValidator($data['profession'], VALID_MAX_LENGTH_INPUTS)],
+                                new MaxLengthValidator($data['profession'], 45)],
                 'company' => [new NotEmptyValidator($data['company']),
-                                new MaxLengthValidator($data['company'], VALID_MAX_LENGTH_INPUTS)],
+                                new MaxLengthValidator($data['company'], 45)],
                 'question1' => [new NotEmptyValidator($data['question1']),
-                                new MaxLengthValidator($data['question1'], VALID_MAX_LENGTH_TEXTAREA)],
+                                new MaxLengthValidator($data['question1'], 255)],
                 'question2' => [new NotEmptyValidator($data['question2']),
-                                new MaxLengthValidator($data['question2'], VALID_MAX_LENGTH_TEXTAREA)],
+                                new MaxLengthValidator($data['question2'], 255)],
                 'question3' => [new NotEmptyValidator($data['question3']),
-                                new MaxLengthValidator($data['question3'], VALID_MAX_LENGTH_TEXTAREA)],
+                                new MaxLengthValidator($data['question3'], 255)],
             ];
 
             $commentValidator = new Comment($toValidate);

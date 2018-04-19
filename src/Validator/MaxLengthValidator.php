@@ -11,7 +11,7 @@ namespace Validator;
 
 class MaxLengthValidator extends AbstractValidator
 {
-    const RANGE = 'Nombre de caractères dépassé';
+    const MAX_LENGTH = 'Nombre de caractères dépassé';
     /**
      * @var string
      */
@@ -19,17 +19,17 @@ class MaxLengthValidator extends AbstractValidator
     /**
      * @var int
      */
-    private $range;
+    private $length;
 
     /**
      * MaxLengthValidator constructor.
      * @param string $input
      * @param int $range
      */
-    public function __construct(string $input, int $range)
+    public function __construct(string $input, int $length)
     {
         $this->input = $input;
-        $this->range = $range;
+        $this->length = $length;
     }
 
     /**
@@ -37,8 +37,8 @@ class MaxLengthValidator extends AbstractValidator
      */
     public function isValid(): bool
     {
-        if (mb_strlen($this->input) > $this->range) {
-            $this->errors[] = self::RANGE;
+        if (mb_strlen($this->input) > $this->length) {
+            $this->errors[] = self::MAX_LENGTH;
             return false;
         }
 

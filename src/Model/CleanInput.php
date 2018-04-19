@@ -24,46 +24,21 @@ class cleanInput
         $newArray = [];
 
         foreach ($array as $key => $value) {
-            $newArray[$key] = $this->trim($value);
-            if ($key == 'lastname' || $key == 'firstname' || $key == 'profession' || $key == 'company') {
-                $newArray[$key] = $this->firstUpperCase($newArray[$key]);
+            $newArray[$key] = trim(strip_tags($value));
+            if ($key == 'firstname' || $key == 'profession' || $key == 'company') {
+                $newArray[$key] = ucfirst($newArray[$key]);
+            } elseif ($key == 'lastname') {
+                $newArray[$key] = mb_strtoupper($value);
             } elseif ($key == 'wilder') {
                 $newArray[$key] = $this->wilder($newArray[$key]);
             } elseif ($key == 'question1' || $key == 'question2' || $key == 'question3') {
                 $newArray[$key] = $this->firstUpperAfterDot($newArray[$key]);
             } elseif ($key == 'email') {
-                $newArray[$key] = $this->lowerCases($newArray[$key]);
+                $newArray[$key] = mb_strtolower($newArray[$key]);
             }
         }
 
         return $newArray;
-    }
-
-    /**
-     * @param string $input
-     * @return string
-     */
-    private function trim(string $input): string
-    {
-        return trim($input);
-    }
-
-    /**
-     * @param string $input
-     * @return string
-     */
-    private function firstUpperCase(string $input): string
-    {
-        return ucfirst($input);
-    }
-
-    /**
-     * @param string $input
-     * @return string
-     */
-    private function lowerCases(string $input): string
-    {
-        return strtolower($input);
     }
 
     /**
@@ -76,10 +51,10 @@ class cleanInput
         $result = '';
         foreach ($tab as $string => $value) {
             if($value != '') {
-                $result .= $this->firstUpperCase($this->trim($value)) . '. ';
+                $result .= ucfirst(trim($value)) . '. ';
             }
         }
-        $result = $this->trim($result);
+        $result = trim($result);
         return $result;
     }
 

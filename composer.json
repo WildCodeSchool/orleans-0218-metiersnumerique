@@ -16,8 +16,7 @@
     "autoload": {
         "psr-4": {
             "": "src/",
-            "App\\": "app/",
-            "Validator\\": "Validator/"
+            "App\\": "app/"
         }
     }
 }
