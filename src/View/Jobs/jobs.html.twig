@@ -18,7 +18,7 @@
 
 {% block content %}
     <div class="container theme">
-        <div class="row">
+        <div class="row button-pills">
             <div class="col-xs-12 col-lg-offset-3 pilltheme">
                 <ul class="nav nav-pills" role="tablist">
                     {% for theme in themes %}
@@ -37,10 +37,21 @@
                             {% for job in jobs if (job.themeId == theme.id) %}
                                 <div class="col-xs-12 col-sm-6 col-md-4">
                                     <figure class="info-card">
-                                        <img src="{{ job.thumbnail }}" width="100%">
+                                        <div class="titre-card-responsive text-center">{{ theme.name }}</div>
+                                        <img class="img-responsive" src="{{ job.thumbnail }}">
                                         <figcaption class="info-card-details animate">
                                             <div class="info-card-header">
-                                                <div class="metacard"><h3 class="metacard">{{ job.name }}</h3><img src="assets/images/icon-comment.png" width="18px" class="bulle-card metacard">3</div>
+                                                <div class="metacard"><h3 class="metacard">{{ job.name }}</h3><img src="assets/images/icon-comment.png" width="18px" class="bulle-card metacard">
+                                                    {% set valid = '' %}
+
+                                                    {% for comment in comments if (comment.job_id == job.id) %}
+                                                            {% set valid = comment.nbrComments %}
+                                                    {% endfor %}
+
+                                                    {% if valid =='' %}
+                                                        0
+                                                    {% else %} {{ valid }} {% endif %}
+                                                </div>
                                                 <p></p>
                                             </div>
                                             <div class="info-card-detail">
