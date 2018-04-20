@@ -36,7 +36,8 @@
 
 .align-center {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    margin-top: 50px;
 }
 
 .circle-avatar {
