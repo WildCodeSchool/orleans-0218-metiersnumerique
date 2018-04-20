@@ -2,12 +2,12 @@
     <link rel="stylesheet" href="/assets/css/navbar.css">
 {% endblock %}
 {% block navbar %}
-    <nav class="navbar navbar-default navbar-fixed-top navbar-custom" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom " role="navigation">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">
                 <img src="/assets/images/logo_orange_pastille.png" alt="Logo Wild Code School">
             </a>
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
+            <button type="button" class="navbar-toggle theme-nav" data-toggle="collapse" data-target=".navbar-menubuilder">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -16,12 +16,10 @@
         </div>
         <div class="collapse navbar-collapse navbar-menubuilder">
             <ul class="nav navbar-nav navbar-right hidden-sm hidden-md hidden-lg">
-                <li class="nav-item"><a href="#">Nos campus</a></li>
-                <li class="nav-item"><a href="#">Notre formation</a></li>
-                <li class="nav-item"><a href="#">Entreprises</a></li>
-                <li class="nav-item"><a href="#">Notre équipe</a></li>
-                <li class="nav-item"><a href="#">FAQ</a></li>
-                <li class="nav-item"><a href="#">Contact</a></li>
+    {% for theme in themes %}
+        <li class="nav-item"><a href="#{{ theme.id }}" data-toggle="tab">{{ theme.name }}</a></li>
+    {% endfor %}
+
             </ul>
         </div>
     </nav>

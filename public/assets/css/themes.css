@@ -2,12 +2,15 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 @media (max-width: 766px) {
+    .theme-nav {
+        display: block;
+    }
+  
     .button-pills {
         display: none;
     }
-
-
 }
+
 .nav-pills li.active a,
 .nav-pills li.active a:focus,
 .nav-pills>li.active>a,
