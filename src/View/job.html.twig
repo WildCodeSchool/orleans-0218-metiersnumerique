@@ -45,14 +45,16 @@
             {% for comment in comments %}
                 <div class="col-md-4 col-xs-12 active">
                     <div class="row row-height">
-                        <div class="col-md-4 col-xs-4 p-right">
-                            <img src="{{ comment.avatar }}" class="circle-avatar">
+                        <div class="col-md-4 col-xs-4">
+                            <div class="row row-avatar">
+                                <img src="{{ comment.avatar }}" class="circle-avatar">
+                            </div>
                         </div>
                         <div class="col-md-8 col-xs-8">
                             <div class="row">
                                 <h4 class="p-margin bold">{{ comment.firstname }} {{ comment.lastname }}</h4>
                             </div>
-                            <div class="row">
+                            <div class="row min-row">
                                 {% if comment.wilder == 1 %}
                                     <p class="p-margin gray">Ancien wilder</p>
                                 {% endif %}
@@ -64,7 +66,15 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4 col-xs-4">
-                            <img src="../../assets/images/quotes.png" alt="guillemets" width=60" class="p-right">
+                            <div class="row">
+                                <img src="../../assets/images/quotes.png" alt="guillemets" width=60">
+                            </div>
+                            <div class="row glyph">
+                                <a href="/like/{{ comment.id }}/{{ job.id }}">
+                                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                </a>
+                                <p class="nb-like">{{ comment.like }}</p>
+                            </div>
                         </div>
                         <div class="col-md-8 col-xs-8">
                             <div class="row">

@@ -146,4 +146,12 @@ class CommentController extends AbstractController
         return $this->getComments();
     }
 
+    public function addLike(int $commentId, int $jobId)
+    {
+        $commentManager = new CommentManager();
+        $commentManager->addLikeByCommentId($commentId);
+        header('Location: /job/' .$jobId);
+
+    }
+
 }
