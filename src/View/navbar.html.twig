@@ -4,7 +4,7 @@
 {% block navbar %}
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom " role="navigation">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/">
                 <img src="/assets/images/logo_orange_pastille.png" alt="Logo Wild Code School">
             </a>
             <button type="button" class="navbar-toggle theme-nav" data-toggle="collapse" data-target=".navbar-menubuilder">
@@ -16,10 +16,9 @@
         </div>
         <div class="collapse navbar-collapse navbar-menubuilder">
             <ul class="nav navbar-nav navbar-right hidden-sm hidden-md hidden-lg">
-    {% for theme in themes %}
-        <li class="nav-item"><a href="#{{ theme.id }}" data-toggle="tab">{{ theme.name }}</a></li>
-    {% endfor %}
-
+                {% for theme in themes %}
+                    <li class="nav-item"><a href="#{{ theme.id }}" data-toggle="tab">{{ theme.name }}</a></li>
+                {% endfor %}
             </ul>
         </div>
     </nav>
