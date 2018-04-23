@@ -1,0 +1,62 @@
+.navbar-header button {
+    line-height: 70px;
+    margin-top: 17px;
+    border: 0;
+}
+
+.navbar-brand {
+    padding: 5px 15px;
+}
+
+.navbar-brand img {
+    width: 40px;
+    height: 40px;
+}
+
+.navbar-right {
+    margin-right: 15px;
+}
+
+.navbar-default {
+    font-size: 15px;
+    background-color: rgba(255, 255, 255, 1);
+    border-bottom-width: 0;
+    border-top: 0;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: rgba(0, 0, 0, 1);
+    background-color: rgba(248, 248, 248, 0);
+    border-top: 1px solid #eeeeee;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color: #f9a02e;
+    background-color: #eeeeee;
+}
+
+.navbar-default .navbar-nav>li>a:focus {
+    color: #f9a02e;
+}
+
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus {
+    color: #f9a02e;
+    background-color: rgba(231, 231, 231, 0);
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: rgba(231, 231, 231, 0);
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #000000;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.navbar-default .navbar-toggle:hover .icon-bar {
+    background-color: #f9a02e;
+}
