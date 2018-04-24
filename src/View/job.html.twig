@@ -7,10 +7,12 @@
     {% include 'navbar.html.twig' %}
 {% endblock %}
 
+{% block banner %}
+    {% include 'banner.html.twig' %}
+{% endblock %}
+
 {% block content %}
-    <div id="titre-metier" class="container-fluid">
-        <h1>{{ job.name }}</h1>
-    </div>
+
     <div class="container">
 
         <a href="/jobs"><button class="btn btn-lg">retour</button></a>
@@ -40,19 +42,19 @@
         </div>
     </div>
 
+
     <div class="container" id="comments" data-jobId="{{ job.id }}">
         <div id="row-comments" class="row">
             {% include 'load-comment.html.twig' %}
         </div>
-
         <div class="row align-center">
             <button id="voirPlus" class="btn btn-lg">Voir plus de commentaires</button>
-            <a href="/job/{{ job.id }}/add-comment">
+
+            <a href="/job/{{ job.id }}/add-comment" class="col-md-6 col-xs-12">
                 <button class="btn btn-lg">Ajouter un commentaire</button>
             </a>
         </div>
     </div>
-
 {% endblock %}
 
 {% block footer %}
