@@ -9,7 +9,12 @@
 namespace Controller;
 
 
+use Model\CleanInput;
+use Validator\Comment;
+use Model\JobManager;
 use Model\ThemeManager;
+use Validator\MaxLengthValidator;
+use Validator\NotEmptyValidator;
 
 class ThemeController extends AbstractController
 {
@@ -42,5 +47,26 @@ class ThemeController extends AbstractController
 
         header('Location:/admin/themes-jobs');
         exit();
+    }
+
+    public function deleteTheme()
+    {
+        if (!empty($_POST)) {
+            $jobManager = new JobManager();
+            $nbJobs = $jobManager->countNbJobsByThemeId($_POST['id']);
+
+            unset($_SESSION['deleteTheme']);
+
+            $_SESSION['deleteTheme']['id'] = $_POST['id'];
+            if ($nbJobs > 0) {
+                $_SESSION['deleteTheme']['danger'] = 'Vous devez supprimer les fiches métiers avant de pouvoir supprimer le thème';
+                header('Location:/admin/themes-jobs');
+            } else {
+                $themeManager = new ThemeManager();
+                $themeManager->delete($_POST['id']);
+                $_SESSION['deleteTheme']['success'] = 'Votre thème a bien été supprimé';
+            }
+        }
+        header('Location:/admin/themes-jobs');
     }
 }

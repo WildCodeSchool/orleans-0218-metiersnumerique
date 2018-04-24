@@ -30,5 +30,6 @@ $routes = [
     ],
     'Theme' => [
         ['addTheme', '/admin/add-theme', 'POST'],
+        ['deleteTheme', '/admin/delete-theme', 'POST'],
     ],
 ];
