@@ -7,10 +7,12 @@
     {% include 'navbar.html.twig' %}
 {% endblock %}
 
+{% block banner %}
+    {% include 'banner.html.twig' %}
+{% endblock %}
+
 {% block content %}
-    <div id="titre-metier" class="container-fluid">
-        <h1>{{ job.name }}</h1>
-    </div>
+
     <div class="container">
 
         <a href="/jobs"><button class="btn btn-lg">retour</button></a>

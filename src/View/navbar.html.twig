@@ -16,10 +16,9 @@
         </div>
         <div class="collapse navbar-collapse navbar-menubuilder">
             <ul class="nav navbar-nav navbar-right hidden-sm hidden-md hidden-lg">
-    {% for theme in themes %}
-        <li class="nav-item"><a href="#{{ theme.id }}" data-toggle="tab">{{ theme.name }}</a></li>
-    {% endfor %}
-
+                {% for theme in themes %}
+                    <li class="nav-item"><a href="#{{ theme.id }}" data-toggle="tab">{{ theme.name }}</a></li>
+                {% endfor %}
             </ul>
         </div>
     </nav>
