@@ -98,8 +98,6 @@ class ThemeController extends AbstractController
                 exit();
             }
 
-
-
             header('Location: /admin/themes-jobs');
             exit();
         }
