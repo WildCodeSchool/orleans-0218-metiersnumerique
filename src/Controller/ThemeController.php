@@ -92,7 +92,7 @@ class ThemeController extends AbstractController
                 }
                 $array = $validator->getErrors();
                 foreach ($array as $arr) {
-                    $_SESSION['updateTheme'] = array_filter(array_values($arr));
+                    $_SESSION['updateTheme'] = array_filter($arr);
                 }
                 header('Location: /admin/update-theme/'.$_POST['id']);
                 exit();
@@ -112,8 +112,6 @@ class ThemeController extends AbstractController
             $nbJobs = $jobManager->countNbJobsByThemeId($_POST['id']);
 
             unset($_SESSION['deleteTheme']);
-
-
 
             $_SESSION['deleteTheme']['id'] = $_POST['id'];
             if ($nbJobs > 0) {
