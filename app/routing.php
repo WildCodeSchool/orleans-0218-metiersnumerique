@@ -29,5 +29,6 @@ $routes = [
     ],
     'Theme' => [
         ['addTheme', '/admin/add-theme', 'POST'],
+        ['updateTheme', '/admin/update-theme/{themeId:\d+}', ['POST','GET']],
     ],
 ];
