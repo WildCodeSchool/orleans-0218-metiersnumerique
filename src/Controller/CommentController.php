@@ -146,4 +146,19 @@ class CommentController extends AbstractController
         return $this->getComments();
     }
 
+    public function loadComments()
+    {
+        if (!empty($_POST)) {
+            $jobId = $_POST['jobId'];
+            $offset = $_POST['offset'];
+            $commentManager = new CommentManager();
+            $comments = $commentManager->selectCommentsByJobId($jobId, $offset);
+        } else {
+            header('Location:/jobs');
+            exit();
+        }
+
+        return $this->twig->render('load-comment.html.twig', ['comments' => $comments]);
+    }
+
 }

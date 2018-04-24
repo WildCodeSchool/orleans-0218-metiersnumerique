@@ -40,54 +40,13 @@
         </div>
     </div>
 
-    <div class="container" id="comments">
-        <div class="row">
-            {% for comment in comments %}
-                <div class="col-md-4">
-                    <div class="row row-height">
-                        <div class="col-md-3">
-                            <img src="{{ comment.avatar }}" class="circle-avatar">
-                        </div>
-                        <div class="col-md-9">
-                            <div class="row">
-                                <p class="p-margin">{{ comment.firstname }} {{ comment.lastname }}</p>
-                            </div>
-                            <div class="row">
-                                {% if comment.wilder == 1 %}
-                                    <p class="p-margin">Ancien wilder</p>
-                                {% endif %}
-                            </div>
-                            <div class="row">
-                                <p class="p-margin">Travaille à : {{ comment.company }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img src="../../assets/images/quotes.png" alt="guillemets" width=60">
-                        </div>
-                        <div class="col-md-9">
-                            <div class="row">
-                                <h3>Question 1</h3>
-                                <p>{{ comment.question1 }}</p>
-                            </div>
-                            <div class="row">
-                                <h3>Question 2</h3>
-                                <p>{{ comment.question2 }}</p>
-                            </div>
-                            <div class="row">
-                                <h3>Question 3</h3>
-                                <p>{{ comment.question3 }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
+    <div class="container" id="comments" data-jobId="{{ job.id }}">
+        <div id="row-comments" class="row">
+            {% include 'load-comment.html.twig' %}
         </div>
+
         <div class="row align-center">
-            <a href="#">
-                <button class="btn btn-lg">Voir plus de commentaires</button>
-            </a>
+            <button id="voirPlus" class="btn btn-lg">Voir plus de commentaires</button>
             <a href="/job/{{ job.id }}/add-comment">
                 <button class="btn btn-lg">Ajouter un commentaire</button>
             </a>

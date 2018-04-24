@@ -58,11 +58,11 @@ class CommentManager extends AbstractManager
         return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
     }
   
-    public function selectCommentsByJobId(int $jobId): array
+    public function selectCommentsByJobId(int $jobId, int $offset = 0): array
     {
-        $query = 'SELECT * FROM ' . $this->table . '
-                    WHERE job_id=' . $jobId
-                    .' AND valid = 1 LIMIT 3'.';';
+        $query = "SELECT * FROM $this->table
+                    WHERE job_id= $jobId
+                    AND valid = 1 LIMIT $offset, 3;";
 
         return $this->pdoConnection->query($query, \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
