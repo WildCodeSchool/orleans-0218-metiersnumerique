@@ -35,18 +35,10 @@ class AdminController extends AbstractController
             $addTheme = '';
         }
 
-        if (isset($_SESSION['modifTheme'])) {
-            $modifTheme = $_SESSION['modifTheme'];
-            unset($_SESSION['modifTheme']);
-        } else {
-            $modifTheme = '';
-        }
-
         return $this->twig->render('Admin/themes-jobs.html.twig', [
             'themes' => $themes,
             'jobs' => $jobs,
             'addTheme' => $addTheme,
-            'modifTheme' => $modifTheme
         ]);
     }
 }
