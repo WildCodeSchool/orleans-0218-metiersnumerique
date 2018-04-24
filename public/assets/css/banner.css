@@ -6,7 +6,7 @@
 
 .banner {
     height: 30vh;
-    background-image: url("https://wildcodeschool.fr/wp-content/uploads/2017/01/header_background.jpg");
+    background-image: url("/assets/images/server.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

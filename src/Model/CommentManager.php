@@ -62,8 +62,17 @@ class CommentManager extends AbstractManager
     {
         $query = 'SELECT * FROM ' . $this->table . '
                     WHERE job_id=' . $jobId
-                    .' AND valid = 1 LIMIT 3'.';';
+                    .' AND valid = 1 ORDER BY ' . $this->table . '.like DESC LIMIT 3'.';';
 
         return $this->pdoConnection->query($query, \PDO::FETCH_CLASS, $this->className)->fetchAll();
+    }
+
+    public function addLikeByCommentId(int $id)
+    {
+        $query = 'UPDATE ' . $this->table . ' SET ' . $this->table . '.like = ' . $this->table . '.like +1 WHERE id = :id; ';
+        $prep = $this->pdoConnection->prepare($query);
+        $prep->bindValue(':id', $id, \PDO::PARAM_INT);
+
+        $prep->execute();
     }
 }

@@ -1,13 +1,14 @@
-* {
-    box-sizing: border-box;
-}
-
 @media (max-width: 766px) {
     .theme-nav {
         display: none;
     }
 
 }
+
+* {
+    box-sizing: border-box;
+}
+
 
 body {
     font-family: 'Open Sans', sans-serif;

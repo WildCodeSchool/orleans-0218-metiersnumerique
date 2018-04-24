@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block navbar %}
-    {% include 'navbar.html.twig' %}
+    {% include 'Admin/navbar.html.twig' %}
 {% endblock %}
 
 {% block banner %}
@@ -17,6 +17,16 @@
         <div class="row">
             <div class="col-xs-12">
                 <h1>Gestion des commentaires</h1>
+            </div>
+        </div>
+        <div class="row" id="legend">
+            <div class="col-xs-3 flex">
+               <div class="legend-color valid"></div>
+                <p class="legend-text">Commentaire validé</p>
+            </div>
+            <div class="col-xs-3 flex">
+                <div class="legend-color not-valid"></div>
+                <p class="legend-text">Commentaire à valider</p>
             </div>
         </div>
         <div class="row">

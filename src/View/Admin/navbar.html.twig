@@ -1,0 +1,24 @@
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/admin/navbar.css">
+{% endblock %}
+{% block navbar %}
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom " role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img src="/assets/images/logo_orange_pastille.png" alt="Logo Wild Code School">
+            </a>
+            <button type="button" class="navbar-toggle theme-nav" data-toggle="collapse" data-target=".navbar-menubuilder">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse navbar-menubuilder">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/admin/themes-jobs">Thèmes et Métiers</a></li>
+                <li><a href="/admin/comment">Validation des commentaires</a></li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
