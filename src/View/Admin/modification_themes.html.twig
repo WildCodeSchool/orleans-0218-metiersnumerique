@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+
+{% block navbar %}
+    {% include 'navbar.html.twig' %}
+{% endblock %}
+
+{% block bandeau %}
+    {% include 'bandeau.html.twig' %}
+{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/admin/themes-jobs.css">
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Modification du thème</h2>
+                {% if updateTheme is not empty %}
+                    {% for messages in updateTheme %}
+                        {% for message in messages %}
+                            <span class="red">{{ message }}</span>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+                <form action="/admin/update-theme/{{ theme.id }}" method="post" class="form-inline">
+                    <div class="form-group">
+                        <input type="hidden" value="{{ theme.id }}" name="id">
+                        <input type="text" class="form-control" name="name" value="{{ theme.name }}"
+                               placeholder="Entrez le nom du nouveau thème">
+                        <button type="submit" class="btn btn-default">Valider</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
