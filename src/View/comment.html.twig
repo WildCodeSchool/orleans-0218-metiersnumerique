@@ -14,7 +14,7 @@
 
 {% block content %}
     <div class="container">
-        <form action="/job/{{ job.id }}/add-comment" method="post" novalidate>
+        <form action="/job/{{ job.id }}/add-comment" method="post" novalidate enctype="multipart/form-data">
             <div class="row">
                 <div class="col-xs-offset-1 col-xs-11 col-sm-offset-2 col-sm-10 col-md-10">
                     <div class="form-group">
@@ -84,7 +84,7 @@
                                 {% endif %}
                             {% endif %}
                             <label class="sr-only" for="email">Email</label>
-                            <input class="form-control" type="text" id="email" name="email"
+                            <input class="form-control" type="email" id="email" name="email"
                                    placeholder="Adresse email .." required
                                    {% if inputs.email is not empty %}value="{{ inputs.email }}"{% endif %}>
                         </div>
@@ -142,9 +142,17 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="form-inline">
+                    <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-3">
+                        <label for="avatar">Ajouter votre avatar</label>
+                        <input id="avatar" name="avatar" type="file"/>
+                    </div>
+                </div>
+            </div>
             <div class="row firstTextarea">
                 <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
-                    <h3>Question 1</h3>
+                    <h3>Ce que vous aimez le plus dans votre métier</h3>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.question1 %}
@@ -164,7 +172,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
-                    <h3>Question 2</h3>
+                    <h3>Ce que vous aimez le moins dans votre métier</h3>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.question2 %}
@@ -184,7 +192,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
-                    <h3>Question 3</h3>
+                    <h3>Commentaires libres</h3>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.question3 %}
@@ -203,7 +211,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-offset-2 col-sm-offset-4 col-md-offset-5 col-xs-5 col-sm-10 col-md-4">
+                <div class="col-xs-offset-2 col-sm-offset-4 col-md-offset-4 col-xs-5 col-sm-10 col-md-5">
                     <input type="submit" value="Envoyer mon commentaire" class="btn btn-lg">
                 </div>
             </div>
