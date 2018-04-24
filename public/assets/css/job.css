@@ -22,12 +22,9 @@
     margin-bottom: 80px;
 }
 
-.comment {
-    padding: 0px 20px;
-}
-
 .p-margin {
-    margin: 0px;
+    margin-bottom: 3px;
+    margin-top: 0px;
 }
 
 .row-height {
@@ -38,9 +35,84 @@
     display: flex;
     justify-content: space-between;
     margin-top: 50px;
+    text-align: center;
 }
 
 .circle-avatar {
     width: 70px;
+    height: 70px;
     border-radius: 50%;
+}
+
+.active {
+    padding: 25px 35px;
+    border-radius: 15px;
+}
+
+.active:hover {
+    background-color: #F0F0F0;
+}
+
+.border-left {
+    border-left: 2px solid #FBA858;
+    padding-left: 10px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.gray {
+    color: lightslategray;
+}
+
+.min-row {
+    min-height: 23px;
+}
+
+.glyphicon-thumbs-up {
+    font-size: 2em;
+}
+
+.glyph {
+    padding-top: 30px;
+    display: flex;
+    justify-content: left;
+}
+
+.nb-like {
+    margin-left: 10px;
+    margin-top: 3px;
+    font-size: 1.2em
+}
+
+@media screen and (max-width: 500px) {
+
+    .active {
+        margin-bottom: 50px;
+        padding-right: 50px;
+        background-color: #F0F0F0;
+    }
+
+    #comments img {
+        width: 60px;
+    }
+
+    #comments {
+        padding: 0px 30px;
+    }
+
+    .align-center {
+        flex-direction: column;
+    }
+
+    .btn {
+        margin-top: 0px;
+        margin-bottom: 15px;
+    }
+
+    #comments h4 {
+        font-size: 1.2em;
+    }
+
 }

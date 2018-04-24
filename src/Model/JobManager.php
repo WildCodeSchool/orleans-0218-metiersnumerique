@@ -30,4 +30,14 @@ class JobManager extends AbstractManager
     {
         return $this->pdoConnection->query('SELECT * FROM ' . $this->table . ' ORDER BY theme_id', \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
+
+    /**
+     * @param int $themeId
+     * @return mixed
+     */
+    public function countNbJobsByThemeId(int $themeId)
+    {
+        $query = 'SELECT count(id) as nbJobs FROM ' . $this->table . ' WHERE theme_id = '. $themeId . ';';
+        return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchColumn();
+    }
 }
