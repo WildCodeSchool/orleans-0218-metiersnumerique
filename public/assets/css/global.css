@@ -44,7 +44,6 @@ a {
     width: 24em;
     margin: 0 auto;
     border-right: 2px solid rgba(255,255,255,.75);
-    /*font-size: 180%;*/
     font-size: calc(1vw + 1vh + 1vmin);
     text-align: center;
     white-space: nowrap;

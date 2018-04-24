@@ -125,7 +125,7 @@ class CommentController extends AbstractController
         $formater = new Format();
         $data = $formater->commentJob($results);
 
-        return $this->twig->render('Admin/view_comment.html.twig', ['data' => $data]);
+        return $this->twig->render('Admin/view-comment.html.twig', ['data' => $data]);
     }
 
     public function commentUpdate()

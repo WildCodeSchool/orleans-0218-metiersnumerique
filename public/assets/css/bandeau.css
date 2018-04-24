@@ -14,11 +14,9 @@
     .bandeauheader {
         margin-bottom: 25px;
     }
-
 }
 
 .bandeauhome {
-    /*font-size: 40px;*/
     text-transform: uppercase;
     margin-bottom: 15px;
 }
@@ -29,7 +27,6 @@
     width: 24em;
     margin: 0 auto;
     border-right: 2px solid rgba(255,255,255,.75);
-    /*font-size: 180%;*/
     font-size: calc(1vw + 1vh + 1vmin);
     text-align: center;
     white-space: nowrap;
