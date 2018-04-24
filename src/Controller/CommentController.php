@@ -75,7 +75,17 @@ class CommentController extends AbstractController
             $data['like'] = 0;
             $data['date'] = date("Y-m-d H:i:s"); //(le format DATETIME de MySQL)
             $data['valid'] = 0;
-            $data['avatar'] = '/assets/images/default_avatar.jpg';
+
+            if(!empty($_FILES['avatar'])) {
+                $fileName = $_FILES["avatar"]["name"];
+                $tempFile = $_FILES["avatar"]["tmp_name"];
+                $extension = pathinfo($fileName,PATHINFO_EXTENSION);
+                $dirTarget = "assets/images/avatar/".uniqid("image").".".$extension;
+                move_uploaded_file($tempFile, $dirTarget);
+                $data['avatar'] = "/".$dirTarget;
+            } else  {
+                $data['avatar'] = '/assets/images/avatar/default_avatar.jpg';
+            }
 
             $toValidate = [
                 'lastname' => [new NotEmptyValidator($data['lastname']),
@@ -137,7 +147,7 @@ class CommentController extends AbstractController
                 $comment = $commentManager->selectOneById($id);
                 $data['avatar'] = $comment->getAvatar();
             } else {
-                $data['avatar'] = '/assets/images/default_avatar.jpg';
+                $data['avatar'] = '/assets/images/avatar/default_avatar.jpg';
             }
             $data['valid'] = 1;
 
@@ -153,5 +163,4 @@ class CommentController extends AbstractController
         header('Location: /job/' .$jobId);
 
     }
-
 }
