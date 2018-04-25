@@ -26,65 +26,65 @@
                 </div>
                 <div class="form-group">
                     <label for="name">Titre</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="name">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="name" {% if inputs.name is not empty %}value="{{ inputs.name }}"{% endif %}>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.name %}
                             {% for err in error if err is not empty %}
-                                <p class="help-block">{{ err }}</p>
+                                <p class="text-danger">{{ err }}</p>
                                 {% set countErrors = countErrors + 1 %}
                             {% endfor %}
                         {% endfor %}
                         {% if countErrors == 0 %}
-                            <p class="help-block">OK !</p>
+                            <p class="text-success">OK !</p>
                         {% endif %}
                     {% endif %}
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description"></textarea>
+                    <textarea class="form-control" id="description" name="description">{% if inputs.description is not empty %}{{ inputs.description }}"{% endif %}</textarea>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.description %}
                             {% for err in error if err is not empty %}
-                                <p class="help-block">{{ err }}</p>
+                                <p class="text-danger">{{ err }}</p>
                                 {% set countErrors = countErrors + 1 %}
                             {% endfor %}
                         {% endfor %}
                         {% if countErrors == 0 %}
-                            <p class="help-block">OK !</p>
+                            <p class="text-success">OK !</p>
                         {% endif %}
                     {% endif %}
                 </div>
                 <div class="form-group">
                     <label for="resum">Resumé</label>
-                    <textarea class="form-control" id="resum" name="resum"></textarea>
+                    <textarea class="form-control" id="resum" name="resum">{% if inputs.resum is not empty %}{{ inputs.resum }}"{% endif %}</textarea>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.resum %}
                             {% for err in error if err is not empty %}
-                                <p class="help-block">{{ err }}</p>
+                                <p class="text-danger">{{ err }}</p>
                                 {% set countErrors = countErrors + 1 %}
                             {% endfor %}
                         {% endfor %}
                         {% if countErrors == 0 %}
-                            <p class="help-block">OK !</p>
+                            <p class="text-success">OK !</p>
                         {% endif %}
                     {% endif %}
                 </div>
                 <div class="form-group">
                     <label for="lien youtube">Lien youtube</label>
-                    <input type="text" class="form-control" id="video" name="video" placeholder="Lien youtube">
+                    <input type="text" class="form-control" id="video" name="video" placeholder="Lien youtube" {% if inputs.video is not empty %}value="{{ inputs.video }}"{% endif %}>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.video %}
                             {% for err in error if err is not empty %}
-                                <p class="help-block">{{ err }}</p>
+                                <p class="text-danger">{{ err }}</p>
                                 {% set countErrors = countErrors + 1 %}
                             {% endfor %}
                         {% endfor %}
                         {% if countErrors == 0 %}
-                            <p class="help-block">OK !</p>
+                            <p class="text-success">OK !</p>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -95,12 +95,12 @@
                         {% set countErrors = 0 %}
                         {% for error in errors.thumbnail %}
                             {% for err in error if err is not empty %}
-                                <p class="help-block">{{ err }}</p>
+                                <p class="text-danger">{{ err }}</p>
                                 {% set countErrors = countErrors + 1 %}
                             {% endfor %}
                         {% endfor %}
                         {% if countErrors == 0 %}
-                            <p class="help-block">OK !</p>
+                            <p class="text-success">OK !</p>
                         {% endif %}
                     {% endif %}
 
@@ -112,12 +112,12 @@
                         {% set countErrors = 0 %}
                         {% for error in errors.image %}
                             {% for err in error if err is not empty %}
-                                <p class="help-block">{{ err }}</p>
+                                <p class="text-danger">{{ err }}</p>
                                 {% set countErrors = countErrors + 1 %}
                             {% endfor %}
                         {% endfor %}
                         {% if countErrors == 0 %}
-                            <p class="help-block">OK !</p>
+                            <p class="text-success">OK !</p>
                         {% endif %}
                     {% endif %}
                 </div>

@@ -93,15 +93,15 @@ class JobController extends AbstractController
                 return $this->twig->render('Admin/add-job.html.twig', ['themes' => $themes, 'inputs' => $data, 'errors' => $errors]);
             } else {
 
-                $Upload = new Upload();
-
-                $data['thumbnail']= $Upload -> renameFile($data['name'],'card-metiers','thumbnail');
-                $data['image']= $Upload -> renameFile($data['name'],'card-metiers','thumbnail');
+                $upload = new Upload();
+                $idUpload = uniqid();
+                $data['thumbnail']= $upload -> renameFile($data['name'],'card-metiers','thumbnail',$idUpload);
+                $data['image']= $upload -> renameFile($data['name'],'card-metiers','thumbnail',$idUpload);
                 $jobManager = new JobManager();
                 $jobManager->insert($data);
-                $Upload = new Upload();
-                $Upload ->upload($data['name'],'card-metiers','thumbnail');
-                $Upload ->upload($data['name'],'image-metiers','image');
+                $upload = new Upload();
+                $upload->upload($data['name'],'card-metiers','thumbnail',$idUpload);
+                $upload ->upload($data['name'],'image-metiers','image',$idUpload);
 
                 header('Location:/admin/add-job');
               exit();

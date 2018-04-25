@@ -12,26 +12,22 @@ namespace Model;
 class Upload
 {
 
-    public function upload ($name,$dir,$index)
+    public function upload ($name,$dir,$index,$id)
     {
 
         $extension_upload = strtolower(  substr(  strrchr($_FILES[$index]['name'], '.')  ,1)  );
-        $nom = '../public/assets/images/'.$dir.'/'.$name.'.'.$extension_upload;
-
+        $nom = '../public/assets/images/'.$dir.'/'.$name.'-'.$id.'.'.$extension_upload;
         return move_uploaded_file($_FILES[$index]['tmp_name'],$nom);
 
     }
 
-    public function renameFile($name,$dir,$index)
-
-
-       {
+    public function renameFile($name,$dir,$index,$id)
+    {
 
         $extension_upload = strtolower(  substr(  strrchr($_FILES[$index]['name'], '.')  ,1)  );
-        $nom = 'assets/images/'.$dir.'/'.$name.'.'.$extension_upload;
+        $nom = 'assets/images/'.$dir.'/'.$name.'-'.$id.'.'.$extension_upload;
 
            return $nom;
-        }
-
+    }
 
 }
