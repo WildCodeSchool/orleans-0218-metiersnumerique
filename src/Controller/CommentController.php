@@ -76,7 +76,7 @@ class CommentController extends AbstractController
             $data['date'] = date("Y-m-d H:i:s"); //(le format DATETIME de MySQL)
             $data['valid'] = 0;
 
-            if(!empty($_FILES['avatar'])) {
+            if(!empty($_FILES['avatar']["name"])) {
                 $fileName = $_FILES["avatar"]["name"];
                 $tempFile = $_FILES["avatar"]["tmp_name"];
                 $extension = pathinfo($fileName,PATHINFO_EXTENSION);
