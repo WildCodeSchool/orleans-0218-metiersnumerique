@@ -35,7 +35,7 @@ class JobManager extends AbstractManager
      * @param int $themeId
      * @return mixed
      */
-    public function countNbJobsByThemeId(int $themeId)
+    public function countNbJobsByThemeId(int $themeId): int
     {
         $query = 'SELECT count(id) as nbJobs FROM ' . $this->table . ' WHERE theme_id = '. $themeId . ';';
         return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchColumn();
