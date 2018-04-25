@@ -25,10 +25,12 @@ class CommentManager extends AbstractManager
      */
     public function selectNbCommentsByJob(): array
     {
-        $query = 'SELECT  job_id, count('.$this->table.'.id) as nbrComments 
-        FROM ' . $this->table . ' 
-        INNER JOIN job ON job.id = ' . $this->table . '.job_id 
-        GROUP BY job_id';
+        $query = 'SELECT  job_id, count(' . $this->table . '.id) as nbrComments 
+                    FROM ' . $this->table . ' 
+                    INNER JOIN job ON job.id = ' . $this->table . '.job_id
+                    WHERE comment.valid = 1
+                    GROUP BY job_id';
+
         return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
     }
 
@@ -58,9 +60,13 @@ class CommentManager extends AbstractManager
     {
         $query = 'SELECT ' . $this->table . '.*, job.name  FROM ' . $this->table . '
                     JOIN job ON ' . $this->table . '.job_id = job.id
-                    WHERE '. $this->table . '.id=' . $id . ';';
+                    WHERE ' . $this->table . '.id = :id  ;';
 
-        return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
+        $statement = $this->pdoConnection->prepare($query);
+        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
   
     public function selectCommentsByJobId(int $jobId, int $offset = 0): array
@@ -85,7 +91,6 @@ class CommentManager extends AbstractManager
         $query = 'UPDATE ' . $this->table . ' SET ' . $this->table . '.like = ' . $this->table . '.like +1 WHERE id = :id; ';
         $prep = $this->pdoConnection->prepare($query);
         $prep->bindValue(':id', $id, \PDO::PARAM_INT);
-
         $prep->execute();
     }
 }
