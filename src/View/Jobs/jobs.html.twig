@@ -32,7 +32,8 @@
         <div class="row">
             <div class="tab-content">
                 {% for theme in themes %}
-                    <div class="pannel pannel-default tab-pane fade{% if (loop.index==1) %} in active{% endif %}" role="tabpanel" id="{{ theme.id }}">
+                    <div class="pannel pannel-default tab-pane fade{% if (loop.index==1) %} in active{% endif %}"
+                         role="tabpanel" id="{{ theme.id }}">
                         <div class="pannel-body">
                             {% for job in jobs if (job.themeId == theme.id) %}
                                 <div class="col-xs-12 col-sm-6 col-md-4">
@@ -41,22 +42,23 @@
                                         <img class="img-responsive" src="{{ job.thumbnail }}">
                                         <figcaption class="info-card-details animate">
                                             <div class="info-card-header">
-                                                <div class="metacard"><h3 class="metacard">{{ job.name }}</h3><img src="assets/images/icon-comment.png" width="18px" class="bulle-card metacard">
-                                                    {% set valid = '' %}
-
+                                                <div class="metacard">
+                                                    <h3 class="metacard">{{ job.name }}</h3>
                                                     {% for comment in comments if (comment.job_id == job.id) %}
-                                                            {% set valid = comment.nbrComments %}
+                                                        {% if comment.nbrComments > 0 %}
+                                                            <img src="assets/images/icon-comment.png" width="18px"
+                                                                 class="bulle-card metacard">
+                                                        {% endif %}
+                                                        {{ comment.nbrComments }}
                                                     {% endfor %}
-
-                                                    {% if valid =='' %}
-                                                        0
-                                                    {% else %} {{ valid }} {% endif %}
                                                 </div>
                                                 <p></p>
                                             </div>
                                             <div class="info-card-detail">
                                                 <p>{{ job.resum }}...</p>
-                                                <a href="job/{{ job.id }}" class=""><button type="button" class="btn">Voir la fiche </button></a>
+                                                <a href="job/{{ job.id }}" class="">
+                                                    <button type="button" class="btn">Voir la fiche</button>
+                                                </a>
                                             </div>
                                         </figcaption>
                                     </figure>

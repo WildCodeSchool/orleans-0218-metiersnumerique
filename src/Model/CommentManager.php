@@ -25,10 +25,12 @@ class CommentManager extends AbstractManager
      */
     public function selectNbCommentsByJob(): array
     {
-        $query = 'SELECT  job_id, count('.$this->table.'.id) as nbrComments 
-        FROM ' . $this->table . ' 
-        INNER JOIN job ON job.id = ' . $this->table . '.job_id 
-        GROUP BY job_id';
+        $query = 'SELECT  job_id, count(' . $this->table . '.id) as nbrComments 
+                    FROM ' . $this->table . ' 
+                    INNER JOIN job ON job.id = ' . $this->table . '.job_id
+                    WHERE comment.valid = 1
+                    GROUP BY job_id';
+
         return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
     }
 
@@ -53,16 +55,16 @@ class CommentManager extends AbstractManager
     {
         $query = 'SELECT ' . $this->table . '.*, job.name  FROM ' . $this->table . '
                     JOIN job ON ' . $this->table . '.job_id = job.id
-                    WHERE '. $this->table . '.id=' . $id . ';';
+                    WHERE ' . $this->table . '.id=' . $id . ';';
 
         return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
     }
-  
+
     public function selectCommentsByJobId(int $jobId): array
     {
         $query = 'SELECT * FROM ' . $this->table . '
                     WHERE job_id=' . $jobId
-                    .' AND valid = 1 LIMIT 3'.';';
+            . ' AND valid = 1 LIMIT 3' . ';';
 
         return $this->pdoConnection->query($query, \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
