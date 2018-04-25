@@ -76,7 +76,7 @@ class CommentController extends AbstractController
             $data['date'] = date("Y-m-d H:i:s"); //(le format DATETIME de MySQL)
             $data['valid'] = 0;
 
-            if(!empty($_FILES['avatar']["name"])) {
+            if(!empty($_FILES['avatar']['name'])) {
                 $fileName = $_FILES["avatar"]["name"];
                 $tempFile = $_FILES["avatar"]["tmp_name"];
                 $extension = pathinfo($fileName,PATHINFO_EXTENSION);
@@ -135,7 +135,7 @@ class CommentController extends AbstractController
         $formater = new Format();
         $data = $formater->commentJob($results);
 
-        return $this->twig->render('Admin/view_comment.html.twig', ['data' => $data]);
+        return $this->twig->render('Admin/view-comment.html.twig', ['data' => $data]);
     }
 
     public function commentUpdate()
@@ -154,5 +154,28 @@ class CommentController extends AbstractController
             $commentManager->update($id, $data);
         }
         return $this->getComments();
+    }
+
+    public function loadComments()
+    {
+        if (!empty($_POST)) {
+            $jobId = $_POST['jobId'];
+            $offset = $_POST['offset'];
+            $commentManager = new CommentManager();
+            $comments = $commentManager->selectCommentsByJobId($jobId, $offset);
+        } else {
+            header('Location:/jobs');
+            exit();
+        }
+
+        return $this->twig->render('load-comment.html.twig', ['comments' => $comments]);
+    }
+
+    public function addLike(int $commentId, int $jobId)
+    {
+        $commentManager = new CommentManager();
+        $commentManager->addLikeByCommentId($commentId);
+        header('Location: /job/' .$jobId);
+
     }
 }
