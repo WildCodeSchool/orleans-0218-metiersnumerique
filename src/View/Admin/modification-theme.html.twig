@@ -2,8 +2,8 @@
 {% block navbar %}
     {% include 'navbar.html.twig' %}
 {% endblock %}
-{% block bandeau %}
-    {% include 'bandeau.html.twig' %}
+{% block banner %}
+    {% include 'banner.html.twig' %}
 {% endblock %}
 {% block stylesheet %}
     <link rel="stylesheet" href="/assets/css/admin/themes-jobs.css">
@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <h2>Modification du th?me</h2>
+                <h2>Modification du thème</h2>
                 {% if updateTheme is not empty %}
                     {% for messages in updateTheme %}
                         {% for message in messages %}

@@ -44,6 +44,11 @@
     border-radius: 50%;
 }
 
+
+.one-comment {
+    margin-bottom: 50px;
+}
+
 .active {
     padding: 25px 35px;
     border-radius: 15px;

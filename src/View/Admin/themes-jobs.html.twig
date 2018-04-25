@@ -39,12 +39,12 @@
         </div>
         <div class="row">
             <h1>Modification des thèmes et des fiches métiers</h1>
-            {% if deleteTheme.success is defined %}
+            {% if deleteTheme.success is not empty %}
                 <span class="green">{{ deleteTheme.success }}</span>
             {% endif %}
             {% for theme in themes %}
                 <div class="col-xs-12 themes">
-                    {% if deleteTheme.danger is defined and theme.id == deleteTheme.id%}
+                    {% if deleteTheme.danger is not empty and theme.id == deleteTheme.id %}
                     <p><span class="red">{{ deleteTheme.danger }}</span></p>
                     {% endif %}
                     <h2 class="inline">{{ theme.name }}</h2>
@@ -59,4 +59,8 @@
             {% endfor %}
         </div>
     </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="/assets/js/confirm.js"></script>
 {% endblock %}

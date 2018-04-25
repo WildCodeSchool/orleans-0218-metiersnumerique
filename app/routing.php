@@ -23,6 +23,7 @@ $routes = [
         ['commentView', '/admin/comment-view/{id:\d+}', 'GET'], // action, url, method
         ['commentUpdate', '/admin/comment-update', 'POST'], // action, url, method
         ['addComment', '/job/{id:\d+}/add-comment', ['POST','GET']],
+        ['loadComments', '/job/load-comment', 'POST'],
         ['addLike', '/like/{commentId:\d+}/{jobId:\d+}', 'GET' ],
     ],
     'Admin' => [

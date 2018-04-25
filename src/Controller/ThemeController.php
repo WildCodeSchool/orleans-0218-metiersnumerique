@@ -64,7 +64,7 @@ class ThemeController extends AbstractController
             if (!isset($_SESSION['updateTheme'])) {
                 $_SESSION['updateTheme'] = '';
             }
-            return $this->twig->render('Admin/modification_themes.html.twig', ['theme' => $theme,
+            return $this->twig->render('Admin/modification-theme.html.twig', ['theme' => $theme,
                 'updateTheme' => $_SESSION['updateTheme']]);
         } elseif (!empty($_POST)) {
             $cleaner = new CleanInput();
@@ -102,18 +102,15 @@ class ThemeController extends AbstractController
             $jobManager = new JobManager();
             $nbJobs = $jobManager->countNbJobsByThemeId($_POST['id']);
 
-            unset($_SESSION['deleteTheme']);
-
             $_SESSION['deleteTheme']['id'] = $_POST['id'];
             if ($nbJobs > 0) {
                 $_SESSION['deleteTheme']['danger'] = 'Vous devez supprimer les fiches métiers avant de pouvoir supprimer le thème';
-                header('Location:/admin/themes-jobs');
             } else {
+                $_SESSION['deleteTheme']['success'] = 'Votre thème a bien été supprimé';
                 $themeManager = new ThemeManager();
                 $themeManager->delete($_POST['id']);
-                $_SESSION['deleteTheme']['success'] = 'Votre thème a bien été supprimé';
             }
         }
-        header('Location:/admin/themes-jobs');
+        header('Location: /admin/themes-jobs');
     }
 }
