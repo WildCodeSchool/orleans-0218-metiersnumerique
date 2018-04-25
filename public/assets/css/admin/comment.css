@@ -1,13 +1,13 @@
-h1 {
+.container h1 {
     padding-bottom: 25px;
 }
 
 .valid {
-    background-color: #C5E1A5;
+    background-color: #C8C8C8;
 }
 
 .valid:hover {
-    background-color: #AED581;
+    background-color: #B8B8B8;
 }
 
 .not-valid {
@@ -43,4 +43,22 @@ h1 {
     background-color: #FBA858;
     border-color: #FBA858;
     color: white;
+}
+
+#legend {
+    margin-bottom: 40px;
+}
+
+.legend-color {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.flex {
+    display: flex;
+}
+
+.legend-text {
+    font-size: 1.4em;
 }

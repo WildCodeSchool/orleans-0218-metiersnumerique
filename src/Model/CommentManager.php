@@ -37,9 +37,14 @@ class CommentManager extends AbstractManager
         $query = 'SELECT ' . $this->table . '.*, job.name  FROM ' . $this->table . '
                     JOIN job ON ' . $this->table . '.job_id = job.id
                     ORDER BY ' . $this->table . '.valid ASC, ' . $this->table . '.date DESC
-                    LIMIT ' . $offset . ', ' . $limit;
+                    LIMIT :offset , :limit';
 
-        return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
+        $statement = $this->pdoConnection->prepare($query);
+        $statement->bindValue(':offset', $offset, \PDO::PARAM_INT);
+        $statement->bindValue(':limit', $limit, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function countNbComments()
@@ -58,12 +63,29 @@ class CommentManager extends AbstractManager
         return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
     }
   
-    public function selectCommentsByJobId(int $jobId): array
+    public function selectCommentsByJobId(int $jobId, int $offset = 0): array
     {
-        $query = 'SELECT * FROM ' . $this->table . '
-                    WHERE job_id=' . $jobId
-                    .' AND valid = 1 LIMIT 3'.';';
 
-        return $this->pdoConnection->query($query, \PDO::FETCH_CLASS, $this->className)->fetchAll();
+        $query = "SELECT * FROM $this->table
+                    WHERE job_id= :jobId
+                    AND valid = 1
+                    ORDER BY $this->table.like DESC
+                    LIMIT :offset, 3;";
+
+        $statement = $this->pdoConnection->prepare($query);
+        $statement->bindValue(':jobId', $jobId, \PDO::PARAM_INT);
+        $statement->bindValue(':offset', $offset, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll(\PDO::FETCH_CLASS, $this->className);
+    }
+
+    public function addLikeByCommentId(int $id)
+    {
+        $query = 'UPDATE ' . $this->table . ' SET ' . $this->table . '.like = ' . $this->table . '.like +1 WHERE id = :id; ';
+        $prep = $this->pdoConnection->prepare($query);
+        $prep->bindValue(':id', $id, \PDO::PARAM_INT);
+
+        $prep->execute();
     }
 }

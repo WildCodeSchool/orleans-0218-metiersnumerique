@@ -23,11 +23,15 @@ $routes = [
         ['commentView', '/admin/comment-view/{id:\d+}', 'GET'], // action, url, method
         ['commentUpdate', '/admin/comment-update', 'POST'], // action, url, method
         ['addComment', '/job/{id:\d+}/add-comment', ['POST','GET']],
+        ['loadComments', '/job/load-comment', 'POST'],
+        ['addLike', '/like/{commentId:\d+}/{jobId:\d+}', 'GET' ],
     ],
     'Admin' => [
         ['showThemesAndJobs', '/admin/themes-jobs', 'GET'],
     ],
     'Theme' => [
         ['addTheme', '/admin/add-theme', 'POST'],
+        ['updateTheme', '/admin/update-theme/{themeId:\d+}', ['POST','GET']],
+        ['deleteTheme', '/admin/delete-theme', 'POST'],
     ],
 ];
