@@ -25,10 +25,12 @@ class CommentManager extends AbstractManager
      */
     public function selectNbCommentsByJob(): array
     {
-        $query = 'SELECT  job_id, count('.$this->table.'.id) as nbrComments 
-        FROM ' . $this->table . ' 
-        INNER JOIN job ON job.id = ' . $this->table . '.job_id 
-        GROUP BY job_id';
+        $query = 'SELECT  job_id, count(' . $this->table . '.id) as nbrComments 
+                    FROM ' . $this->table . ' 
+                    INNER JOIN job ON job.id = ' . $this->table . '.job_id
+                    WHERE comment.valid = 1
+                    GROUP BY job_id';
+
         return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
     }
 
@@ -37,9 +39,14 @@ class CommentManager extends AbstractManager
         $query = 'SELECT ' . $this->table . '.*, job.name  FROM ' . $this->table . '
                     JOIN job ON ' . $this->table . '.job_id = job.id
                     ORDER BY ' . $this->table . '.valid ASC, ' . $this->table . '.date DESC
-                    LIMIT ' . $offset . ', ' . $limit;
+                    LIMIT :offset , :limit';
 
-        return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
+        $statement = $this->pdoConnection->prepare($query);
+        $statement->bindValue(':offset', $offset, \PDO::PARAM_INT);
+        $statement->bindValue(':limit', $limit, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function countNbComments()
@@ -53,17 +60,37 @@ class CommentManager extends AbstractManager
     {
         $query = 'SELECT ' . $this->table . '.*, job.name  FROM ' . $this->table . '
                     JOIN job ON ' . $this->table . '.job_id = job.id
-                    WHERE '. $this->table . '.id=' . $id . ';';
+                    WHERE ' . $this->table . '.id = :id  ;';
 
-        return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
+        $statement = $this->pdoConnection->prepare($query);
+        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
   
-    public function selectCommentsByJobId(int $jobId): array
+    public function selectCommentsByJobId(int $jobId, int $offset = 0): array
     {
-        $query = 'SELECT * FROM ' . $this->table . '
-                    WHERE job_id=' . $jobId
-                    .' AND valid = 1 LIMIT 3'.';';
 
-        return $this->pdoConnection->query($query, \PDO::FETCH_CLASS, $this->className)->fetchAll();
+        $query = "SELECT * FROM $this->table
+                    WHERE job_id= :jobId
+                    AND valid = 1
+                    ORDER BY $this->table.like DESC
+                    LIMIT :offset, 3;";
+
+        $statement = $this->pdoConnection->prepare($query);
+        $statement->bindValue(':jobId', $jobId, \PDO::PARAM_INT);
+        $statement->bindValue(':offset', $offset, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll(\PDO::FETCH_CLASS, $this->className);
+    }
+
+    public function addLikeByCommentId(int $id)
+    {
+        $query = 'UPDATE ' . $this->table . ' SET ' . $this->table . '.like = ' . $this->table . '.like +1 WHERE id = :id; ';
+        $prep = $this->pdoConnection->prepare($query);
+        $prep->bindValue(':id', $id, \PDO::PARAM_INT);
+        $prep->execute();
     }
 }

@@ -4,8 +4,8 @@
     {% include 'navbar.html.twig' %}
 {% endblock %}
 
-{% block bandeau %}
-    {% include 'bandeau.html.twig' %}
+{% block banner %}
+    {% include 'banner.html.twig' %}
 {% endblock %}
 
 {% block stylesheet %}
@@ -14,12 +14,21 @@
 
 {% block content %}
     <div class="container">
-        <form action="/job/{{ job.id }}/add-comment" method="post" novalidate>
+        <form action="/job/{{ job.id }}/add-comment" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-xs-offset-1 col-xs-11 col-sm-offset-2 col-sm-10 col-md-10">
                     <div class="form-group">
                         <input type="hidden" name="job_id" value="{{ job.id }}">
                         <h1>Commentaire de la fiche <span class="orange">{{ job.name }}</span></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-inline">
+                    <div id="div-avatar" class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
+                        <img id="photo" src="/assets/images/avatar/default_avatar.jpg" class="img-circle" width="90" height="90" alt="image">
+                        <label for="avatar" class="label-file">Ajouter votre avatar (.jpg, .png ou .gif)</label>
+                        <input id="avatar" name="avatar" type="file"/>
                     </div>
                 </div>
             </div>
@@ -84,7 +93,7 @@
                                 {% endif %}
                             {% endif %}
                             <label class="sr-only" for="email">Email</label>
-                            <input class="form-control" type="text" id="email" name="email"
+                            <input class="form-control" type="email" id="email" name="email"
                                    placeholder="Adresse email .." required
                                    {% if inputs.email is not empty %}value="{{ inputs.email }}"{% endif %}>
                         </div>
@@ -144,7 +153,7 @@
             </div>
             <div class="row firstTextarea">
                 <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
-                    <h3>Question 1</h3>
+                    <h3>Ce que vous aimez le plus dans votre métier</h3>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.question1 %}
@@ -164,7 +173,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
-                    <h3>Question 2</h3>
+                    <h3>Ce que vous aimez le moins dans votre métier</h3>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.question2 %}
@@ -184,7 +193,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
-                    <h3>Question 3</h3>
+                    <h3>Commentaires libres</h3>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.question3 %}
@@ -203,13 +212,18 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-offset-2 col-sm-offset-4 col-md-offset-5 col-xs-5 col-sm-10 col-md-4">
+                <div class="col-xs-offset-1 col-md-offset-2 col-xs-10 col-sm-10 col-md-4">
                     <input type="submit" value="Envoyer mon commentaire" class="btn btn-lg">
+                </div>
+                <div class="col-xs-10 col-sm-10 col-md-4">
+                    <a id="back" href="/job/{{ job.id }}" class="btn btn-lg pull-right">Revenir à la fiche métier</a>
                 </div>
             </div>
         </form>
     </div>
+
 {% endblock %}
+{% block javascript %}<script src="/assets/js/comment.js"></script>{% endblock %}
 
 {% block footer %}
     {% include 'footer.html.twig' %}
