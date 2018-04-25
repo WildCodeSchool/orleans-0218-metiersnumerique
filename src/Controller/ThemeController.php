@@ -20,22 +20,19 @@ class ThemeController extends AbstractController
 {
     /**
      * @return string
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     public function addTheme()
     {
-        if (!empty($_POST['themeName'])) {
+        if (isset($_SESSION['addTheme'])) {
+            unset($_SESSION['addTheme']);
+        }
 
-            if (isset($_SESSION['addTheme'])) {
-                unset($_SESSION['addTheme']);
-            }
+        $validator = new NotEmptyValidator($_POST['themeName']);
+        $isValid = $validator->isValid();
+
+        if ($isValid == true) {
             $themeManager = new ThemeManager();
             $themeName['name'] = $_POST['themeName'];
-
-            /* Ajout des validations (classe en développement par Steven) */
-
             $insertReturn = $themeManager->insert($themeName);
 
             if ($insertReturn == true) {
@@ -43,6 +40,8 @@ class ThemeController extends AbstractController
             } elseif ($insertReturn == false) {
                 $_SESSION['addTheme']['danger'] = 'L\'ajout du thème a échoué...';
             }
+        } else {
+            $_SESSION['addTheme']['danger'] = 'Le champ ne peut pas être vide...';
         }
 
         header('Location:/admin/themes-jobs');
