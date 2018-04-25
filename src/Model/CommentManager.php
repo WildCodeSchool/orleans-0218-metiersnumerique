@@ -55,9 +55,13 @@ class CommentManager extends AbstractManager
     {
         $query = 'SELECT ' . $this->table . '.*, job.name  FROM ' . $this->table . '
                     JOIN job ON ' . $this->table . '.job_id = job.id
-                    WHERE ' . $this->table . '.id=' . $id . ';';
+                    WHERE ' . $this->table . '.id = :id  ;';
 
-        return $this->pdoConnection->query($query, \PDO::FETCH_ASSOC)->fetchAll();
+        $statement = $this->pdoConnection->prepare($query);
+        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function selectCommentsByJobId(int $jobId): array
