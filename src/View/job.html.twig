@@ -48,11 +48,15 @@
             {% include 'load-comment.html.twig' %}
         </div>
         <div class="row align-center">
-            <button id="voirPlus" class="btn btn-lg">Voir plus de commentaires</button>
+            <div class="col-md-6 col-xs-12">
+                <button id="voirPlus" class="btn btn-lg">Voir plus de commentaires</button>
+            </div>
 
-            <a href="/job/{{ job.id }}/add-comment" class="col-md-6 col-xs-12">
-                <button class="btn btn-lg">Ajouter un commentaire</button>
-            </a>
+            <div class="col-md-6 col-xs-12">
+                <a href="/job/{{ job.id }}/add-comment">
+                    <button class="btn btn-lg">Ajouter un commentaire</button>
+                </a>
+            </div>
         </div>
     </div>
 {% endblock %}
