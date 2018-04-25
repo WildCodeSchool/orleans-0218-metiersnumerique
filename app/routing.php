@@ -25,6 +25,7 @@ $routes = [
         ['addComment', '/job/{id:\d+}/add-comment', ['POST','GET']],
         ['loadComments', '/job/load-comment', 'POST'],
         ['addLike', '/like/{commentId:\d+}/{jobId:\d+}', 'GET' ],
+        ['deleteComment', '/admin/delete-comment', 'POST' ],
     ],
     'Admin' => [
         ['showThemesAndJobs', '/admin/themes-jobs', 'GET'],
