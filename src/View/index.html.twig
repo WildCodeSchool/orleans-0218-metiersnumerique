@@ -6,30 +6,34 @@
     {% include 'navbar.html.twig' %}
 {% endblock %}
 {% block content %}
-    <header class="header container-fluid">
-        <div class="header-content">
-            <h1 class="home line-1 anim-typewriter">La Wild Code School vous informe</h1>
+    <header class="banner container-fluid">
+        <div class="banner-content">
+            <h1 class="title typewriter">La Wild Code School vous informe</h1>
             <a href="/jobs"><button class="btn btn-lg">Découvrir les métiers du numérique</button></a>
         </div>
     </header>
 
+    <body>
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 col-md-6">
-                <h4 class="text-center">Interview de John Devos, Campus Manager à Orléans</h4>
-                <div class="embed-responsive embed-responsive-4by3">
-                    <iframe width="560" height="315" class="iframe embed-responsive-item" frameborder="0" src="https://www.youtube.com/embed/dn2c61VGCoQ"></iframe>
-                </div>
-            </div>
+            <div class="col-sm-12 col-md-4">
+                <h4>Interview de <span class="bold">Sylvain Blondeau</span> & <span class="bold">Nicolas Vincent</span></h4>
+                <p>Formateurs à la Wild Code School d'Orléans</p>
 
-            <div class="col-sm-12 col-md-6">
-                <h4 class="text-center">Interview de Nicolas Vincent, formateur à Orléans</h4>
-                <div class="embed-responsive embed-responsive-4by3">
-                    <iframe width="560" height="315" class="iframe embed-responsive-item" frameborder="0" src="https://www.youtube.com/embed/dn2c61VGCoQ"></iframe>
+            </div>
+            <div class="col-sm-12 col-md-8">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe width="560" height="315" class="iframe embed-responsive-item" frameborder="0" src="https://www.youtube.com/embed/TT_OHeK1a-Y" allow="autoplay; encrypted-media"></iframe>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <h3>Les métiers du numérique :</h3>
+            <h4>"Je travaille dans l'informatique ..." Oui mais encore ? Qu'est ce que cela veut dire ? Quels sont les métiers qui se cachent derrière ? Ce site a pour but de vous éclairer sur la question.<br/>
+            Suivez le guide !</h4>
+        </div>
     </div>
+    </body>
 {% endblock %}
 {% block footer %}
     {% include 'footer.html.twig' %}
