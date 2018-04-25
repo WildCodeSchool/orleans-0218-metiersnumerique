@@ -13,6 +13,7 @@ use Model\CommentManager;
 use Model\Job;
 use Model\JobManager;
 use Model\ThemeManager;
+use Model\Upload;
 use Validator\ExtensionUploadValidator;
 use Validator\SizeUploadValidator;
 use Validator\NotEmptyValidator;
@@ -91,10 +92,18 @@ class JobController extends AbstractController
             if (!$boolErrors) {
                 return $this->twig->render('Admin/add-job.html.twig', ['themes' => $themes, 'inputs' => $data, 'errors' => $errors]);
             } else {
+
+                $Upload = new Upload();
+
+                $data['thumbnail']= $Upload -> renameFile($data['name'],'card-metiers','thumbnail');
+                $data['image']= $Upload -> renameFile($data['name'],'card-metiers','thumbnail');
                 $jobManager = new JobManager();
                 $jobManager->insert($data);
+                $Upload = new Upload();
+                $Upload ->upload($data['name'],'card-metiers','thumbnail');
+                $Upload ->upload($data['name'],'image-metiers','image');
 
-                header('Location:/admin/add-job/');
+                header('Location:/admin/add-job');
               exit();
             }
         }
