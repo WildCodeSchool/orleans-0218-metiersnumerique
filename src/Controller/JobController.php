@@ -18,6 +18,7 @@ use Validator\ExtensionUploadValidator;
 use Validator\SizeUploadValidator;
 use Validator\NotEmptyValidator;
 use Validator\MaxLengthValidator;
+use Validator\ResUploadValidator;
 use Validator\Comment;
 
 class JobController extends AbstractController
@@ -70,7 +71,7 @@ class JobController extends AbstractController
                     new MaxLengthValidator($data['resum'], 255)],
                 'thumbnail' => [new ExtensionUploadValidator($_FILES['thumbnail']['type']),
                     new SizeUploadValidator($_FILES['thumbnail']['size']),
-
+                    new ResUploadValidator($_FILES['thumbnail']['tmp_name'],250),
                     new NotEmptyValidator($_FILES['thumbnail']['name'])],
             ];
             if (!empty($_FILES['image']['name'])) {

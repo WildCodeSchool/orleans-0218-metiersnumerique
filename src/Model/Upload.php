@@ -17,6 +17,7 @@ class Upload
 
         $extension_upload = strtolower(  substr(  strrchr($_FILES[$index]['name'], '.')  ,1)  );
         $nom = '../public/assets/images/'.$dir.'/'.$name.'-'.$id.'.'.$extension_upload;
+
         return move_uploaded_file($_FILES[$index]['tmp_name'],$nom);
 
     }
@@ -27,7 +28,7 @@ class Upload
         $extension_upload = strtolower(  substr(  strrchr($_FILES[$index]['name'], '.')  ,1)  );
         $nom = 'assets/images/'.$dir.'/'.$name.'-'.$id.'.'.$extension_upload;
 
-           return $nom;
+        return $nom;
     }
 
 }
