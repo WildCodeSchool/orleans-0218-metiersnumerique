@@ -38,4 +38,22 @@ class JobController extends AbstractController
 
         return $this->twig->render('job.html.twig', ['job' => $job, 'comments' => $comments]);
     }
+
+    public function deleteJob()
+    {
+        if (!empty($_POST)) {
+
+            $jobManager = new JobManager();
+            $_SESSION['deleteJob']['id'] = $_POST['id'];
+            $_SESSION['deleteJob']['success'] = 'Votre fiche a bien été supprimé';
+            $jobManager->delete($_POST['id']);
+
+            }
+
+
+        header('Location: /admin/themes-jobs');
+    }
+
+
+
 }

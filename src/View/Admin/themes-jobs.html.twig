@@ -34,11 +34,13 @@
         <div class="row">
             <div class="col-xs-12">
                 <h2>Ajouter une fiche métier</h2>
-                <a href="" class="btn">Ajouter une fiche métier</a>
+                <a href="/admin/add-job" class="btn">Ajouter une fiche métier</a>
             </div>
         </div>
         <div class="row">
-            <h1>Modification des thèmes et des fiches métiers</h1>
+            <div class="col-xs-12">
+            <h2>Modification des thèmes et des fiches métiers</h2>
+            </div>
             {% if deleteTheme.success is not empty %}
                 <span class="green">{{ deleteTheme.success }}</span>
             {% endif %}
@@ -56,7 +58,36 @@
                         </button>
                     </form>
                 </div>
+                <div class="col-xs-12 themes">
+                   <table class="table">
+                       <thead>
+                       <tr>
+                           <th>Titre fiche</th>
+                           <th>Thématique</th>
+                           <th></th>
+                       </tr>
+                       </thead>
+                        <tbody>
+                        {% for job in jobs if (job.themeId == theme.id) %}
+                        <tr>
+                            <td width="30%">{{ job.name }}</td>
+                            <td width="30%">{{ theme.name }}</td>
+                            <td width="20%" align="right"> <a class="btn-modification inline" href="/admin/update-job/{{ job.id }}"><span class="glyphicon glyphicon-pencil modification" aria-hidden="true"></span></a><form action="/admin/delete-job" method="POST" class="inline" confirm="Vous allez supprimer la fiche '{{ job.name }}'. Ceci sera irréversible.">
+                                    <input type="hidden" value="{{ job.id }}" name="id">
+                                    <button type="submit" class="suppression">
+                                        <span class="glyphicon glyphicon-remove delete" aria-hidden="true"></span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table></div>
+
             {% endfor %}
+
+
+
         </div>
     </div>
 {% endblock %}
