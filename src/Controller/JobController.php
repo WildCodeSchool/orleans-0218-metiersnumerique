@@ -52,14 +52,11 @@ class JobController extends AbstractController
         $themeManager = new ThemeManager();
         $themes = $themeManager->selectAll();
 
-
         if (!empty($_POST)) {
 
             $cleaner = new CleanInput();
 
             $data = $cleaner->clean($_POST);
-
-
 
             $toValidate = [
                 'theme_id' => [new MaxLengthValidator($data['theme_id'], 11)],
@@ -74,11 +71,16 @@ class JobController extends AbstractController
                     new SizeUploadValidator($_FILES['thumbnail']['size']),
 
                     new NotEmptyValidator($_FILES['thumbnail']['name'])],
-                'image' => [new ExtensionUploadValidator($_FILES['image']['type']),
+            ];
+            if (!empty($_FILES['image']['name'])) {
+                $toValidate = [
+                    'image' => [new ExtensionUploadValidator($_FILES['image']['type']),
                     new SizeUploadValidator($_FILES['image']['size']),
                     new MaxLengthValidator($_FILES['image']['name'], 255)]
-
-            ];
+                ];
+            } else {
+                $data['thumbnail'] = '';
+            }
 
             $commentValidator = new Comment($toValidate);
 
@@ -86,12 +88,11 @@ class JobController extends AbstractController
 
             $errors = $commentValidator->getErrors();
 
-
             if (!$boolErrors) {
                 return $this->twig->render('Admin/add-job.html.twig', ['themes' => $themes, 'inputs' => $data, 'errors' => $errors]);
             } else {
-                $commentManager = new CommentManager();
-                $commentManager->insert($data);
+                $jobManager = new JobManager();
+                $jobManager->insert($data);
 
                 header('Location:/admin/add-job/');
               exit();

@@ -15,17 +15,12 @@
 {% block content %}
     <div class="container">
         <div class="row">
-
-
             <form method="post" action="" enctype="multipart/form-data">
-
                 <div class="form-group">
                     <label for="name">Theme</label>
                     <select id="theme_id" name="theme_id" class="form-control">
                             {% for theme in themes %}
-
                                 <option value="{{ theme.id }}">{{ theme.name }}</option>
-
                             {% endfor %}
                     </select>
                 </div>
@@ -126,12 +121,8 @@
                         {% endif %}
                     {% endif %}
                 </div>
-
-
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default">Ajouter</button>
             </form>
-
         </div>
     </div>
-
 {% endblock %}
