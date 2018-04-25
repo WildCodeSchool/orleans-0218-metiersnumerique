@@ -25,7 +25,7 @@
                 </form>
                 {% if (addTheme.success is defined) %}
                     <p class="text-success">{{ addTheme.success }}</p>
-                {% elseif (session.danger is defined) %}
+                {% elseif (addTheme.danger is defined) %}
                     <p class="text-danger">{{ addTheme.danger }}</p>
                 {% endif %}
             </div>
