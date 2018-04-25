@@ -82,11 +82,15 @@
                 <input type="submit" value="Valider" class="btn btn-success">
             </div>
         </form>
-        <form action="" method="POST">
+        <form action="/admin/delete-comment" method="POST" confirm="Confirmez-vous la suppression du commentaire ?">
             <input type="hidden" name="id" value="{{ data[0].comment.id }}">
             <div class="col-xs-3 col-md-offset-1 col-md-2">
                 <input type="submit" value="Supprimer" class="btn btn-danger">
             </div>
         </form>
     </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="/assets/js/confirm.js"></script>
 {% endblock %}
