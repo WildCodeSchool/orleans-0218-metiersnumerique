@@ -42,6 +42,6 @@ class JobManager extends AbstractManager
         $statement->bindValue(':themeId', $themeId, \PDO::PARAM_INT);
         $statement->execute();
 
-        return $statement->fetchColumn(\PDO::FETCH_ASSOC);
+        return $statement->fetchColumn();
     }
 }
