@@ -55,6 +55,7 @@ span.green {
 
 .img-circle {
     display: inline-block;
+    object-fit: cover;
 }
 
 #avatar {
@@ -69,3 +70,6 @@ span.green {
     color: blue;
 }
 
+.btnComment {
+    margin-bottom: 10px;
+}
