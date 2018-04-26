@@ -184,4 +184,15 @@ class CommentController extends AbstractController
 
         return $nbLike;
     }
+
+    public function deleteComment()
+    {
+        if (!empty($_POST['id'])) {
+            $commentManager = new CommentManager();
+            $commentManager->delete($_POST['id']);
+        }
+
+        header('Location: /admin/comment');
+        exit();
+    }
 }
