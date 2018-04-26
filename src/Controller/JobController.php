@@ -71,9 +71,12 @@ class JobController extends AbstractController
                     new MaxLengthValidator($data['resum'], 255)],
                 'thumbnail' => [new ExtensionUploadValidator($_FILES['thumbnail']['type']),
                     new SizeUploadValidator($_FILES['thumbnail']['size']),
-                    new ResUploadValidator($_FILES['thumbnail']['tmp_name'],250),
                     new NotEmptyValidator($_FILES['thumbnail']['name'])],
             ];
+            if (!empty($_FILES['thumbnail']['tmp_name'])) {
+                $toValidate = [
+                'thumbnail' => new ResUploadValidator($_FILES['thumbnail']['tmp_name'],250)];
+            }
             if (!empty($_FILES['image']['name'])) {
                 $toValidate = [
                     'image' => [new ExtensionUploadValidator($_FILES['image']['type']),
@@ -81,7 +84,7 @@ class JobController extends AbstractController
                     new MaxLengthValidator($_FILES['image']['name'], 255)]
                 ];
             } else {
-                $data['thumbnail'] = '';
+                $data['image'] = '';
             }
 
             $commentValidator = new Comment($toValidate);
@@ -104,7 +107,7 @@ class JobController extends AbstractController
                 $upload->upload($data['name'],'card-metiers','thumbnail',$idUpload);
                 $upload ->upload($data['name'],'image-metiers','image',$idUpload);
 
-                header('Location:/admin/add-job');
+                header('Location:/admin/themes-jobs');
               exit();
             }
         }
