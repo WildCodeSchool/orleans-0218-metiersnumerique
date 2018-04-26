@@ -26,7 +26,7 @@ class JobController extends AbstractController
         $commentManager = new CommentManager();
         $comments = $commentManager->selectNbCommentsByJob();
 
-        return $this->twig->render('Jobs/jobs.html.twig', ['themes' => $themes, 'jobs' => $jobs, 'comments' => $comments ]);
+        return $this->twig->render('Jobs/jobs.html.twig', ['themes' => $themes, 'jobs' => $jobs, 'comments' => $comments]);
     }
 
     public function getOneJobById(int $id)
@@ -41,8 +41,7 @@ class JobController extends AbstractController
 
     public function deleteJob()
     {
-        var_dump($_POST['image']);
-        die();
+
         if (!empty($_POST)) {
 
             $jobManager = new JobManager();
@@ -51,29 +50,26 @@ class JobController extends AbstractController
 
             $jobManager->delete($_POST['id']);
 
-            }
+        }
 
         if (!empty($_POST['thumbnail'])) {
             $fichier = $_POST['thumbnail'];
 
-            if( file_exists ( $fichier))
-                unlink( $fichier ) ;
+            if (file_exists($fichier))
+                unlink($fichier);
 
         }
 
         if (!empty($_POST['image'])) {
             $fichier = $_POST['image'];
 
-            if( file_exists ( $fichier))
-                unlink( $fichier ) ;
-
-
+            if (file_exists($fichier))
+                unlink($fichier);
         }
 
 
         header('Location: /admin/themes-jobs');
     }
-
 
 
 }
