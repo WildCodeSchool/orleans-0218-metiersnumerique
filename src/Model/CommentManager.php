@@ -94,6 +94,15 @@ class CommentManager extends AbstractManager
         $prep->execute();
     }
 
+    public function deleteCommentAvatar(int $id)
+    {
+        $comment = $this->selectOneById($id);
+        $avatar = $comment->getAvatar();
+        if (file_exists($avatar) && $avatar != 'assets/images/avatar/default_avatar.jpg') {
+            unlink($avatar);
+        }
+    }
+  
     public function selectNbLikeByCommentId(int $commentId): int
     {
         $query = "SELECT $this->table.like 
