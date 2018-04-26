@@ -82,9 +82,9 @@ class CommentController extends AbstractController
                 $extension = pathinfo($fileName,PATHINFO_EXTENSION);
                 $dirTarget = "assets/images/avatar/".uniqid("image").".".$extension;
                 move_uploaded_file($tempFile, $dirTarget);
-                $data['avatar'] = "/".$dirTarget;
+                $data['avatar'] = $dirTarget;
             } else  {
-                $data['avatar'] = '/assets/images/avatar/default_avatar.jpg';
+                $data['avatar'] = 'assets/images/avatar/default_avatar.jpg';
             }
 
             $toValidate = [
@@ -183,6 +183,7 @@ class CommentController extends AbstractController
     {
         if (!empty($_POST['id'])) {
             $commentManager = new CommentManager();
+            $commentManager->deleteCommentAvatar($_POST['id']);
             $commentManager->delete($_POST['id']);
         }
 

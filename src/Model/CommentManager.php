@@ -93,4 +93,13 @@ class CommentManager extends AbstractManager
         $prep->bindValue(':id', $id, \PDO::PARAM_INT);
         $prep->execute();
     }
+
+    public function deleteCommentAvatar(int $id)
+    {
+        $comment = $this->selectOneById($id);
+        $avatar = $comment->getAvatar();
+        if (file_exists($avatar) && $avatar != 'assets/images/avatar/default_avatar.jpg') {
+            unlink($avatar);
+        }
+    }
 }
