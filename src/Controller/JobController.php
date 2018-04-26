@@ -52,7 +52,7 @@ class JobController extends AbstractController
             }
 
         if (!empty($_POST['thumbnail'])) {
-            $fichier = ''.$_POST['thumbnail'];
+            $fichier = '../public/'.$_POST['thumbnail'];
             var_dump($fichier);
             echo $fichier;
             if( file_exists ( $fichier))
@@ -60,7 +60,7 @@ class JobController extends AbstractController
         }
 
         if (!empty($_POST['image'])) {
-            $fichier = '../'.$_POST['image'];
+            $fichier = '../public/'.$_POST['image'];
 
             echo $fichier;
             if( file_exists ( $fichier))
