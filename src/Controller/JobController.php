@@ -34,7 +34,7 @@ class JobController extends AbstractController
         $commentManager = new CommentManager();
         $comments = $commentManager->selectNbCommentsByJob();
 
-        return $this->twig->render('Jobs/jobs.html.twig', ['themes' => $themes, 'jobs' => $jobs, 'comments' => $comments ]);
+        return $this->twig->render('Jobs/jobs.html.twig', ['themes' => $themes, 'jobs' => $jobs, 'comments' => $comments]);
     }
 
     public function getOneJobById(int $id)
@@ -47,6 +47,36 @@ class JobController extends AbstractController
         return $this->twig->render('job.html.twig', ['job' => $job, 'comments' => $comments]);
     }
 
+    public function deleteJob()
+    {
+        if (!empty($_POST)) {
+            $jobManager = new JobManager();
+            $_SESSION['deleteJob']['id'] = $_POST['id'];
+            $isDeleted = $jobManager->delete($_POST['id']);
+
+            if ($isDeleted) {
+                $_SESSION['deleteJob']['success'] = 'Votre fiche a bien été supprimé';
+            } else {
+                $_SESSION['deleteJob']['danger'] = 'Votre fiche n\'a pas été supprimée';
+            }
+        }
+
+        if (!empty($_POST['thumbnail'])) {
+            $fichier = $_POST['thumbnail'];
+
+            if (file_exists($fichier))
+                unlink($fichier);
+        }
+
+        if (!empty($_POST['image'])) {
+            $fichier = $_POST['image'];
+
+            if (file_exists($fichier))
+                unlink($fichier);
+        }
+
+        header('Location: /admin/themes-jobs');
+    }
 
     public function updateJob(int $jobId)
     {
@@ -61,8 +91,7 @@ class JobController extends AbstractController
             }
             return $this->twig->render('Admin/update-job.html.twig', ['themes' => $themes,'job' => $job,
                 'updateJob' => $_SESSION['updateJob']]);
-        }
-        elseif (!empty($_POST)) {
+        } elseif (!empty($_POST)) {
             $cleaner = new CleanInput();
             $data = $cleaner->clean($_POST);
             $toValidate = [
@@ -79,6 +108,7 @@ class JobController extends AbstractController
                    new ResUploadValidator($_FILES['thumbnail']['tmp_name'],250),
                    new NotEmptyValidator($_FILES['thumbnail']['name'])],
             ];
+          
             if (!empty($_FILES['image']['name'])) {
                 $toValidate = [
                    'image' => [new ExtensionUploadValidator($_FILES['image']['type']),
@@ -88,9 +118,11 @@ class JobController extends AbstractController
             } else {
                 $data['image'] = '';
             }
+          
             $commentValidator = new Comment($toValidate);
             $boolErrors = $commentValidator->isValid();
             $errors = $commentValidator->getErrors();
+          
             if (!$boolErrors) {
                 return $this->twig->render('Admin/update-job.html.twig', ['themes' => $themes, 'inputs' => $data, 'errors' => $errors]);
             } else {

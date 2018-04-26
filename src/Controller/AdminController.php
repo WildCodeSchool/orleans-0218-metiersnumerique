@@ -42,11 +42,19 @@ class AdminController extends AbstractController
             $deleteTheme = '';
         }
 
+        if (isset($_SESSION['deleteJob'])) {
+            $deleteJob = $_SESSION['deleteJob'];
+            unset($_SESSION['deleteJob']);
+        } else {
+            $deleteJob = '';
+        }
+
         return $this->twig->render('Admin/themes-jobs.html.twig', [
             'themes' => $themes,
             'jobs' => $jobs,
             'addTheme' => $addTheme,
             'deleteTheme' => $deleteTheme,
+            'deleteJob' => $deleteJob,
         ]);
     }
 }
