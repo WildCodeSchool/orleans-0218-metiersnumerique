@@ -48,6 +48,9 @@
                 {% if deleteJob.success is not empty %}
                     <span class="green">{{ deleteJob.success }}</span>
                 {% endif %}
+                {% if deleteJob.danger is not empty %}
+                    <span class="red">{{ deleteJob.danger }}</span>
+                {% endif %}
             </div>
             {% for theme in themes %}
                 <div class="col-xs-12 themes">
