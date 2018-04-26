@@ -46,9 +46,17 @@ class JobController extends AbstractController
 
             $jobManager = new JobManager();
             $_SESSION['deleteJob']['id'] = $_POST['id'];
-            $_SESSION['deleteJob']['success'] = 'Votre fiche a bien été supprimé';
+            $isDeleted = $jobManager->delete($_POST['id']);
 
-            $jobManager->delete($_POST['id']);
+            if ($isDeleted) {
+
+                $_SESSION['deleteJob']['success'] = 'Votre fiche a bien été supprimé';
+
+            }else{
+
+                $_SESSION['deleteJob']['danger'] = 'Votre fiche n\'a pas été supprimée';
+
+            }
 
         }
 

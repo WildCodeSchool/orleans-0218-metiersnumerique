@@ -41,9 +41,14 @@
             <div class="col-xs-12">
             <h2>Modification des thèmes et des fiches métiers</h2>
             </div>
-            {% if deleteTheme.success is not empty %}
-                <span class="green">{{ deleteTheme.success }}</span>
-            {% endif %}
+            <div class="col-xs-12">
+                {% if deleteTheme.success is not empty %}
+                    <span class="green">{{ deleteTheme.success }}</span>
+                {% endif %}
+                {% if deleteJob.success is not empty %}
+                    <span class="green">{{ deleteJob.success }}</span>
+                {% endif %}
+            </div>
             {% for theme in themes %}
                 <div class="col-xs-12 themes">
                     {% if deleteTheme.danger is not empty and theme.id == deleteTheme.id %}
