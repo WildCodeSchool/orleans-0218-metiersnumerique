@@ -2,12 +2,6 @@
 /temp/*
 *.cache
 app/db.php
-public/assets/images/card-metiers/*.png
-public/assets/images/card-metiers/*.gif
-public/assets/images/card-metiers/*.jpg
-public/assets/images/card-metiers/*.jpeg
 
-public/assets/images/image-metiers/*.png
-public/assets/images/image-metiers/*.gif
-public/assets/images/image-metiers/*.jpg
-public/assets/images/image-metiers/*.jpeg
+public/assets/images/image-metiers/*
+public/assets/images/card-metiers/*
