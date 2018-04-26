@@ -40,8 +40,10 @@
 
 .circle-avatar {
     width: 70px;
-    height: 70px;
     border-radius: 50%;
+    height: 70px;
+    background-size: cover;
+    background-position: center;
 }
 
 
