@@ -103,7 +103,6 @@ class JobController extends AbstractController
                 $data['image']= $upload -> renameFile($data['name'],'card-metiers','thumbnail',$idUpload);
                 $jobManager = new JobManager();
                 $jobManager->insert($data);
-                $upload = new Upload();
                 $upload->upload($data['name'],'card-metiers','thumbnail',$idUpload);
                 $upload ->upload($data['name'],'image-metiers','image',$idUpload);
 
