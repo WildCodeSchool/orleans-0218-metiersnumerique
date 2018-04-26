@@ -46,9 +46,26 @@ class JobController extends AbstractController
             $jobManager = new JobManager();
             $_SESSION['deleteJob']['id'] = $_POST['id'];
             $_SESSION['deleteJob']['success'] = 'Votre fiche a bien été supprimé';
+
             $jobManager->delete($_POST['id']);
 
             }
+
+        if (!empty($_POST['thumbnail'])) {
+            $fichier = '../'.$_POST['thumbnail'];
+            var_dump($fichier);
+            echo $fichier;
+            if( file_exists ( $fichier))
+                unlink( $fichier ) ;
+        }
+
+        if (!empty($_POST['image'])) {
+            $fichier = '../'.$_POST['image'];
+            var_dump($fichier);
+            echo $fichier;
+            if( file_exists ( $fichier))
+                unlink( $fichier ) ;
+        }
 
 
         header('Location: /admin/themes-jobs');
