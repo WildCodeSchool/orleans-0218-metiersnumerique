@@ -17,7 +17,7 @@ $routes = [
         ['showJobs', '/jobs', 'GET'], // action, url, method
         ['getOneJobById', '/job/{id}', 'GET'], // action, url, method
         ['deleteJob', '/admin/delete-job', 'POST'], // action, url, method
-
+        ['updateJob', '/admin/update-job/{jobId:\d+}', ['POST','GET']], // action, url, method
     ],
     'Comment' => [ // Controller
         ['getComments', '/admin/comment', 'GET'], // action, url, method
@@ -26,7 +26,8 @@ $routes = [
         ['commentUpdate', '/admin/comment-update', 'POST'], // action, url, method
         ['addComment', '/job/{id:\d+}/add-comment', ['POST','GET']],
         ['loadComments', '/job/load-comment', 'POST'],
-        ['addLike', '/like/{commentId:\d+}/{jobId:\d+}', 'GET' ],
+        ['addLike', '/like', 'POST' ],
+        ['deleteComment', '/admin/delete-comment', 'POST' ],
     ],
     'Admin' => [
         ['showThemesAndJobs', '/admin/themes-jobs', 'GET'],
