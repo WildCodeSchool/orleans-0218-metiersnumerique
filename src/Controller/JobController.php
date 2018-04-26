@@ -74,10 +74,10 @@ class JobController extends AbstractController
                     new NotEmptyValidator($_FILES['thumbnail']['name'])],
             ];
 
-            $thumbResValidate = new ResUploadValidator($_FILES['thumbnail']['tmp_name'],250);
+
 
             if (!empty($_FILES['thumbnail']['tmp_name'])) {
-
+                $thumbResValidate = new ResUploadValidator($_FILES['thumbnail']['tmp_name'],250);
                 array_push($toValidate['thumbnail'], $thumbResValidate);
             }
 
