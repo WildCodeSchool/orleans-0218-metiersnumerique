@@ -1,11 +1,11 @@
 {% extends 'layout.html.twig' %}
 
 {% block navbar %}
-    {% include 'navbar.html.twig' %}
+    {% include 'Admin/navbar.html.twig' %}
 {% endblock %}
 
-{% block bandeau %}
-    {% include 'bandeau.html.twig' %}
+{% block banner %}
+    {% include 'banner.html.twig' %}
 {% endblock %}
 
 {% block stylesheet %}
@@ -19,14 +19,14 @@
                 <h2>Ajouter une thématique</h2>
                 <form action="/admin/add-theme" method="post" class="form-inline">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="newTheme" name="themeName" placeholder="Entrer le nom du nouveau théme">
+                        <input type="text" class="form-control" id="newTheme" name="themeName" placeholder="Entrez le nom du nouveau thème">
                         <button type="submit" class="btn btn-default">Envoyer</button>
                     </div>
                 </form>
-                {% if (session.success is defined) %}
-                    <p class="text-success">{{ session.success }}</p>
-                {% elseif (session.danger is defined) %}
-                    <p class="text-danger">{{ session.danger }}</p>
+                {% if (addTheme.success is defined) %}
+                    <p class="text-success">{{ addTheme.success }}</p>
+                {% elseif (addTheme.danger is defined) %}
+                    <p class="text-danger">{{ addTheme.danger }}</p>
                 {% endif %}
             </div>
         </div>
@@ -37,5 +37,30 @@
                 <a href="/admin/add-job" class="btn">Ajouter une fiche métier</a>
             </div>
         </div>
+        <div class="row">
+            <h1>Modification des thèmes et des fiches métiers</h1>
+            {% if deleteTheme.success is not empty %}
+                <span class="green">{{ deleteTheme.success }}</span>
+            {% endif %}
+            {% for theme in themes %}
+                <div class="col-xs-12 themes">
+                    {% if deleteTheme.danger is not empty and theme.id == deleteTheme.id %}
+                    <p><span class="red">{{ deleteTheme.danger }}</span></p>
+                    {% endif %}
+                    <h2 class="inline">{{ theme.name }}</h2>
+                    <a class="btn-modification inline" href="/admin/update-theme/{{ theme.id }}"><span class="glyphicon glyphicon-pencil modification" aria-hidden="true"></span></a>
+                    <form action="/admin/delete-theme" method="POST" class="inline" confirm="Vous allez supprimer le thème '{{ theme.name }}'. Ceci sera irréversible.">
+                        <input type="hidden" value="{{ theme.id }}" name="id">
+                        <button type="submit" class="suppression">
+                            <span class="glyphicon glyphicon-remove delete" aria-hidden="true"></span>
+                        </button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
     </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="/assets/js/confirm.js"></script>
 {% endblock %}

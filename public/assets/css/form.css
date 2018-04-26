@@ -52,3 +52,20 @@ span.green {
     color: green;
     font-weight: bold;
 }
+
+.img-circle {
+    display: inline-block;
+}
+
+#avatar {
+    display: none;
+}
+
+.label-file {
+    color: orange;
+}
+
+.label-file:hover {
+    color: blue;
+}
+

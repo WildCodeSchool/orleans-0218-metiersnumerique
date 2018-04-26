@@ -1,3 +1,55 @@
+body {
+    padding-top: 50px;
+}
+
 #newTheme {
     width: 300px;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.themes a {
+    margin-left: 2%;
+    font-size: 150%;
+}
+
+span.modification {
+    color: #0000ff;
+}
+
+span.modification:focus,
+span.modification:hover {
+    color: #448AFF;
+}
+
+span.delete {
+    color: #ff0000;
+}
+
+span.delete:focus,
+span.delete:hover {
+    color: #FF5252;
+}
+
+.suppression {
+    background-color: inherit;
+    border: inherit;
+    margin-left: 20px;
+    font-size: 150%;
+}
+
+button {
+    display: inline-block;
+}
+
+span.green {
+    color: green;
+    font-weight: bold;
+}
+
+span.red {
+    color: red;
+    font-weight: bold;
 }

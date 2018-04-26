@@ -75,7 +75,17 @@ class CommentController extends AbstractController
             $data['like'] = 0;
             $data['date'] = date("Y-m-d H:i:s"); //(le format DATETIME de MySQL)
             $data['valid'] = 0;
-            $data['avatar'] = '/assets/images/default_avatar.jpg';
+
+            if(!empty($_FILES['avatar']['name'])) {
+                $fileName = $_FILES["avatar"]["name"];
+                $tempFile = $_FILES["avatar"]["tmp_name"];
+                $extension = pathinfo($fileName,PATHINFO_EXTENSION);
+                $dirTarget = "assets/images/avatar/".uniqid("image").".".$extension;
+                move_uploaded_file($tempFile, $dirTarget);
+                $data['avatar'] = $dirTarget;
+            } else  {
+                $data['avatar'] = 'assets/images/avatar/default_avatar.jpg';
+            }
 
             $toValidate = [
                 'lastname' => [new NotEmptyValidator($data['lastname']),
@@ -125,7 +135,7 @@ class CommentController extends AbstractController
         $formater = new Format();
         $data = $formater->commentJob($results);
 
-        return $this->twig->render('Admin/view_comment.html.twig', ['data' => $data]);
+        return $this->twig->render('Admin/view-comment.html.twig', ['data' => $data]);
     }
 
     public function commentUpdate()
@@ -137,7 +147,7 @@ class CommentController extends AbstractController
                 $comment = $commentManager->selectOneById($id);
                 $data['avatar'] = $comment->getAvatar();
             } else {
-                $data['avatar'] = '/assets/images/default_avatar.jpg';
+                $data['avatar'] = '/assets/images/avatar/default_avatar.jpg';
             }
             $data['valid'] = 1;
 
@@ -146,4 +156,44 @@ class CommentController extends AbstractController
         return $this->getComments();
     }
 
+    public function loadComments()
+    {
+        if (!empty($_POST)) {
+            $jobId = $_POST['jobId'];
+            $offset = $_POST['offset'];
+            $commentManager = new CommentManager();
+            $comments = $commentManager->selectCommentsByJobId($jobId, $offset);
+        } else {
+            header('Location:/jobs');
+            exit();
+        }
+
+        return $this->twig->render('load-comment.html.twig', ['comments' => $comments]);
+    }
+
+    public function addLike()
+    {
+        $commentManager = new CommentManager();
+
+        if (!empty($_POST)) {
+            $commentId = $_POST['commentId'];
+            $commentManager->addLikeByCommentId($commentId);
+
+        }
+        $nbLike = $commentManager->selectNbLikeByCommentId($commentId);
+
+        return $nbLike;
+    }
+
+    public function deleteComment()
+    {
+        if (!empty($_POST['id'])) {
+            $commentManager = new CommentManager();
+            $commentManager->deleteCommentAvatar($_POST['id']);
+            $commentManager->delete($_POST['id']);
+        }
+
+        header('Location: /admin/comment');
+        exit();
+    }
 }
