@@ -75,7 +75,7 @@
                             <td width="20%" align="right"> <a class="btn-modification inline" href="/admin/update-job/{{ job.id }}"><span class="glyphicon glyphicon-pencil modification" aria-hidden="true"></span></a><form action="/admin/delete-job" method="POST" class="inline" confirm="Vous allez supprimer la fiche '{{ job.name }}'. Ceci sera irréversible.">
                                     <input type="hidden" value="{{ job.id }}" name="id">
                                     <input type="hidden" value="{{ job.thumbnail }}" name="thumbnail">
-                                    <input type="hidden" value="{{ theme.image }}" name="thumbnail">
+                                    <input type="hidden" value="{{ job.image }}" name="image">
                                     <button type="submit" class="suppression">
                                         <span class="glyphicon glyphicon-remove delete" aria-hidden="true"></span>
                                     </button>

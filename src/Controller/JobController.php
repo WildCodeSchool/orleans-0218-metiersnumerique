@@ -41,6 +41,8 @@ class JobController extends AbstractController
 
     public function deleteJob()
     {
+        var_dump($_POST['image']);
+        die();
         if (!empty($_POST)) {
 
             $jobManager = new JobManager();
@@ -52,21 +54,20 @@ class JobController extends AbstractController
             }
 
         if (!empty($_POST['thumbnail'])) {
-            $fichier = '../public/'.$_POST['thumbnail'];
-            var_dump($fichier);
-            echo $fichier;
+            $fichier = $_POST['thumbnail'];
+
             if( file_exists ( $fichier))
                 unlink( $fichier ) ;
+
         }
 
         if (!empty($_POST['image'])) {
-            $fichier = '../public/'.$_POST['image'];
+            $fichier = $_POST['image'];
 
-            echo $fichier;
             if( file_exists ( $fichier))
                 unlink( $fichier ) ;
 
-            var_dump($fichier);
+
         }
 
 
