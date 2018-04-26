@@ -11,20 +11,20 @@ namespace Validator;
 
 class ExtensionUploadValidator extends AbstractValidator
 {
-    const EXTENSION = 'L\'image peut être au format jpg, jpeg, png ou gif' ;
+    const TYPEMIME = 'L\'image peut être au format jpg, jpeg, png ou gif' ;
 
     /**
      * @var string
      */
-    private $extension;
+    private $typeMime;
 
     /**
      * ExtensionUploadValidator constructor.
      * @param string $fichier
      */
-    public function __construct(string $extension)
+    public function __construct(string $typeMime)
     {
-        $this->extension = $extension;
+        $this->typeMime = $typeMime;
     }
 
     /**
@@ -32,10 +32,10 @@ class ExtensionUploadValidator extends AbstractValidator
      */
     public function isValid(): bool
     {
-        $extensions=['image/jpeg','image/jpg','image/png','image/gif'];
+        $typeMimes=['image/jpeg','image/jpg','image/png','image/gif'];
 
-        if (!in_array($this->extension,$extensions)) {
-            $this->errors[] = self::EXTENSION;
+        if (!in_array($this->typeMime,$typeMimes)) {
+            $this->errors[] = self::TYPEMIME;
             return false;
         }
 

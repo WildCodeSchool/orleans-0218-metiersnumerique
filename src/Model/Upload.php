@@ -15,8 +15,8 @@ class Upload
     public function upload ($name,$dir,$index,$id)
     {
 
-        $extension_upload = strtolower(  substr(  strrchr($_FILES[$index]['name'], '.')  ,1)  );
-        $road = '../public/assets/images/'.$dir.'/'.$name.'-'.$id.'.'.$extension_upload;
+        $typeUpload = strtolower(  substr(  strrchr($_FILES[$index]['name'], '.')  ,1)  );
+        $road = '../public/assets/images/'.$dir.'/'.$name.'-'.$id.'.'.$typeUpload;
 
         return move_uploaded_file($_FILES[$index]['tmp_name'],$road);
 
@@ -25,8 +25,8 @@ class Upload
     public function renameFile($name,$dir,$index,$id)
     {
 
-        $extension_upload = strtolower(  substr(  strrchr($_FILES[$index]['name'], '.')  ,1)  );
-        $road = 'assets/images/'.$dir.'/'.$name.'-'.$id.'.'.$extension_upload;
+        $typeUpload = strtolower(  substr(  strrchr($_FILES[$index]['name'], '.')  ,1)  );
+        $road = 'assets/images/'.$dir.'/'.$name.'-'.$id.'.'.$typeUpload;
 
         return $road;
     }
