@@ -74,16 +74,16 @@ class JobController extends AbstractController
                     new MaxLengthValidator($data['description'], 255)],
                 'resum' => [new NotEmptyValidator($data['resum']),
                     new MaxLengthValidator($data['resum'], 255)],
-               // 'thumbnail' => [new ExtensionUploadValidator($_FILES['thumbnail']['type']),
-                    //new SizeUploadValidator($_FILES['thumbnail']['size']),
-                   // new ResUploadValidator($_FILES['thumbnail']['tmp_name'],250),
-                   // new NotEmptyValidator($_FILES['thumbnail']['name'])],
+               'thumbnail' => [new ExtensionUploadValidator($_FILES['thumbnail']['type']),
+                    new SizeUploadValidator($_FILES['thumbnail']['size']),
+                   new ResUploadValidator($_FILES['thumbnail']['tmp_name'],250),
+                   new NotEmptyValidator($_FILES['thumbnail']['name'])],
             ];
             if (!empty($_FILES['image']['name'])) {
                 $toValidate = [
-                   // 'image' => [new ExtensionUploadValidator($_FILES['image']['type']),
-                       // new SizeUploadValidator($_FILES['image']['size']),
-                       // new MaxLengthValidator($_FILES['image']['name'], 255)]
+                   'image' => [new ExtensionUploadValidator($_FILES['image']['type']),
+                       new SizeUploadValidator($_FILES['image']['size']),
+                       new MaxLengthValidator($_FILES['image']['name'], 255)]
                 ];
             } else {
                 $data['image'] = '';
@@ -97,7 +97,7 @@ class JobController extends AbstractController
                 $upload = new Upload();
                 $idUpload = uniqid();
                 $data['thumbnail']= $upload -> renameFile($data['name'],'card-metiers','thumbnail',$idUpload);
-                $data['image']= $upload -> renameFile($data['name'],'card-metiers','thumbnail',$idUpload);
+                $data['image']= $upload -> renameFile($data['name'],'image-metiers','image',$idUpload);
                 $jobManager = new JobManager();
                 $jobManager->insert($data);
                 $upload->upload($data['name'],'card-metiers','thumbnail',$idUpload);

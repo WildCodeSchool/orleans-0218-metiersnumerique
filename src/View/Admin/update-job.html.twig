@@ -37,7 +37,7 @@
                             {% endfor %}
                         {% endfor %}
                         {% if countErrors == 0 %}
-                            <p class="text-success">OK !</p>
+                            <p class="text-success">Le champ est valide!</p>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -53,7 +53,7 @@
                             {% endfor %}
                         {% endfor %}
                         {% if countErrors == 0 %}
-                            <p class="text-success">OK !</p>
+                            <p class="text-success">Le champ est valide!</p>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -69,7 +69,7 @@
                             {% endfor %}
                         {% endfor %}
                         {% if countErrors == 0 %}
-                            <p class="text-success">OK !</p>
+                            <p class="text-success">Le champ est valide!</p>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -85,7 +85,7 @@
                             {% endfor %}
                         {% endfor %}
                         {% if countErrors == 0 %}
-                            <p class="text-success">OK !</p>
+                            <p class="text-success">Le champ est valide!</p>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -93,7 +93,7 @@
                     <div class="col-md-3">
                 <div class="form-group">
                     <p>Vignette Actuelle</p>
-                    <img src="{% if job.thumbnail is not empty %}{{ job.thumbnail }}{% endif %}" width="250px" height="150px">
+                    <img src="{% if job.thumbnail is not empty %}{{ job.thumbnail }}{% endif %}" id="imgthumbnail" name="imgthumbnail" width="250px" height="150px">
                     <input type="file" id="thumbnail" name="thumbnail" value="{% if job.thumbnail is not empty %}{{ job.thumbnail }}{% endif %}">
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
@@ -104,7 +104,7 @@
                             {% endfor %}
                         {% endfor %}
                         {% if countErrors == 0 %}
-                            <p class="text-success">OK !</p>
+                            <p class="text-success">Le champ est valide!</p>
                         {% endif %}
                     {% endif %}
 
@@ -113,7 +113,7 @@
                     <div class="col-md-3">
                 <div class="form-group">
                     <p>Image actuelle</p>
-                    <img src="{% if job.image is not empty %}{{ job.image }}{% endif %}" width="250px" height="150px">
+                    <img  src="{% if job.image is not empty %}{{ job.image }}{% endif %}" id="imgimage" name="imgimage" width="250px" height="150px">
                     <input type="file" id="image" name="image">
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
@@ -124,7 +124,7 @@
                             {% endfor %}
                         {% endfor %}
                         {% if countErrors == 0 %}
-                            <p class="text-success">OK !</p>
+                            <p class="text-success">Le champ est valide!</p>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -136,3 +136,4 @@
         </div>
     </div>
 {% endblock %}
+{% block javascript %}<script src="/assets/js/update-job.js"></script>{% endblock %}
