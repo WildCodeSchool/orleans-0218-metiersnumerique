@@ -137,7 +137,11 @@ class Paginator
     {
         $pattern = '/\D/';
 
-        $nbPages = ceil($this->nbElements / $this->limit);
+        if ($this->nbElements == 0) {
+            $nbPages = 1;
+        } else {
+            $nbPages = ceil($this->nbElements / $this->limit);
+        }
 
         if ($this->pageId > $nbPages) {
             $this->pageId = $nbPages;

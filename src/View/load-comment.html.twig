@@ -29,7 +29,7 @@
                         <img src="../../assets/images/quotes.png" alt="guillemets" width=60">
                     </div>
                     <div class="row glyph">
-                        <a href="/like/{{ comment.id }}/{{ comment.jobId }}">
+                        <a class="like" data-commentId="{{ comment.id }}" href="#">
                             <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                         </a>
                         <p class="nb-like">{{ comment.like }}</p>
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        {% if loop.index % 3 == 0 %}
+        {% if loop.index % 3 == 0 or loop.last %}
     </div>
     {% endif %}
 {% endfor %}

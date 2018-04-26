@@ -102,4 +102,18 @@ class CommentManager extends AbstractManager
             unlink($avatar);
         }
     }
+  
+    public function selectNbLikeByCommentId(int $commentId): int
+    {
+        $query = "SELECT $this->table.like 
+                  FROM $this->table  
+                  WHERE id = :commentId";
+
+        $statement = $this->pdoConnection->prepare($query);
+        $statement->bindValue('commentId', $commentId, \PDO::PARAM_INT);
+        $statement->execute();
+        $nbLike = $statement->fetchColumn();
+
+        return $nbLike;
+    }
 }
