@@ -27,6 +27,18 @@
                 <div class="form-inline">
                     <div id="div-avatar" class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
                         <img id="photo" src="/assets/images/avatar/default_avatar.jpg" class="img-circle" width="90" height="90" alt="image">
+                        {% if errors is not empty %}
+                            {% set countErrors = 0 %}
+                            {% for error in errors.image %}
+                                {% for err in error if err is not empty %}
+                                    <p class="text-danger">{{ err }}</p>
+                                    {% set countErrors = countErrors + 1 %}
+                                {% endfor %}
+                            {% endfor %}
+                            {% if countErrors == 0 %}
+                                <p class="text-success">l'upload a été accepté</p>
+                            {% endif %}
+                        {% endif %}
                         <label for="avatar" class="label-file">Ajouter votre avatar (.jpg, .png ou .gif)</label>
                         <input id="avatar" name="avatar" type="file"/>
                     </div>
@@ -212,11 +224,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-offset-1 col-md-offset-2 col-xs-10 col-sm-10 col-md-4">
-                    <input type="submit" value="Envoyer mon commentaire" class="btn btn-lg">
+                <div class="col-xs-offset-2 col-md-offset-2 col-xs-8 col-sm-4 col-md-4">
+                    <input type="submit" value="Envoyer mon commentaire" class="btn btn-lg btnComment">
                 </div>
-                <div class="col-xs-10 col-sm-10 col-md-4">
-                    <a id="back" href="/job/{{ job.id }}" class="btn btn-lg pull-right">Revenir à la fiche métier</a>
+                <div class="col-xs-offset-2 col-xs-8 col-sm-offset-1 col-sm-3">
+                    <a id="back" href="/job/{{ job.id }}" class="btn btn-lg pull-right btnComment">Revenir à la fiche métier</a>
                 </div>
             </div>
         </form>

@@ -30,6 +30,9 @@
             </div>
         </div>
         <div class="row">
+            {% if datas.data is not defined %}
+                <h1 class="text-center">Vous n'avez pas de commentaire sur votre site</h1>
+            {% else %}
             <div class="col-xs-12">
                 <table class="table">
                     <thead>
@@ -80,5 +83,6 @@
                 </ul>
             </nav>
         </div>
+        {% endif %}
     </div>
 {% endblock %}

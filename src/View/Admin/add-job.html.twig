@@ -1,0 +1,130 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/admin/addjob.css">
+{% endblock %}
+
+{% block navbar %}
+    {% include 'Admin/navbar.html.twig' %}
+{% endblock %}
+
+{% block banner %}
+    {% include 'banner.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <form method="post" action="" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="name">Theme</label>
+                    <select id="theme_id" name="theme_id" class="form-control">
+                            {% for theme in themes %}
+                                <option value="{{ theme.id }}">{{ theme.name }}</option>
+                            {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Titre</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="" {% if inputs.name is not empty %}value="{{ inputs.name }}"{% endif %}>
+                    {% if errors is not empty %}
+                        {% set countErrors = 0 %}
+                        {% for error in errors.name %}
+                            {% for err in error if err is not empty %}
+                                <p class="text-danger">{{ err }}</p>
+                                {% set countErrors = countErrors + 1 %}
+                            {% endfor %}
+                        {% endfor %}
+                        {% if countErrors == 0 %}
+                            <p class="text-success">Le champ est bien rempli</p>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" name="description" rows="10">{% if inputs.description is not empty %}{{ inputs.description }}"{% endif %}</textarea>
+                    {% if errors is not empty %}
+                        {% set countErrors = 0 %}
+                        {% for error in errors.description %}
+                            {% for err in error if err is not empty %}
+                                <p class="text-danger">{{ err }}</p>
+                                {% set countErrors = countErrors + 1 %}
+                            {% endfor %}
+                        {% endfor %}
+                        {% if countErrors == 0 %}
+                            <p class="text-success">Le champ est bien rempli</p>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="resum">Resumé</label>
+                    <input type="text" class="form-control" id="resum" name="resum" placeholder="" maxlength="80" {% if inputs.resum is not empty %}value="{{ inputs.resum }}"{% endif %}>
+
+
+                    {% if errors is not empty %}
+                        {% set countErrors = 0 %}
+                        {% for error in errors.resum %}
+                            {% for err in error if err is not empty %}
+                                <p class="text-danger">{{ err }}</p>
+                                {% set countErrors = countErrors + 1 %}
+                            {% endfor %}
+                        {% endfor %}
+                        {% if countErrors == 0 %}
+                            <p class="text-success">Le champ est bien rempli</p>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="lien youtube">Lien youtube</label>
+                    <input type="text" class="form-control" id="video" name="video" placeholder="Lien youtube" {% if inputs.video is not empty %}value="{{ inputs.video }}"{% endif %}>
+                    {% if errors is not empty %}
+                        {% set countErrors = 0 %}
+                        {% for error in errors.video %}
+                            {% for err in error if err is not empty %}
+                                <p class="text-danger">{{ err }}</p>
+                                {% set countErrors = countErrors + 1 %}
+                            {% endfor %}
+                        {% endfor %}
+                        {% if countErrors == 0 %}
+                            <p class="text-success">Le champ est bien rempli</p>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="thumbnail">Vignette</label>
+                    <input type="file" id="thumbnail" name="thumbnail">
+                    {% if errors is not empty %}
+                        {% set countErrors = 0 %}
+                        {% for error in errors.thumbnail %}
+                            {% for err in error if err is not empty %}
+                                <p class="text-danger">{{ err }}</p>
+                                {% set countErrors = countErrors + 1 %}
+                            {% endfor %}
+                        {% endfor %}
+                        {% if countErrors == 0 %}
+                            <p class="text-success">Le champ est bien rempli</p>
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" id="image" name="image">
+                    {% if errors is not empty %}
+                        {% set countErrors = 0 %}
+                        {% for error in errors.image %}
+                            {% for err in error if err is not empty %}
+                                <p class="text-danger">{{ err }}</p>
+                                {% set countErrors = countErrors + 1 %}
+                            {% endfor %}
+                        {% endfor %}
+                        {% if countErrors == 0 %}
+                            <p class="text-success">Le champ est bien rempli</p>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-default">Ajouter</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -76,17 +76,6 @@ class CommentController extends AbstractController
             $data['date'] = date("Y-m-d H:i:s"); //(le format DATETIME de MySQL)
             $data['valid'] = 0;
 
-            if(!empty($_FILES['avatar']['name'])) {
-                $fileName = $_FILES["avatar"]["name"];
-                $tempFile = $_FILES["avatar"]["tmp_name"];
-                $extension = pathinfo($fileName,PATHINFO_EXTENSION);
-                $dirTarget = "assets/images/avatar/".uniqid("image").".".$extension;
-                move_uploaded_file($tempFile, $dirTarget);
-                $data['avatar'] = "/".$dirTarget;
-            } else  {
-                $data['avatar'] = '/assets/images/avatar/default_avatar.jpg';
-            }
-
             $toValidate = [
                 'lastname' => [new NotEmptyValidator($data['lastname']),
                                 new MaxLengthValidator($data['lastname'], 45)],
@@ -116,6 +105,19 @@ class CommentController extends AbstractController
             if (!$boolErrors) {
                 return $this->twig->render('comment.html.twig', ['job' => $job, 'inputs' => $data, 'errors' => $errors]);
             } else {
+
+                if(!empty($_FILES['avatar']['name'])) {
+                    $fileName = $_FILES["avatar"]["name"];
+                    $tempFile = $_FILES["avatar"]["tmp_name"];
+                    $extension = pathinfo($fileName,PATHINFO_EXTENSION);
+                    $dirTarget = "assets/images/avatar/".uniqid("image").".".$extension;
+                    if(move_uploaded_file($tempFile, $dirTarget)) {
+                        $data['avatar'] = $dirTarget;
+                    } else {
+                        $data['avatar'] = 'assets/images/avatar/default_avatar.jpg';
+                    }
+                }
+
                 $commentManager = new CommentManager();
                 $commentManager->insert($data);
 
@@ -171,11 +173,32 @@ class CommentController extends AbstractController
         return $this->twig->render('load-comment.html.twig', ['comments' => $comments]);
     }
 
-    public function addLike(int $commentId, int $jobId)
+    public function addLike()
     {
         $commentManager = new CommentManager();
-        $commentManager->addLikeByCommentId($commentId);
-        header('Location: /job/' .$jobId);
 
+        if (!empty($_POST)) {
+            $commentId = $_POST['commentId'];
+
+            if (!isset($_COOKIE["like$commentId"])) {
+                $commentManager->addLikeByCommentId($commentId);
+                setcookie('like'.$commentId, true);
+            }
+        }
+        $nbLike = $commentManager->selectNbLikeByCommentId($commentId);
+
+        return $nbLike;
+    }
+
+    public function deleteComment()
+    {
+        if (!empty($_POST['id'])) {
+            $commentManager = new CommentManager();
+            $commentManager->deleteCommentAvatar($_POST['id']);
+            $commentManager->delete($_POST['id']);
+        }
+
+        header('Location: /admin/comment');
+        exit();
     }
 }
