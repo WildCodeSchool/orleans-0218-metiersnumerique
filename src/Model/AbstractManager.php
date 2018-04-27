@@ -87,7 +87,7 @@ abstract class AbstractManager
         $fields = array_keys($data);
 
         $query = "INSERT INTO $this->table 
-                  (" . implode(',' . $this->table .'.', $fields) . ")
+                  ($this->table." . implode(',' . $this->table .'.', $fields) . ")
                   VALUES  (:" . implode(', :', $fields) . ")";
 
         $statement = $this->pdoConnection->prepare($query);

@@ -25,13 +25,13 @@ class cleanInput
 
         foreach ($array as $key => $value) {
             $newArray[$key] = trim(strip_tags($value));
-            if ($key == 'firstname' || $key == 'profession' || $key == 'company') {
+            if ($key == 'firstname' || $key == 'profession' || $key == 'company' || $key == 'name') {
                 $newArray[$key] = ucfirst($newArray[$key]);
             } elseif ($key == 'lastname') {
                 $newArray[$key] = mb_strtoupper($value);
             } elseif ($key == 'wilder') {
                 $newArray[$key] = $this->wilder($newArray[$key]);
-            } elseif ($key == 'question1' || $key == 'question2' || $key == 'question3') {
+            } elseif ($key == 'question1' || $key == 'question2' || $key == 'question3' || $key == 'resum' || $key == 'description') {
                 $newArray[$key] = $this->firstUpperAfterDot($newArray[$key]);
             } elseif ($key == 'email') {
                 $newArray[$key] = mb_strtolower($newArray[$key]);
