@@ -20,7 +20,7 @@
                     {% for theme in nbJobsByTheme %}
                         <li role="presentation" {% if (loop.index==1) %}class="active"{% endif %}>
                             <a href="#{{ theme.themeId }}" role="pill" data-toggle="tab">
-                                {{ theme.themeName }} ({{ theme.nbJobs }})
+                                {{ theme.themeName }} <span class="badge">{{ theme.nbJobs }}</span>
                             </a>
                         </li>
                     {% endfor %}
