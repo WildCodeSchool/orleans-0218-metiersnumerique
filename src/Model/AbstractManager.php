@@ -72,7 +72,7 @@ abstract class AbstractManager
         $sql = "DELETE FROM $this->table WHERE id=:id";
         $statement = $this->pdoConnection->prepare($sql);
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
-        $statement->execute();
+        return $statement->execute();
     }
 
 
@@ -87,7 +87,7 @@ abstract class AbstractManager
         $fields = array_keys($data);
 
         $query = "INSERT INTO $this->table 
-                  (" . implode(',' . $this->table .'.', $fields) . ")
+                  ($this->table." . implode(',' . $this->table .'.', $fields) . ")
                   VALUES  (:" . implode(', :', $fields) . ")";
 
         $statement = $this->pdoConnection->prepare($query);

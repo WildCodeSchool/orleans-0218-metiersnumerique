@@ -173,11 +173,29 @@ class CommentController extends AbstractController
         return $this->twig->render('load-comment.html.twig', ['comments' => $comments]);
     }
 
-    public function addLike(int $commentId, int $jobId)
+    public function addLike()
     {
         $commentManager = new CommentManager();
-        $commentManager->addLikeByCommentId($commentId);
-        header('Location: /job/' .$jobId);
 
+        if (!empty($_POST)) {
+            $commentId = $_POST['commentId'];
+            $commentManager->addLikeByCommentId($commentId);
+
+        }
+        $nbLike = $commentManager->selectNbLikeByCommentId($commentId);
+
+        return $nbLike;
+    }
+
+    public function deleteComment()
+    {
+        if (!empty($_POST['id'])) {
+            $commentManager = new CommentManager();
+            $commentManager->deleteCommentAvatar($_POST['id']);
+            $commentManager->delete($_POST['id']);
+        }
+
+        header('Location: /admin/comment');
+        exit();
     }
 }
