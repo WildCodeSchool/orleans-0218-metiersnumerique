@@ -96,21 +96,26 @@ class JobController extends AbstractController
                 'name' => [new NotEmptyValidator($data['name']),
                     new MaxLengthValidator($data['name'], 255)],
                 'description' => [new NotEmptyValidator($data['description']),
-                    new MaxLengthValidator($data['description'], 255)],
+                    new MaxLengthValidator($data['description'], 1000)],
                 'resum' => [new NotEmptyValidator($data['resum']),
-                    new MaxLengthValidator($data['resum'], 255)],
+                    new MaxLengthValidator($data['resum'], 300)],
                 'thumbnail' => [new ExtensionUploadValidator($_FILES['thumbnail']['type']),
                     new SizeUploadValidator($_FILES['thumbnail']['size']),
                     new ResUploadValidator($_FILES['thumbnail']['tmp_name'], 250),
                     new NotEmptyValidator($_FILES['thumbnail']['name'])],
             ];
 
-            if (!empty($_FILES['image']['name'])) {
-                $toValidate = [
-                    'image' => [new ExtensionUploadValidator($_FILES['image']['type']),
-                        new SizeUploadValidator($_FILES['image']['size']),
-                        new MaxLengthValidator($_FILES['image']['name'], 255)]
-                ];
+            if (!empty($_FILES['thumbnail']['tmp_name'])) {
+                $thumbResValidate = new ResUploadValidator($_FILES['thumbnail']['tmp_name'], 250);
+                array_push($toValidate['thumbnail'], $thumbResValidate);
+            }
+            if (!empty($_FILES['image']['tmp_name'])) {
+                $extensionUpload = new ExtensionUploadValidator($_FILES['image']['type']);
+                $sizeUpload = new SizeUploadValidator($_FILES['image']['size']);
+                $maxLengthUpload = new MaxLengthValidator($_FILES['image']['name'], 255);
+                array_push($toValidate['image'], $extensionUpload);
+                array_push($toValidate['image'], $sizeUpload);
+                array_push($toValidate['image'], $maxLengthUpload);
             } else {
                 $data['image'] = '';
             }
