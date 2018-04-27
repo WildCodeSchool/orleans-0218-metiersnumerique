@@ -118,9 +118,15 @@ abstract class AbstractManager
     {
         $fields = array_keys($data);
 
+        $setter = [];
+
+        foreach ($fields as $field) {
+            $setter[] .= $field . ' = :' . $field;
+        }
+
         $query = "UPDATE $this->table 
-                  SET " . implode(' = :' . implode(', ', $fields) . ' = :' , $fields ) . "
-                  WHERE id=$id";
+                  SET " . implode(', ', $setter) . "
+                  WHERE id=:id";
 
         $statement = $this->pdoConnection->prepare($query);
 
@@ -135,6 +141,8 @@ abstract class AbstractManager
                 $statement->bindValue($field, $value, \PDO::PARAM_NULL);
             }
         }
+
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
 
         $resultQuery = $statement->execute();
         return $resultQuery;

@@ -86,13 +86,20 @@ class JobController extends AbstractController
         header('Location: /admin/themes-jobs');
     }
 
+    /**
+     * @param int $jobId
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function updateJob(int $jobId)
     {
         $themeManager = new ThemeManager();
         $themes = $themeManager->selectAll();
         $jobManager = new JobManager();
+        $job = $jobManager->selectOneById($jobId);
         if (empty($_POST)) {
-            $job = $jobManager->selectOneById($jobId);
             if (!isset($_SESSION['updateJob'])) {
                 $_SESSION['updateJob'] = '';
             }
@@ -110,25 +117,19 @@ class JobController extends AbstractController
                     new MaxLengthValidator($data['description'], 1000)],
                 'resum' => [new NotEmptyValidator($data['resum']),
                     new MaxLengthValidator($data['resum'], 300)],
-                'thumbnail' => [new ExtensionUploadValidator($_FILES['thumbnail']['type']),
-                    new SizeUploadValidator($_FILES['thumbnail']['size']),
-                    new NotEmptyValidator($_FILES['thumbnail']['name'])],
             ];
 
             if (!empty($_FILES['thumbnail']['tmp_name'])) {
-                $thumbResValidate = new ResUploadValidator($_FILES['thumbnail']['tmp_name'], 250);
-                array_push($toValidate['thumbnail'], $thumbResValidate);
+                $toValidate['thumbnail'] = [
+                    new ExtensionUploadValidator($_FILES['thumbnail']['type']),
+                    new SizeUploadValidator($_FILES['thumbnail']['size']),
+                new ResUploadValidator($_FILES['thumbnail']['tmp_name'], 250)];
             }
 
             if (!empty($_FILES['image']['tmp_name'])) {
-                $extensionUpload = new ExtensionUploadValidator($_FILES['image']['type']);
-                $sizeUpload = new SizeUploadValidator($_FILES['image']['size']);
-                $maxLengthUpload = new MaxLengthValidator($_FILES['image']['name'], 255);
-                array_push($toValidate['image'], $extensionUpload);
-                array_push($toValidate['image'], $sizeUpload);
-                array_push($toValidate['image'], $maxLengthUpload);
-            } else {
-                $data['image'] = '';
+                $toValidate['image'] = [
+                    new ExtensionUploadValidator($_FILES['image']['type']),
+                    new SizeUploadValidator($_FILES['image']['size'])];
             }
 
             $commentValidator = new Comment($toValidate);
@@ -136,16 +137,19 @@ class JobController extends AbstractController
             $errors = $commentValidator->getErrors();
 
             if (!$boolErrors) {
+                $data['thumbnail'] = $job->getThumbnail();
+                $data['image'] = $job->getImage();
                 return $this->twig->render('Admin/update-job.html.twig', ['themes' => $themes, 'inputs' => $data, 'errors' => $errors]);
             } else {
                 $upload = new Upload();
                 $idUpload = uniqid();
-                $data['thumbnail'] = $upload->renameFile($data['name'], 'card-metiers', 'thumbnail', $idUpload);
-                $data['image'] = $upload->renameFile($data['name'], 'image-metiers', 'image', $idUpload);
-                $jobManager = new JobManager();
-                $jobManager->insert($data);
                 $upload->upload($data['name'], 'card-metiers', 'thumbnail', $idUpload);
-                $upload->upload($data['name'], 'image-metiers', 'image', $idUpload);
+                if (!empty($_FILES['image']['tmp_name'])) {
+                    $data['image'] = $upload->renameFile($data['name'], 'image-metiers', 'image', $idUpload);
+                    $upload->upload($data['name'], 'image-metiers', 'image', $idUpload);
+                }
+                $jobManager->update($data['theme_id'], $data);
+
                 header('Location:/admin/themes-jobs');
                 exit();
             }
@@ -187,15 +191,13 @@ class JobController extends AbstractController
 
 
             if (!empty($_FILES['image']['tmp_name'])) {
-                $extensionUpload = new ExtensionUploadValidator($_FILES['image']['type']);
-                $sizeUpload = new SizeUploadValidator($_FILES['image']['size']);
-                $maxLengthUpload = new MaxLengthValidator($_FILES['image']['name'], 255);
-                array_push($toValidate['image'], $extensionUpload);
-                array_push($toValidate['image'], $sizeUpload);
-                array_push($toValidate['image'], $maxLengthUpload);
+
+                $toValidate['image'] = [
+                    new ExtensionUploadValidator($_FILES['image']['type']),
+                new SizeUploadValidator($_FILES['image']['size'])];
 
             } else {
-                $data['image'] = '';
+                $data['image'] = 'assets/images/image-metiers/No-image-available.jpg';
             }
 
             $commentValidator = new Comment($toValidate);
@@ -211,7 +213,13 @@ class JobController extends AbstractController
                 $upload = new Upload();
                 $idUpload = uniqid();
                 $data['thumbnail'] = $upload->renameFile($data['name'], 'card-metiers', 'thumbnail', $idUpload);
-                $data['image'] = $upload->renameFile($data['name'], 'image-metiers', 'image', $idUpload);
+
+                if (!empty($_FILES['image']['tmp_name'])) {
+
+                    $data['image'] = $upload->renameFile($data['name'], 'image-metiers', 'image', $idUpload);
+
+                }
+
                 $jobManager = new JobManager();
                 $jobManager->insert($data);
                 $upload->upload($data['name'], 'card-metiers', 'thumbnail', $idUpload);

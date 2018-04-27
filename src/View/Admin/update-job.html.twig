@@ -26,8 +26,9 @@
                 </div>
                 <div class="form-group">
                     <label for="name">Titre</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="name" {% if inputs.name is not empty %}value="{{ inputs.name }}"{% elseif job.name is not empty %}value="{{ job.name }}"{% endif %}>
-
+                    <input type="text" class="form-control" id="name" name="name" placeholder=""
+                           {% if inputs.name is not empty %}value="{{ inputs.name }}"
+                           {% elseif job.name is not empty %}value="{{ job.name }}"{% endif %}>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.name %}
@@ -43,7 +44,8 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description" rows="10">{% if inputs.name is not empty %}value="{{ inputs.name }}"{% elseif job.description is not empty %}{{ job.description }}{% endif %}</textarea>
+                    <textarea class="form-control" id="description" name="description"
+                              rows="10">{% if inputs.description is not empty %}{{ inputs.description }}{% elseif job.description is not empty %}{{ job.description }}{% endif %}</textarea>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.description %}
@@ -59,7 +61,9 @@
                 </div>
                 <div class="form-group">
                     <label for="resum">Resumé</label>
-                    <textarea class="form-control" id="resum" name="resum">{% if inputs.name is not empty %}value="{{ inputs.name }}"{% elseif job.resum is not empty %}{{ job.resum }}{% endif %}</textarea>
+                    <input type="text" class="form-control" id="resum" name="resum" placeholder="" maxlength="80"
+                           {% if inputs.resum is not empty %}value="{{ inputs.resum }}"
+                           {% elseif job.resum is not empty %}value="{{ job.resum }}"{% endif %}>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.resum %}
@@ -75,7 +79,9 @@
                 </div>
                 <div class="form-group">
                     <label for="lien youtube">Lien youtube</label>
-                    <input type="text" class="form-control" id="video" name="video" placeholder="Lien youtube" {% if inputs.name is not empty %}value="{{ inputs.name }}"{% elseif job.video is not empty %}value="{{ job.dieo }}"{% endif %}>
+                    <input type="text" class="form-control" id="video" name="video" placeholder="Lien youtube"
+                           {% if inputs.video is not empty %}value="{{ inputs.video }}"
+                           {% elseif job.video is not empty %}value="{{ job.video }}"{% endif %}>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.video %}
@@ -91,49 +97,67 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                <div class="form-group">
-                    <p>Vignette Actuelle</p>
-                    {% if job.thumbnail is not empty %}<img src="/{{ job.thumbnail }}" id="imgthumbnail" name="imgthumbnail" width="250px" height="150px">{% endif %}
-                    <input type="file" id="thumbnail" name="thumbnail" value="{% if job.thumbnail is not empty %}{{ job.thumbnail }}{% endif %}">
-                    {% if errors is not empty %}
-                        {% set countErrors = 0 %}
-                        {% for error in errors.thumbnail %}
-                            {% for err in error if err is not empty %}
-                                <p class="text-danger">{{ err }}</p>
-                                {% set countErrors = countErrors + 1 %}
-                            {% endfor %}
-                        {% endfor %}
-                        {% if countErrors == 0 %}
-                            <p class="text-success">Le champ est valide!</p>
-                        {% endif %}
-                    {% endif %}
-
-                </div></div>
-
+                        <div class="form-group">
+                            <p>Vignette Actuelle</p>
+                            {% if job.thumbnail is not empty %}
+                                <img src="/{{ job.thumbnail }}" id="imgthumbnail"
+                                name="imgthumbnail" width="250px"
+                                height="150px">
+                            {% elseif inputs.thumbnail %}
+                            <img src="/{{ inputs.thumbnail }}" id="imgthumbnail"
+                                 name="imgthumbnail" width="250px"
+                                 height="150px">
+                            {% endif %}
+                            <input type="file" id="thumbnail" name="thumbnail"
+                                   value="{% if job.thumbnail is not empty %}{{ job.thumbnail }}{% endif %}">
+                            {% if errors is not empty %}
+                                {% set countErrors = 0 %}
+                                {% for error in errors.thumbnail %}
+                                    {% for err in error if err is not empty %}
+                                        <p class="text-danger">{{ err }}</p>
+                                        {% set countErrors = countErrors + 1 %}
+                                    {% endfor %}
+                                {% endfor %}
+                                {% if countErrors == 0 %}
+                                    <p class="text-success">Le champ est valide!</p>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
                     <div class="col-md-3">
-                <div class="form-group">
-                    <p>Image actuelle</p>
-                    {% if job.image is not empty %}<img  src="/{{ job.image }}" id="imgimage" name="imgimage" width="250px" height="150px">{% endif %}
-                    <input type="file" id="image" name="image">
-                    {% if errors is not empty %}
-                        {% set countErrors = 0 %}
-                        {% for error in errors.image %}
-                            {% for err in error if err is not empty %}
-                                <p class="text-danger">{{ err }}</p>
-                                {% set countErrors = countErrors + 1 %}
-                            {% endfor %}
-                        {% endfor %}
-                        {% if countErrors == 0 %}
-                            <p class="text-success">Le champ est valide!</p>
-                        {% endif %}
-                    {% endif %}
+                        <div class="form-group">
+                            <p>Image actuelle</p>
+                            {% if job.image is not empty %}
+                                <img  src="/{{ job.image }}" id="imgimage"
+                                      name="imgimage" width="250px" height="150px">
+                            {% elseif inputs.image %}
+                                <img src="/{{ inputs.image }}" id="imgimage"
+                                     name="imgimage" width="250px" height="150px">
+                            {% endif %}
+                            <input type="file" id="image" name="image">
+                            {% if errors is not empty %}
+                                {% set countErrors = 0 %}
+                                {% for error in errors.image %}
+                                    {% for err in error if err is not empty %}
+                                        <p class="text-danger">{{ err }}</p>
+                                        {% set countErrors = countErrors + 1 %}
+                                    {% endfor %}
+                                {% endfor %}
+                                {% if countErrors == 0 %}
+                                    <p class="text-success">Le champ est valide!</p>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3"></div>
+                    </div>
                 </div>
-                        <div class="col-md-3"></div>
-                        <div class="col-md-3"></div>
-                    </div></div>
                 <button type="submit" class="btn btn-default">Ajouter</button>
             </form>
         </div>
     </div>
 {% endblock %}
-{% block javascript %}<script src="/assets/js/update-job.js"></script>{% endblock %}
+
+{% block javascript %}
+<script src="/assets/js/update-job.js"></script>
+{% endblock %}
