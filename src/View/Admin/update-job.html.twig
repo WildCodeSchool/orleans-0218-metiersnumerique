@@ -26,7 +26,7 @@
                 </div>
                 <div class="form-group">
                     <label for="name">Titre</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="name" {% if inputs.name is not empty %}value="{{ inputs.name }}"{% elseif job.name is not empty %}value="{{ job.name }}"{% endif %}>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="" {% if inputs.name is not empty %}value="{{ inputs.name }}"{% elseif job.name is not empty %}value="{{ job.name }}"{% endif %}>
 
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description" rows="10">{% if inputs.name is not empty %}value="{{ inputs.name }}"{% elseif job.description is not empty %}{{ job.description }}{% endif %}</textarea>
+                    <textarea class="form-control" id="description" name="description" rows="10">{% if inputs.description is not empty %}{{ inputs.description }}{% elseif job.description is not empty %}{{ job.description }}{% endif %}</textarea>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.description %}
@@ -59,7 +59,8 @@
                 </div>
                 <div class="form-group">
                     <label for="resum">Resumé</label>
-                    <textarea class="form-control" id="resum" name="resum">{% if inputs.name is not empty %}value="{{ inputs.name }}"{% elseif job.resum is not empty %}{{ job.resum }}{% endif %}</textarea>
+                    <input type="text" class="form-control" id="resum" name="resum" placeholder="" maxlength="80" {% if inputs.resum is not empty %}value="{{ inputs.resum }}"{% elseif job.resum is not empty %}value="{{ job.resum }}"{% endif %}>
+
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.resum %}
@@ -75,7 +76,7 @@
                 </div>
                 <div class="form-group">
                     <label for="lien youtube">Lien youtube</label>
-                    <input type="text" class="form-control" id="video" name="video" placeholder="Lien youtube" {% if inputs.name is not empty %}value="{{ inputs.name }}"{% elseif job.video is not empty %}value="{{ job.video }}"{% endif %}>
+                    <input type="text" class="form-control" id="video" name="video" placeholder="Lien youtube" {% if inputs.video is not empty %}value="{{ inputs.video }}"{% elseif job.video is not empty %}value="{{ job.video }}"{% endif %}>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.video %}

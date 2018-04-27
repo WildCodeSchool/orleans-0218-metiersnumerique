@@ -58,7 +58,8 @@
                 </div>
                 <div class="form-group">
                     <label for="resum">Resumé</label>
-                    <textarea class="form-control" id="resum" name="resum" rows="1" >{% if inputs.resum is not empty %}{{ inputs.resum }}"{% endif %}</textarea>
+                    <input type="text" class="form-control" id="resum" name="resum" placeholder="" maxlength="80" {% if inputs.resum is not empty %}value="{{ inputs.resum }}"{% endif %}>
+
 
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
