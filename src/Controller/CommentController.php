@@ -76,17 +76,6 @@ class CommentController extends AbstractController
             $data['date'] = date("Y-m-d H:i:s"); //(le format DATETIME de MySQL)
             $data['valid'] = 0;
 
-            if(!empty($_FILES['avatar']['name'])) {
-                $fileName = $_FILES["avatar"]["name"];
-                $tempFile = $_FILES["avatar"]["tmp_name"];
-                $extension = pathinfo($fileName,PATHINFO_EXTENSION);
-                $dirTarget = "assets/images/avatar/".uniqid("image").".".$extension;
-                move_uploaded_file($tempFile, $dirTarget);
-                $data['avatar'] = $dirTarget;
-            } else  {
-                $data['avatar'] = 'assets/images/avatar/default_avatar.jpg';
-            }
-
             $toValidate = [
                 'lastname' => [new NotEmptyValidator($data['lastname']),
                                 new MaxLengthValidator($data['lastname'], 45)],
@@ -116,6 +105,19 @@ class CommentController extends AbstractController
             if (!$boolErrors) {
                 return $this->twig->render('comment.html.twig', ['job' => $job, 'inputs' => $data, 'errors' => $errors]);
             } else {
+
+                if(!empty($_FILES['avatar']['name'])) {
+                    $fileName = $_FILES["avatar"]["name"];
+                    $tempFile = $_FILES["avatar"]["tmp_name"];
+                    $extension = pathinfo($fileName,PATHINFO_EXTENSION);
+                    $dirTarget = "assets/images/avatar/".uniqid("image").".".$extension;
+                    if(move_uploaded_file($tempFile, $dirTarget)) {
+                        $data['avatar'] = $dirTarget;
+                    } else {
+                        $data['avatar'] = 'assets/images/avatar/default_avatar.jpg';
+                    }
+                }
+
                 $commentManager = new CommentManager();
                 $commentManager->insert($data);
 
