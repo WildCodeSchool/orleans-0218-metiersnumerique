@@ -42,7 +42,7 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description">{% if inputs.description is not empty %}{{ inputs.description }}"{% endif %}</textarea>
+                    <textarea class="form-control" id="description" name="description" rows="10">{% if inputs.description is not empty %}{{ inputs.description }}"{% endif %}</textarea>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.description %}

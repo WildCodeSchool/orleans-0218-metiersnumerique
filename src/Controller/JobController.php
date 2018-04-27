@@ -101,16 +101,23 @@ class JobController extends AbstractController
                     new MaxLengthValidator($data['resum'], 255)],
                 'thumbnail' => [new ExtensionUploadValidator($_FILES['thumbnail']['type']),
                     new SizeUploadValidator($_FILES['thumbnail']['size']),
-                    new ResUploadValidator($_FILES['thumbnail']['tmp_name'], 250),
                     new NotEmptyValidator($_FILES['thumbnail']['name'])],
             ];
 
-            if (!empty($_FILES['image']['name'])) {
-                $toValidate = [
-                    'image' => [new ExtensionUploadValidator($_FILES['image']['type']),
-                        new SizeUploadValidator($_FILES['image']['size']),
-                        new MaxLengthValidator($_FILES['image']['name'], 255)]
-                ];
+            if (!empty($_FILES['thumbnail']['tmp_name'])) {
+                $thumbResValidate = new ResUploadValidator($_FILES['thumbnail']['tmp_name'], 250);
+                array_push($toValidate['thumbnail'], $thumbResValidate);
+            }
+
+
+            if (!empty($_FILES['image']['tmp_name'])) {
+                $extensionUpload = new ExtensionUploadValidator($_FILES['image']['type']);
+                $sizeUpload = new SizeUploadValidator($_FILES['image']['size']);
+                $maxLengthUpload = new MaxLengthValidator($_FILES['image']['name'], 255);
+                array_push($toValidate['image'], $extensionUpload);
+                array_push($toValidate['image'], $sizeUpload);
+                array_push($toValidate['image'], $maxLengthUpload);
+
             } else {
                 $data['image'] = '';
             }
@@ -130,7 +137,7 @@ class JobController extends AbstractController
                 $jobManager->insert($data);
                 $upload->upload($data['name'], 'card-metiers', 'thumbnail', $idUpload);
                 $upload->upload($data['name'], 'image-metiers', 'image', $idUpload);
-                header('Location:/admin/add-job');
+                header('Location:/admin/themes-jobs');
                 exit();
             }
         }

@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description">{% if inputs.name is not empty %}value="{{ inputs.name }}"{% elseif job.description is not empty %}{{ job.description }}{% endif %}</textarea>
+                    <textarea class="form-control" id="description" name="description" rows="10">{% if inputs.name is not empty %}value="{{ inputs.name }}"{% elseif job.description is not empty %}{{ job.description }}{% endif %}</textarea>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.description %}
@@ -93,7 +93,7 @@
                     <div class="col-md-3">
                 <div class="form-group">
                     <p>Vignette Actuelle</p>
-                    <img src="{% if job.thumbnail is not empty %}{{ job.thumbnail }}{% endif %}" id="imgthumbnail" name="imgthumbnail" width="250px" height="150px">
+                    {% if job.thumbnail is not empty %}<img src="/{{ job.thumbnail }}" id="imgthumbnail" name="imgthumbnail" width="250px" height="150px">{% endif %}
                     <input type="file" id="thumbnail" name="thumbnail" value="{% if job.thumbnail is not empty %}{{ job.thumbnail }}{% endif %}">
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
@@ -113,7 +113,7 @@
                     <div class="col-md-3">
                 <div class="form-group">
                     <p>Image actuelle</p>
-                    <img  src="{% if job.image is not empty %}{{ job.image }}{% endif %}" id="imgimage" name="imgimage" width="250px" height="150px">
+                    {% if job.image is not empty %}<img  src="/{{ job.image }}" id="imgimage" name="imgimage" width="250px" height="150px">{% endif %}
                     <input type="file" id="image" name="image">
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
