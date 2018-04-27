@@ -132,14 +132,13 @@ class JobController extends AbstractController
             } else {
                 $upload = new Upload();
                 $idUpload = uniqid();
+                $upload->upload($data['name'], 'card-metiers', 'thumbnail', $idUpload);
                 if (!empty($_FILES['image']['tmp_name'])) {
                     $data['image'] = $upload->renameFile($data['name'], 'image-metiers', 'image', $idUpload);
+                    $upload->upload($data['name'], 'image-metiers', 'image', $idUpload);
                 }
+                $jobManager->update($data['theme_id'], $data);
 
-                $jobManager = new JobManager();
-                $jobManager->update($data['theme_id'],$data);
-                $upload->upload($data['name'], 'card-metiers', 'thumbnail', $idUpload);
-                $upload->upload($data['name'], 'image-metiers', 'image', $idUpload);
                 header('Location:/admin/themes-jobs');
                 exit();
             }
