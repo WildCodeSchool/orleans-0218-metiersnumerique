@@ -53,12 +53,14 @@ class JobController extends AbstractController
             $jobManager = new JobManager();
             $_SESSION['deleteJob']['id'] = $_POST['id'];
             $isDeleted = $jobManager->delete($_POST['id']);
+          
             if ($isDeleted) {
                 $_SESSION['deleteJob']['success'] = 'Votre fiche a bien été supprimé';
             } else {
                 $_SESSION['deleteJob']['danger'] = 'Votre fiche n\'a pas été supprimée';
             }
         }
+      
         if (!empty($_POST['thumbnail'])) {
             $fichier = $_POST['thumbnail'];
             if (file_exists($fichier))
@@ -69,6 +71,7 @@ class JobController extends AbstractController
             if (file_exists($fichier))
                 unlink($fichier);
         }
+
         header('Location: /admin/themes-jobs');
     }
 
@@ -115,7 +118,7 @@ class JobController extends AbstractController
             $commentValidator = new Comment($toValidate);
             $boolErrors = $commentValidator->isValid();
             $errors = $commentValidator->getErrors();
-
+          
             if (!$boolErrors) {
                 return $this->twig->render('Admin/update-job.html.twig', ['themes' => $themes, 'inputs' => $data, 'errors' => $errors]);
             } else {

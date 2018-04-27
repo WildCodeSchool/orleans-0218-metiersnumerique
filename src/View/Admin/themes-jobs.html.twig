@@ -38,10 +38,20 @@
             </div>
         </div>
         <div class="row">
-            <h1>Modification des thèmes et des fiches métiers</h1>
-            {% if deleteTheme.success is not empty %}
-                <span class="green">{{ deleteTheme.success }}</span>
-            {% endif %}
+            <div class="col-xs-12">
+            <h2>Modification des thèmes et des fiches métiers</h2>
+            </div>
+            <div class="col-xs-12">
+                {% if deleteTheme.success is not empty %}
+                    <span class="green">{{ deleteTheme.success }}</span>
+                {% endif %}
+                {% if deleteJob.success is not empty %}
+                    <span class="green">{{ deleteJob.success }}</span>
+                {% endif %}
+                {% if deleteJob.danger is not empty %}
+                    <span class="red">{{ deleteJob.danger }}</span>
+                {% endif %}
+            </div>
             {% for theme in themes %}
                 <div class="col-xs-12 themes">
                     {% if deleteTheme.danger is not empty and theme.id == deleteTheme.id %}
@@ -56,7 +66,38 @@
                         </button>
                     </form>
                 </div>
+                <div class="col-xs-12 themes">
+                   <table class="table">
+                       <thead>
+                       <tr>
+                           <th>Titre fiche</th>
+                           <th>Thématique</th>
+                           <th></th>
+                       </tr>
+                       </thead>
+                        <tbody>
+                        {% for job in jobs if (job.themeId == theme.id) %}
+                        <tr>
+                            <td width="30%">{{ job.name }}</td>
+                            <td width="30%">{{ theme.name }}</td>
+                            <td width="20%" align="right"> <a class="btn-modification inline" href="/admin/update-job/{{ job.id }}"><span class="glyphicon glyphicon-pencil modification" aria-hidden="true"></span></a><form action="/admin/delete-job" method="POST" class="inline" confirm="Vous allez supprimer la fiche '{{ job.name }}'. Ceci sera irréversible.">
+                                    <input type="hidden" value="{{ job.id }}" name="id">
+                                    <input type="hidden" value="{{ job.thumbnail }}" name="thumbnail">
+                                    <input type="hidden" value="{{ job.image }}" name="image">
+                                    <button type="submit" class="suppression">
+                                        <span class="glyphicon glyphicon-remove delete" aria-hidden="true"></span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table></div>
+
             {% endfor %}
+
+
+
         </div>
     </div>
 {% endblock %}
