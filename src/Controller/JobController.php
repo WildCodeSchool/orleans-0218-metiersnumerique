@@ -178,12 +178,10 @@ class JobController extends AbstractController
 
 
             if (!empty($_FILES['image']['tmp_name'])) {
-                $extensionUpload = new ExtensionUploadValidator($_FILES['image']['type']);
-                $sizeUpload = new SizeUploadValidator($_FILES['image']['size']);
-                $maxLengthUpload = new MaxLengthValidator($_FILES['image']['name'], 255);
-                array_push($toValidate['image'], $extensionUpload);
-                array_push($toValidate['image'], $sizeUpload);
-                array_push($toValidate['image'], $maxLengthUpload);
+
+                $toValidate['image'] = [
+                    new ExtensionUploadValidator($_FILES['image']['type']),
+                new SizeUploadValidator($_FILES['image']['size'])];
 
             } else {
                 $data['image'] = '';
@@ -202,7 +200,13 @@ class JobController extends AbstractController
                 $upload = new Upload();
                 $idUpload = uniqid();
                 $data['thumbnail'] = $upload->renameFile($data['name'], 'card-metiers', 'thumbnail', $idUpload);
-                $data['image'] = $upload->renameFile($data['name'], 'image-metiers', 'image', $idUpload);
+
+                if (!empty($_FILES['image']['tmp_name'])) {
+
+                    $data['image'] = $upload->renameFile($data['name'], 'image-metiers', 'image', $idUpload);
+
+                }
+
                 $jobManager = new JobManager();
                 $jobManager->insert($data);
                 $upload->upload($data['name'], 'card-metiers', 'thumbnail', $idUpload);

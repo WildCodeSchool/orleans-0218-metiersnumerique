@@ -75,7 +75,7 @@
                 </div>
                 <div class="form-group">
                     <label for="lien youtube">Lien youtube</label>
-                    <input type="text" class="form-control" id="video" name="video" placeholder="Lien youtube" {% if inputs.name is not empty %}value="{{ inputs.name }}"{% elseif job.video is not empty %}value="{{ job.dieo }}"{% endif %}>
+                    <input type="text" class="form-control" id="video" name="video" placeholder="Lien youtube" {% if inputs.name is not empty %}value="{{ inputs.name }}"{% elseif job.video is not empty %}value="{{ job.video }}"{% endif %}>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.video %}
