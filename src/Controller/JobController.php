@@ -119,7 +119,7 @@ class JobController extends AbstractController
                     new SizeUploadValidator($_FILES['image']['size'])];
 
             } else {
-                $data['image'] = '';
+                $data['image'] = 'assets/images/image-metiers/No-image-available.jpg';
             }
 
             $commentValidator = new Comment($toValidate);
@@ -188,7 +188,7 @@ class JobController extends AbstractController
                 new SizeUploadValidator($_FILES['image']['size'])];
 
             } else {
-                $data['image'] = '';
+                $data['image'] = 'assets/images/image-metiers/No-image-available.jpg';
             }
 
             $commentValidator = new Comment($toValidate);
