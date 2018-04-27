@@ -75,13 +75,20 @@ class JobController extends AbstractController
         header('Location: /admin/themes-jobs');
     }
 
+    /**
+     * @param int $jobId
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function updateJob(int $jobId)
     {
         $themeManager = new ThemeManager();
         $themes = $themeManager->selectAll();
         $jobManager = new JobManager();
+        $job = $jobManager->selectOneById($jobId);
         if (empty($_POST)) {
-            $job = $jobManager->selectOneById($jobId);
             if (!isset($_SESSION['updateJob'])) {
                 $_SESSION['updateJob'] = '';
             }
@@ -101,8 +108,6 @@ class JobController extends AbstractController
                     new MaxLengthValidator($data['resum'], 300)],
             ];
 
-
-
             if (!empty($_FILES['thumbnail']['tmp_name'])) {
                 $toValidate['thumbnail'] = [
                     new ExtensionUploadValidator($_FILES['thumbnail']['type']),
@@ -111,19 +116,18 @@ class JobController extends AbstractController
             }
 
             if (!empty($_FILES['image']['tmp_name'])) {
-
-
                 $toValidate['image'] = [
                     new ExtensionUploadValidator($_FILES['image']['type']),
                     new SizeUploadValidator($_FILES['image']['size'])];
-
             }
 
             $commentValidator = new Comment($toValidate);
             $boolErrors = $commentValidator->isValid();
             $errors = $commentValidator->getErrors();
-          
+
             if (!$boolErrors) {
+                $data['thumbnail'] = $job->getThumbnail();
+                $data['image'] = $job->getImage();
                 return $this->twig->render('Admin/update-job.html.twig', ['themes' => $themes, 'inputs' => $data, 'errors' => $errors]);
             } else {
                 $upload = new Upload();
