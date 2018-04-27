@@ -179,8 +179,12 @@ class CommentController extends AbstractController
 
         if (!empty($_POST)) {
             $commentId = $_POST['commentId'];
-            $commentManager->addLikeByCommentId($commentId);
+            $commentJobId = $_POST['commentJobId'];
 
+            if (!isset($_COOKIE["like$commentJobId"])) {
+                $commentManager->addLikeByCommentId($commentId);
+                setcookie('like'.$commentJobId, true);
+            }
         }
         $nbLike = $commentManager->selectNbLikeByCommentId($commentId);
 
