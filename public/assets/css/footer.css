@@ -1,24 +1,20 @@
 footer {
     background-color: #35383A;
     text-align: center;
-    color: white;
-    min-height: 50vh;
+    min-height: 30vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     padding: 30px 50px;
 }
 
-footer h4 {
-    font-size: calc(1vw + 1vh + 1vmin);
-}
-
 footer .logo {
     width: 80px;
+    border-radius: 50%;
 }
 
-.blue {
-    color: #1FA597;
+footer .logo:hover {
+    box-shadow: 0 5px 5px 0 #272727;
 }
 
 .form-control {
