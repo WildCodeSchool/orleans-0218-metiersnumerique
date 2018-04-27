@@ -92,8 +92,11 @@ class JobController extends AbstractController
             if (!isset($_SESSION['updateJob'])) {
                 $_SESSION['updateJob'] = '';
             }
+            if (empty($job->getImage())) {
+                $inputs['image'] = 'assets/images/image-metiers/default_image.jpg';
+            }
             return $this->twig->render('Admin/update-job.html.twig', ['themes' => $themes, 'job' => $job,
-                'updateJob' => $_SESSION['updateJob']]);
+                'updateJob' => $_SESSION['updateJob'], 'inputs' => $inputs]);
         } elseif (!empty($_POST)) {
             $cleaner = new CleanInput();
             $data = $cleaner->clean($_POST);
@@ -127,18 +130,26 @@ class JobController extends AbstractController
 
             if (!$boolErrors) {
                 $data['thumbnail'] = $job->getThumbnail();
-                $data['image'] = $job->getImage();
+                if (!empty($job->getImage())) {
+                    $data['image'] = $job->getImage();
+                } else {
+                    $data['image'] = 'assets/images/image-metiers/default_image.jpg';
+                }
                 return $this->twig->render('Admin/update-job.html.twig', ['themes' => $themes, 'inputs' => $data, 'errors' => $errors]);
             } else {
                 $upload = new Upload();
                 $idUpload = uniqid();
-                $upload->upload($data['name'], 'card-metiers', 'thumbnail', $idUpload);
+
+                if (!empty($_FILES['thumbnail']['name'])) {
+                    $data['thumbnail'] = $upload->renameFile($data['name'], 'card-metiers', 'thumbnail', $idUpload);
+                    $upload->upload($data['name'], 'card-metiers', 'thumbnail', $idUpload);
+                }
+
                 if (!empty($_FILES['image']['tmp_name'])) {
                     $data['image'] = $upload->renameFile($data['name'], 'image-metiers', 'image', $idUpload);
                     $upload->upload($data['name'], 'image-metiers', 'image', $idUpload);
                 }
                 $jobManager->update($data['theme_id'], $data);
-
                 header('Location:/admin/themes-jobs');
                 exit();
             }
@@ -180,7 +191,6 @@ class JobController extends AbstractController
 
 
             if (!empty($_FILES['image']['tmp_name'])) {
-
                 $toValidate['image'] = [
                     new ExtensionUploadValidator($_FILES['image']['type']),
                 new SizeUploadValidator($_FILES['image']['size'])];
@@ -204,9 +214,7 @@ class JobController extends AbstractController
                 $data['thumbnail'] = $upload->renameFile($data['name'], 'card-metiers', 'thumbnail', $idUpload);
 
                 if (!empty($_FILES['image']['tmp_name'])) {
-
                     $data['image'] = $upload->renameFile($data['name'], 'image-metiers', 'image', $idUpload);
-
                 }
 
                 $jobManager = new JobManager();

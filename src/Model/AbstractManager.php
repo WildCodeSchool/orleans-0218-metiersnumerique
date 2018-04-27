@@ -145,6 +145,7 @@ abstract class AbstractManager
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
 
         $resultQuery = $statement->execute();
+
         return $resultQuery;
     }
 
