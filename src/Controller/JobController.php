@@ -99,16 +99,15 @@ class JobController extends AbstractController
                     new MaxLengthValidator($data['description'], 1000)],
                 'resum' => [new NotEmptyValidator($data['resum']),
                     new MaxLengthValidator($data['resum'], 300)],
-                'thumbnail' => [new ExtensionUploadValidator($_FILES['thumbnail']['type']),
-                    new SizeUploadValidator($_FILES['thumbnail']['size'])],
-
             ];
 
 
 
             if (!empty($_FILES['thumbnail']['tmp_name'])) {
-                $thumbResValidate = new ResUploadValidator($_FILES['thumbnail']['tmp_name'], 250);
-                array_push($toValidate['thumbnail'], $thumbResValidate);
+                $toValidate['thumbnail'] = [
+                    new ExtensionUploadValidator($_FILES['thumbnail']['type']),
+                    new SizeUploadValidator($_FILES['thumbnail']['size']),
+                new ResUploadValidator($_FILES['thumbnail']['tmp_name'], 250)];
             }
 
             if (!empty($_FILES['image']['tmp_name'])) {
@@ -118,8 +117,6 @@ class JobController extends AbstractController
                     new ExtensionUploadValidator($_FILES['image']['type']),
                     new SizeUploadValidator($_FILES['image']['size'])];
 
-            } else {
-                $data['image'] = 'assets/images/image-metiers/No-image-available.jpg';
             }
 
             $commentValidator = new Comment($toValidate);
@@ -132,13 +129,11 @@ class JobController extends AbstractController
                 $upload = new Upload();
                 $idUpload = uniqid();
                 if (!empty($_FILES['image']['tmp_name'])) {
-
                     $data['image'] = $upload->renameFile($data['name'], 'image-metiers', 'image', $idUpload);
-
                 }
 
                 $jobManager = new JobManager();
-                $jobManager->insert($data);
+                $jobManager->update($data['theme_id'],$data);
                 $upload->upload($data['name'], 'card-metiers', 'thumbnail', $idUpload);
                 $upload->upload($data['name'], 'image-metiers', 'image', $idUpload);
                 header('Location:/admin/themes-jobs');
