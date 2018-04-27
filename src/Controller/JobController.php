@@ -31,10 +31,21 @@ class JobController extends AbstractController
         $jobController = new JobManager();
         $jobs = $jobController->selectAllOrderByThemeId();
 
+        foreach ($themes as $theme) {
+            $nbJobsByTheme[$theme->getId()]['themeId'] = $theme->getId();
+            $nbJobsByTheme[$theme->getId()]['themeName'] = $theme->getName();
+            $nbJobsByTheme[$theme->getId()]['nbJobs'] = $jobController->countNbJobsByThemeId($theme->getId());
+        }
+
         $commentManager = new CommentManager();
         $comments = $commentManager->selectNbCommentsByJob();
 
-        return $this->twig->render('Jobs/jobs.html.twig', ['themes' => $themes, 'jobs' => $jobs, 'comments' => $comments]);
+        return $this->twig->render('Jobs/jobs.html.twig', [
+            'themes' => $themes,
+            'jobs' => $jobs,
+            'comments' => $comments,
+            'nbJobsByTheme' => $nbJobsByTheme
+        ]);
     }
 
     public function getOneJobById(int $id)
@@ -53,14 +64,14 @@ class JobController extends AbstractController
             $jobManager = new JobManager();
             $_SESSION['deleteJob']['id'] = $_POST['id'];
             $isDeleted = $jobManager->delete($_POST['id']);
-          
+
             if ($isDeleted) {
                 $_SESSION['deleteJob']['success'] = 'Votre fiche a bien été supprimé';
             } else {
                 $_SESSION['deleteJob']['danger'] = 'Votre fiche n\'a pas été supprimée';
             }
         }
-      
+
         if (!empty($_POST['thumbnail'])) {
             $fichier = $_POST['thumbnail'];
             if (file_exists($fichier))
@@ -123,7 +134,7 @@ class JobController extends AbstractController
             $commentValidator = new Comment($toValidate);
             $boolErrors = $commentValidator->isValid();
             $errors = $commentValidator->getErrors();
-          
+
             if (!$boolErrors) {
                 return $this->twig->render('Admin/update-job.html.twig', ['themes' => $themes, 'inputs' => $data, 'errors' => $errors]);
             } else {

@@ -17,9 +17,11 @@
         <div class="row button-pills">
             <div class="col-xs-12 col-lg-offset-3 pilltheme">
                 <ul class="nav nav-pills" role="tablist">
-                    {% for theme in themes %}
+                    {% for theme in nbJobsByTheme %}
                         <li role="presentation" {% if (loop.index==1) %}class="active"{% endif %}>
-                            <a href="#{{ theme.id }}" role="pill" data-toggle="tab">{{ theme.name }}</a>
+                            <a href="#{{ theme.themeId }}" role="pill" data-toggle="tab">
+                                {{ theme.themeName }} ({{ theme.nbJobs }})
+                            </a>
                         </li>
                     {% endfor %}
                 </ul>
