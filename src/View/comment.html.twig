@@ -62,7 +62,7 @@
                             {% endif %}
                             <label class="sr-only" for="lastname">Nom</label>
                             <input class="form-control" type="text" id="lastname" name="lastname"
-                                   placeholder="Votre nom ici .." required
+                                   placeholder="Votre nom ici .. (*)" required
                                     {% if inputs.lastname is not empty %}value="{{ inputs.lastname }}"{% endif %}>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                             {% endif %}
                             <label class="sr-only" for="firstname">Prénom</label>
                             <input class="form-control" type="text" id="firstname" name="firstname"
-                                   placeholder="Votre prénom ici .." required
+                                   placeholder="Votre prénom ici .. (*)" required
                                    {% if inputs.firstname is not empty %}value="{{ inputs.firstname }}"{% endif %}>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                             {% endif %}
                             <label class="sr-only" for="email">Email</label>
                             <input class="form-control" type="email" id="email" name="email"
-                                   placeholder="Adresse email .." required
+                                   placeholder="Adresse email .. (*)" required
                                    {% if inputs.email is not empty %}value="{{ inputs.email }}"{% endif %}>
                         </div>
                     </div>
@@ -137,7 +137,7 @@
                             {% endif %}
                             <label class="sr-only" for="profession">Profession</label>
                             <input class="form-control" type="text" id="profession" name="profession"
-                                   placeholder="Votre profession ici .." required
+                                   placeholder="Votre profession ici .. (*)" required
                                    {% if inputs.profession is not empty %}value="{{ inputs.profession }}"{% endif %}>
                         </div>
                     </div>
@@ -157,7 +157,7 @@
                             {% endif %}
                             <label class="sr-only" for="company">Entreprise</label>
                             <input class="form-control" type="text" id="company" name="company"
-                                   placeholder="Votre entreprise ici .." required
+                                   placeholder="Votre entreprise ici .. (*)" required
                                    {% if inputs.company is not empty %}value="{{ inputs.company }}"{% endif %}>
                         </div>
                     </div>
@@ -179,7 +179,7 @@
                         {% endif %}
                     {% endif %}
                     <textarea name="question1" id="q1" cols="0" rows="0" maxlength="255"
-                              placeholder="Votre réponse ici .." required
+                              placeholder="Votre réponse ici .. (*)" required
                     >{% if inputs.question1 is not empty %}{{ inputs.question1 }}{% endif %}</textarea>
                 </div>
             </div>
@@ -199,7 +199,7 @@
                         {% endif %}
                     {% endif %}
                     <textarea name="question2" id="q2" cols="0" rows="0"  maxlength="255"
-                              placeholder="Votre réponse ici .." required
+                              placeholder="Votre réponse ici .. (*)" required
                     >{% if inputs.question2 is not empty %}{{ inputs.question2 }}{% endif %}</textarea>
                 </div>
             </div>
@@ -219,7 +219,7 @@
                         {% endif %}
                     {% endif %}
                     <textarea name="question3" id="q3" cols="0" rows="0"  maxlength="255"
-                              placeholder="Votre réponse ici .." required
+                              placeholder="Votre réponse ici .. (*)" required
                     >{% if inputs.question3 is not empty %}{{ inputs.question3 }}{% endif %}</textarea>
                 </div>
             </div>

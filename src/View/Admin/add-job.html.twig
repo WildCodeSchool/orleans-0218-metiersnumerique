@@ -1,6 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/form.css">
     <link rel="stylesheet" href="/assets/css/admin/addjob.css">
 {% endblock %}
 
@@ -25,7 +26,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="name">Titre</label>
+                    <label for="name">Titre</label> <span class="red">(*)</span>
                     <input type="text" class="form-control" id="name" name="name" placeholder="" {% if inputs.name is not empty %}value="{{ inputs.name }}"{% endif %}>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
@@ -41,7 +42,7 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    <label for="description">Description</label>
+                    <label for="description">Description</label> <span class="red">(*)</span>
                     <textarea class="form-control" id="description" name="description" rows="10">{% if inputs.description is not empty %}{{ inputs.description }}"{% endif %}</textarea>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
@@ -57,10 +58,8 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    <label for="resum">Resumé</label>
+                    <label for="resum">Resumé</label> <span class="red">(*)</span>
                     <input type="text" class="form-control" id="resum" name="resum" placeholder="" maxlength="80" {% if inputs.resum is not empty %}value="{{ inputs.resum }}"{% endif %}>
-
-
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.resum %}
@@ -91,7 +90,7 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    <label for="thumbnail">Vignette</label>
+                    <label for="thumbnail">Vignette</label> <span class="red">(*)</span>
                     <input type="file" id="thumbnail" name="thumbnail">
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}

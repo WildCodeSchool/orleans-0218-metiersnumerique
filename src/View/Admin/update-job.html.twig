@@ -1,6 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/form.css">
     <link rel="stylesheet" href="/assets/css/admin/comment.css">
 {% endblock %}
 
@@ -25,7 +26,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="name">Titre</label>
+                    <label for="name">Titre</label> <span class="red">(*)</span>
                     <input type="text" class="form-control" id="name" name="name" placeholder=""
                            {% if inputs.name is not empty %}value="{{ inputs.name }}"
                            {% elseif job.name is not empty %}value="{{ job.name }}"{% endif %}>
@@ -43,7 +44,7 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    <label for="description">Description</label>
+                    <label for="description">Description</label> <span class="red">(*)</span>
                     <textarea class="form-control" id="description" name="description"
                               rows="10">{% if inputs.description is not empty %}{{ inputs.description }}{% elseif job.description is not empty %}{{ job.description }}{% endif %}</textarea>
                     {% if errors is not empty %}
@@ -60,7 +61,7 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    <label for="resum">Resumé</label>
+                    <label for="resum">Resumé</label> <span class="red">(*)</span>
                     <input type="text" class="form-control" id="resum" name="resum" placeholder="" maxlength="80"
                            {% if inputs.resum is not empty %}value="{{ inputs.resum }}"
                            {% elseif job.resum is not empty %}value="{{ job.resum }}"{% endif %}>
