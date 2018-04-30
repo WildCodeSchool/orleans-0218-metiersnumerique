@@ -4,6 +4,7 @@
 app/db.php
 
 public/assets/images/image-metiers/*
+!public/assets/images/image-metiers/default_image.jpg
 public/assets/images/card-metiers/*
 public/assets/images/avatar/*
 !public/assets/images/avatar/default_avatar.jpg
