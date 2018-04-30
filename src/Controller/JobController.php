@@ -116,7 +116,7 @@ class JobController extends AbstractController
                 'description' => [new NotEmptyValidator($data['description']),
                     new MaxLengthValidator($data['description'], 1000)],
                 'resum' => [new NotEmptyValidator($data['resum']),
-                    new MaxLengthValidator($data['resum'], 300)],
+                    new MaxLengthValidator($data['resum'], 140)],
             ];
 
             if (!empty($_FILES['thumbnail']['tmp_name'])) {
@@ -178,33 +178,34 @@ class JobController extends AbstractController
 
             $toValidate = [
                 'theme_id' => [new MaxLengthValidator($data['theme_id'], 11)],
-                'video' => [new MaxLengthValidator($data['video'], 255)],
                 'name' => [new NotEmptyValidator($data['name']),
                     new MaxLengthValidator($data['name'], 255)],
                 'description' => [new NotEmptyValidator($data['description']),
-                    new MaxLengthValidator($data['description'], 255)],
+                    new MaxLengthValidator($data['description'], 1000)],
                 'resum' => [new NotEmptyValidator($data['resum']),
-                    new MaxLengthValidator($data['resum'], 255)],
+                    new MaxLengthValidator($data['resum'], 140)],
                 'thumbnail' => [new ExtensionUploadValidator($_FILES['thumbnail']['type']),
                     new SizeUploadValidator($_FILES['thumbnail']['size']),
                     new NotEmptyValidator($_FILES['thumbnail']['name'])],
             ];
 
+            if (empty($data['video'])) {
+                $data['video'] = null;
+            } else {
+                $toValidate['video'] = new MaxLengthValidator($data['video'], 255);
+            }
 
             if (!empty($_FILES['thumbnail']['tmp_name'])) {
                 $thumbResValidate = new ResUploadValidator($_FILES['thumbnail']['tmp_name'], 250);
                 array_push($toValidate['thumbnail'], $thumbResValidate);
             }
 
-
             if (!empty($_FILES['image']['tmp_name'])) {
-
                 $toValidate['image'] = [
                     new ExtensionUploadValidator($_FILES['image']['type']),
                 new SizeUploadValidator($_FILES['image']['size'])];
-
             } else {
-                $data['image'] = 'assets/images/image-metiers/No-image-available.jpg';
+                $data['image'] = null;
             }
 
             $commentValidator = new Comment($toValidate);
@@ -216,15 +217,12 @@ class JobController extends AbstractController
             if (!$boolErrors) {
                 return $this->twig->render('Admin/add-job.html.twig', ['themes' => $themes, 'inputs' => $data, 'errors' => $errors]);
             } else {
-
                 $upload = new Upload();
                 $idUpload = uniqid();
                 $data['thumbnail'] = $upload->renameFile($data['name'], 'card-metiers', 'thumbnail', $idUpload);
 
                 if (!empty($_FILES['image']['tmp_name'])) {
-
                     $data['image'] = $upload->renameFile($data['name'], 'image-metiers', 'image', $idUpload);
-
                 }
 
                 $jobManager = new JobManager();
