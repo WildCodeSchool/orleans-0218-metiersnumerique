@@ -37,7 +37,7 @@
                         <img id="photo" src="/assets/images/avatar/default_avatar.jpg" class="img-circle" width="90" height="90" alt="image">
                         {% if errors is not empty %}
                             {% set countErrors = 0 %}
-                            {% for error in errors.image %}
+                            {% for error in errors.avatar %}
                                 {% for err in error if err is not empty %}
                                     <p class="text-danger">{{ err }}</p>
                                     {% set countErrors = countErrors + 1 %}

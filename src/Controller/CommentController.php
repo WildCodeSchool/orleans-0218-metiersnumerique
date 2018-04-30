@@ -16,6 +16,8 @@ use Validator\Comment;
 use Validator\EmailValidator;
 use Validator\NotEmptyValidator;
 use Validator\MaxLengthValidator;
+use Validator\ExtensionUploadValidator;
+use Validator\SizeUploadValidator;
 use Model\Paginator;
 
 class CommentController extends AbstractController
@@ -96,11 +98,18 @@ class CommentController extends AbstractController
                                 new MaxLengthValidator($data['question3'], 255)],
             ];
 
+            if(!empty($_FILES['avatar']['name'])) {
+                $toValidate['avatar'] = [
+                    new ExtensionUploadValidator($_FILES['avatar']['type']),
+                    new SizeUploadValidator($_FILES['avatar']['size'])];
+            }
+
             $commentValidator = new Comment($toValidate);
 
             $boolErrors = $commentValidator->isValid();
 
             $errors = $commentValidator->getErrors();
+
 
             if (!$boolErrors) {
                 return $this->twig->render('comment.html.twig', ['job' => $job, 'inputs' => $data, 'errors' => $errors]);
@@ -116,6 +125,8 @@ class CommentController extends AbstractController
                     } else {
                         $data['avatar'] = 'assets/images/avatar/default_avatar.jpg';
                     }
+                } else {
+                    $data['avatar'] = 'assets/images/avatar/default_avatar.jpg';
                 }
 
                 $commentManager = new CommentManager();
