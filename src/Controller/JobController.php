@@ -93,6 +93,7 @@ class JobController extends AbstractController
             }
         }
         header('Location: /admin/themes-jobs');
+        exit();
     }
 
     /**
