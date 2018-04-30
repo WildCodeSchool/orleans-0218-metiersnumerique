@@ -62,27 +62,36 @@ class JobController extends AbstractController
     {
         if (!empty($_POST)) {
             $jobManager = new JobManager();
-            $_SESSION['deleteJob']['id'] = $_POST['id'];
-            $isDeleted = $jobManager->delete($_POST['id']);
+            $jobId = $_POST['id'];
+
+            $commentManager = new CommentManager();
+            $comments = $commentManager->selectAllCommentsByJobId($jobId);
+
+            foreach ($comments as $comment) {
+                $commentManager->deleteCommentAvatar($comment->getId());
+                $commentManager->delete($comment->getId());
+            }
+
+            $_SESSION['deleteJob']['id'] = $jobId;
+            $isDeleted = $jobManager->delete($jobId);
 
             if ($isDeleted) {
                 $_SESSION['deleteJob']['success'] = 'Votre fiche a bien été supprimé';
             } else {
                 $_SESSION['deleteJob']['danger'] = 'Votre fiche n\'a pas été supprimée';
             }
-        }
 
-        if (!empty($_POST['thumbnail'])) {
-            $fichier = $_POST['thumbnail'];
-            if (file_exists($fichier))
-                unlink($fichier);
+            if (!empty($_POST['thumbnail'])) {
+                $fichier = $_POST['thumbnail'];
+                if (file_exists($fichier))
+                    unlink($fichier);
+            }
+            if (!empty($_POST['image'])) {
+                $fichier = $_POST['image'];
+                if (file_exists($fichier))
+                    unlink($fichier);
+            }
         }
-        if (!empty($_POST['image'])) {
-            $fichier = $_POST['image'];
-            if (file_exists($fichier))
-                unlink($fichier);
-        }
-
         header('Location: /admin/themes-jobs');
     }
 
