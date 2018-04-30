@@ -11,24 +11,45 @@ namespace Model;
 
 class Upload
 {
-
-    public function upload ($name,$dir,$index,$id)
+    /**
+     * @param $name
+     * @param $dir
+     * @param $index
+     * @param $id
+     * @return bool
+     */
+    public function upload($name, $dir, $index, $id)
     {
 
-        $typeUpload = strtolower(  substr(  strrchr($_FILES[$index]['name'], '.')  ,1)  );
-        $road = '../public/assets/images/'.$dir.'/'.$name.'-'.$id.'.'.$typeUpload;
+        $typeUpload = strtolower(substr(strrchr($_FILES[$index]['name'], '.'), 1));
+        $road = '../public/assets/images/' . $dir . '/' . $name . '-' . $id . '.' . $typeUpload;
 
-        return move_uploaded_file($_FILES[$index]['tmp_name'],$road);
+        return move_uploaded_file($_FILES[$index]['tmp_name'], $road);
 
     }
 
-    public function renameFile($name,$dir,$index,$id)
+    /**
+     * @param $name
+     * @param $dir
+     * @param $index
+     * @param $id
+     * @return string
+     */
+    public function renameFile($name, $dir, $index, $id)
     {
 
-        $typeUpload = strtolower(  substr(  strrchr($_FILES[$index]['name'], '.')  ,1)  );
-        $road = 'assets/images/'.$dir.'/'.$name.'-'.$id.'.'.$typeUpload;
+        $typeUpload = strtolower(substr(strrchr($_FILES[$index]['name'], '.'), 1));
+        $road = 'assets/images/' . $dir . '/' . $name . '-' . $id . '.' . $typeUpload;
 
         return $road;
+    }
+
+    /**
+     * @param $name
+     */
+    public function deleteFile($name): bool
+    {
+        return unlink($name);
     }
 
 }
