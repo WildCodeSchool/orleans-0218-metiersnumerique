@@ -47,13 +47,9 @@ class Upload
     /**
      * @param $name
      */
-    public function deleteFile($name)
+    public function deleteFile($name): bool
     {
-        if (file_exists($name)) {
-            return unlink($name);
-        } else {
-            return false;
-        }
+        return unlink($name);
     }
 
 }

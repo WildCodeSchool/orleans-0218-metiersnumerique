@@ -149,7 +149,7 @@ class JobController extends AbstractController
                     $data['thumbnail'] = $upload->renameFile($data['name'], 'card-metiers', 'thumbnail', $idUpload);
                     $upload->upload($data['name'], 'card-metiers', 'thumbnail', $idUpload);
                 }
-                if (!empty($_FILES['image']['tmp_name'])) {
+                if (!empty($_FILES['image']['name'])) {
                     $toDelete = $job->getImage();
                     $upload->deleteFile($toDelete);
                     $data['image'] = $upload->renameFile($data['name'], 'image-metiers', 'image', $idUpload);
