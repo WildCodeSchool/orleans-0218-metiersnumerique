@@ -11,7 +11,7 @@ namespace Validator;
 
 class SizeUploadValidator extends AbstractValidator
 {
-    const SIZE = 'L\'image de doit pas depasser 500 ko et faire moins de 250px de hauteur';
+    const SIZE = 'L\'image ne doit pas dépasser 500 ko et faire moins de 250px de hauteur';
 
     /**
      * @var string
