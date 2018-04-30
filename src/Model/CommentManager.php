@@ -86,6 +86,19 @@ class CommentManager extends AbstractManager
         return $statement->fetchAll(\PDO::FETCH_CLASS, $this->className);
     }
 
+    public function selectAllCommentsByJobId(int $jobId): array
+    {
+
+        $query = "SELECT * FROM $this->table
+                    WHERE job_id= :jobId";
+
+        $statement = $this->pdoConnection->prepare($query);
+        $statement->bindValue(':jobId', $jobId, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll(\PDO::FETCH_CLASS, $this->className);
+    }
+
     public function addLikeByCommentId(int $id)
     {
         $query = 'UPDATE ' . $this->table . ' SET ' . $this->table . '.like = ' . $this->table . '.like +1 WHERE id = :id; ';
