@@ -16,6 +16,8 @@ use Validator\Comment;
 use Validator\EmailValidator;
 use Validator\NotEmptyValidator;
 use Validator\MaxLengthValidator;
+use Validator\ExtensionUploadValidator;
+use Validator\SizeUploadValidator;
 use Model\Paginator;
 
 class CommentController extends AbstractController
@@ -76,17 +78,6 @@ class CommentController extends AbstractController
             $data['date'] = date("Y-m-d H:i:s"); //(le format DATETIME de MySQL)
             $data['valid'] = 0;
 
-            if(!empty($_FILES['avatar']['name'])) {
-                $fileName = $_FILES["avatar"]["name"];
-                $tempFile = $_FILES["avatar"]["tmp_name"];
-                $extension = pathinfo($fileName,PATHINFO_EXTENSION);
-                $dirTarget = "assets/images/avatar/".uniqid("image").".".$extension;
-                move_uploaded_file($tempFile, $dirTarget);
-                $data['avatar'] = "/".$dirTarget;
-            } else  {
-                $data['avatar'] = '/assets/images/avatar/default_avatar.jpg';
-            }
-
             $toValidate = [
                 'lastname' => [new NotEmptyValidator($data['lastname']),
                                 new MaxLengthValidator($data['lastname'], 45)],
@@ -107,15 +98,32 @@ class CommentController extends AbstractController
                                 new MaxLengthValidator($data['question3'], 255)],
             ];
 
+            if(!empty($_FILES['avatar']['name'])) {
+                $toValidate['avatar'] = [
+                    new ExtensionUploadValidator($_FILES['avatar']['type']),
+                    new SizeUploadValidator($_FILES['avatar']['size'])];
+            }
+
             $commentValidator = new Comment($toValidate);
 
-            $boolErrors = $commentValidator->isValid();
+            $isValid = $commentValidator->isValid();
 
-            $errors = $commentValidator->getErrors();
+            if (!$isValid) {
+                $errors = $commentValidator->getErrors();
 
-            if (!$boolErrors) {
                 return $this->twig->render('comment.html.twig', ['job' => $job, 'inputs' => $data, 'errors' => $errors]);
             } else {
+
+                if(!empty($_FILES['avatar']['name'])) {
+                    $fileName = $_FILES["avatar"]["name"];
+                    $tempFile = $_FILES["avatar"]["tmp_name"];
+                    $extension = pathinfo($fileName,PATHINFO_EXTENSION);
+                    $dirTarget = "assets/images/avatar/".uniqid("image").".".$extension;
+                    if(move_uploaded_file($tempFile, $dirTarget)) {
+                        $data['avatar'] = $dirTarget;
+                    }
+                }
+
                 $commentManager = new CommentManager();
                 $commentManager->insert($data);
 
@@ -147,7 +155,7 @@ class CommentController extends AbstractController
                 $comment = $commentManager->selectOneById($id);
                 $data['avatar'] = $comment->getAvatar();
             } else {
-                $data['avatar'] = '/assets/images/avatar/default_avatar.jpg';
+                $data['avatar'] = 'assets/images/avatar/default_avatar.jpg';
             }
             $data['valid'] = 1;
 
@@ -171,11 +179,32 @@ class CommentController extends AbstractController
         return $this->twig->render('load-comment.html.twig', ['comments' => $comments]);
     }
 
-    public function addLike(int $commentId, int $jobId)
+    public function addLike()
     {
         $commentManager = new CommentManager();
-        $commentManager->addLikeByCommentId($commentId);
-        header('Location: /job/' .$jobId);
 
+        if (!empty($_POST)) {
+            $commentId = $_POST['commentId'];
+
+            if (!isset($_COOKIE["like$commentId"])) {
+                $commentManager->addLikeByCommentId($commentId);
+                setcookie('like'.$commentId, true);
+            }
+        }
+        $nbLike = $commentManager->selectNbLikeByCommentId($commentId);
+
+        return $nbLike;
+    }
+
+    public function deleteComment()
+    {
+        if (!empty($_POST['id'])) {
+            $commentManager = new CommentManager();
+            $commentManager->deleteCommentAvatar($_POST['id']);
+            $commentManager->delete($_POST['id']);
+        }
+
+        header('Location: /admin/comment');
+        exit();
     }
 }

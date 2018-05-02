@@ -86,11 +86,47 @@ class CommentManager extends AbstractManager
         return $statement->fetchAll(\PDO::FETCH_CLASS, $this->className);
     }
 
+    public function selectAllCommentsByJobId(int $jobId): array
+    {
+
+        $query = "SELECT * FROM $this->table
+                    WHERE job_id= :jobId";
+
+        $statement = $this->pdoConnection->prepare($query);
+        $statement->bindValue(':jobId', $jobId, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll(\PDO::FETCH_CLASS, $this->className);
+    }
+
     public function addLikeByCommentId(int $id)
     {
         $query = 'UPDATE ' . $this->table . ' SET ' . $this->table . '.like = ' . $this->table . '.like +1 WHERE id = :id; ';
         $prep = $this->pdoConnection->prepare($query);
         $prep->bindValue(':id', $id, \PDO::PARAM_INT);
         $prep->execute();
+    }
+
+    public function deleteCommentAvatar(int $id)
+    {
+        $comment = $this->selectOneById($id);
+        $avatar = $comment->getAvatar();
+        if (file_exists($avatar) && $avatar != 'assets/images/avatar/default_avatar.jpg') {
+            unlink($avatar);
+        }
+    }
+  
+    public function selectNbLikeByCommentId(int $commentId): int
+    {
+        $query = "SELECT $this->table.like 
+                  FROM $this->table  
+                  WHERE id = :commentId";
+
+        $statement = $this->pdoConnection->prepare($query);
+        $statement->bindValue('commentId', $commentId, \PDO::PARAM_INT);
+        $statement->execute();
+        $nbLike = $statement->fetchColumn();
+
+        return $nbLike;
     }
 }

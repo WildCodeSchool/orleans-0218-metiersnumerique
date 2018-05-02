@@ -17,7 +17,7 @@
         <form action="/admin/comment-update" method="POST">
             <input type="hidden" name="id" value="{{ data[0].comment.id }}">
             <div class="row">
-                <div class="col-xs-12 col-sm-offset-1 col-md-6">
+                <div class="col-xs-12 col-sm-offset-1">
                     <h1>Commentaire de
                         <span class="orange">{{ data[0].comment.firstname }} {{ data[0].comment.lastname }}</span>
                     </h1>
@@ -36,7 +36,7 @@
                 <div class="col-xs-offset-2 col-xs-12 col-sm-offset-3 col-md-offset-0 col-md-6">
                     <div class="col-xs-6 col-md-5">
                         <div class="thumbnail">
-                            <img src="{{ data[0].comment.avatar }}" alt="">
+                            <img src="/{{ data[0].comment.avatar }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -52,9 +52,7 @@
                 <div class="col-sm-offset-1 col-xs-12 col-sm-10 col-md-9">
                     <h3>Les plus du métier</h3>
                     <p class="answer">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Ex in ipsam iste nulla quam quibusdam sit suscipit, ut.
-                        Maiores nostrum nulla odio provident quidem quisquam quo sit velit voluptatem voluptatum.
+                        {{ data[0].comment.question1 }}
                     </p>
                 </div>
             </div>
@@ -62,9 +60,7 @@
                 <div class="col-sm-offset-1 col-xs-12 col-sm-10 col-md-9">
                     <h3>Les moins du métier</h3>
                     <p class="answer">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Ex in ipsam iste nulla quam quibusdam sit suscipit, ut.
-                        Maiores nostrum nulla odio provident quidem quisquam quo sit velit voluptatem voluptatum.
+                        {{ data[0].comment.question2 }}
                     </p>
                 </div>
             </div>
@@ -72,9 +68,7 @@
                 <div class="col-sm-offset-1 col-xs-12 col-sm-10 col-md-9">
                     <h3>Commentaire libre</h3>
                     <p class="answer">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Ex in ipsam iste nulla quam quibusdam sit suscipit, ut.
-                        Maiores nostrum nulla odio provident quidem quisquam quo sit velit voluptatem voluptatum.
+                        {{ data[0].comment.question3 }}
                     </p>
                 </div>
             </div>
@@ -82,11 +76,15 @@
                 <input type="submit" value="Valider" class="btn btn-success">
             </div>
         </form>
-        <form action="" method="POST">
+        <form action="/admin/delete-comment" method="POST" confirm="Confirmez-vous la suppression du commentaire ?">
             <input type="hidden" name="id" value="{{ data[0].comment.id }}">
             <div class="col-xs-3 col-md-offset-1 col-md-2">
                 <input type="submit" value="Supprimer" class="btn btn-danger">
             </div>
         </form>
     </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="/assets/js/confirm.js"></script>
 {% endblock %}

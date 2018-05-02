@@ -24,9 +24,29 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <p><span class="red">(*)</span> : Champ obligatoire</p>
+                </div>
+            </div>
+            <div class="col-xs-offset-4 col-xs-4">
+                <hr>
+            </div>
+            <div class="row">
                 <div class="form-inline">
                     <div id="div-avatar" class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
                         <img id="photo" src="/assets/images/avatar/default_avatar.jpg" class="img-circle" width="90" height="90" alt="image">
+                        {% if errors is not empty %}
+                            {% set countErrors = 0 %}
+                            {% for error in errors.avatar %}
+                                {% for err in error if err is not empty %}
+                                    <p class="text-danger">{{ err }}</p>
+                                    {% set countErrors = countErrors + 1 %}
+                                {% endfor %}
+                            {% endfor %}
+                            {% if countErrors == 0 %}
+                                <p class="text-success">l'upload a été accepté</p>
+                            {% endif %}
+                        {% endif %}
                         <label for="avatar" class="label-file">Ajouter votre avatar (.jpg, .png ou .gif)</label>
                         <input id="avatar" name="avatar" type="file"/>
                     </div>
@@ -48,9 +68,9 @@
                                     <span class="green">Champ valide</span>
                                 {% endif %}
                             {% endif %}
-                            <label class="sr-only" for="lastname">Nom</label>
+                            <label for="lastname">Nom</label> <span class="red">(*)</span>
                             <input class="form-control" type="text" id="lastname" name="lastname"
-                                   placeholder="Votre nom ici .." required
+                                   placeholder="Votre nom ici .. (*)" required
                                     {% if inputs.lastname is not empty %}value="{{ inputs.lastname }}"{% endif %}>
                         </div>
                     </div>
@@ -68,9 +88,9 @@
                                     <span class="green">Champ valide</span>
                                 {% endif %}
                             {% endif %}
-                            <label class="sr-only" for="firstname">Prénom</label>
+                            <label for="firstname">Prénom</label> <span class="red">(*)</span>
                             <input class="form-control" type="text" id="firstname" name="firstname"
-                                   placeholder="Votre prénom ici .." required
+                                   placeholder="Votre prénom ici .. (*)" required
                                    {% if inputs.firstname is not empty %}value="{{ inputs.firstname }}"{% endif %}>
                         </div>
                     </div>
@@ -92,9 +112,9 @@
                                     <span class="green">Champ valide</span>
                                 {% endif %}
                             {% endif %}
-                            <label class="sr-only" for="email">Email</label>
+                            <label for="email">Email</label> <span class="red">(*)</span>
                             <input class="form-control" type="email" id="email" name="email"
-                                   placeholder="Adresse email .." required
+                                   placeholder="Adresse email .. (*)" required
                                    {% if inputs.email is not empty %}value="{{ inputs.email }}"{% endif %}>
                         </div>
                     </div>
@@ -123,9 +143,9 @@
                                     <span class="green">Champ valide</span>
                                 {% endif %}
                             {% endif %}
-                            <label class="sr-only" for="profession">Profession</label>
+                            <label for="profession">Profession</label> <span class="red">(*)</span>
                             <input class="form-control" type="text" id="profession" name="profession"
-                                   placeholder="Votre profession ici .." required
+                                   placeholder="Votre profession ici .. (*)" required
                                    {% if inputs.profession is not empty %}value="{{ inputs.profession }}"{% endif %}>
                         </div>
                     </div>
@@ -143,9 +163,9 @@
                                     <span class="green">Champ valide</span>
                                 {% endif %}
                             {% endif %}
-                            <label class="sr-only" for="company">Entreprise</label>
+                            <label for="company">Entreprise</label> <span class="red">(*)</span>
                             <input class="form-control" type="text" id="company" name="company"
-                                   placeholder="Votre entreprise ici .." required
+                                   placeholder="Votre entreprise ici .. (*)" required
                                    {% if inputs.company is not empty %}value="{{ inputs.company }}"{% endif %}>
                         </div>
                     </div>
@@ -153,7 +173,7 @@
             </div>
             <div class="row firstTextarea">
                 <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
-                    <h3>Ce que vous aimez le plus dans votre métier</h3>
+                    <h3>Ce que vous aimez le plus dans votre métier <span class="red">(*)</span></h3>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.question1 %}
@@ -167,13 +187,13 @@
                         {% endif %}
                     {% endif %}
                     <textarea name="question1" id="q1" cols="0" rows="0" maxlength="255"
-                              placeholder="Votre réponse ici .." required
+                              placeholder="Votre réponse ici .. (*)" required
                     >{% if inputs.question1 is not empty %}{{ inputs.question1 }}{% endif %}</textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
-                    <h3>Ce que vous aimez le moins dans votre métier</h3>
+                    <h3>Ce que vous aimez le moins dans votre métier <span class="red">(*)</span></h3>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.question2 %}
@@ -187,13 +207,13 @@
                         {% endif %}
                     {% endif %}
                     <textarea name="question2" id="q2" cols="0" rows="0"  maxlength="255"
-                              placeholder="Votre réponse ici .." required
+                              placeholder="Votre réponse ici .. (*)" required
                     >{% if inputs.question2 is not empty %}{{ inputs.question2 }}{% endif %}</textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
-                    <h3>Commentaires libres</h3>
+                    <h3>Commentaires libres <span class="red">(*)</span></h3>
                     {% if errors is not empty %}
                         {% set countErrors = 0 %}
                         {% for error in errors.question3 %}
@@ -207,16 +227,21 @@
                         {% endif %}
                     {% endif %}
                     <textarea name="question3" id="q3" cols="0" rows="0"  maxlength="255"
-                              placeholder="Votre réponse ici .." required
+                              placeholder="Votre réponse ici .. (*)" required
                     >{% if inputs.question3 is not empty %}{{ inputs.question3 }}{% endif %}</textarea>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-offset-1 col-md-offset-2 col-xs-10 col-sm-10 col-md-4">
-                    <input type="submit" value="Envoyer mon commentaire" class="btn btn-lg">
+                <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
+                    <p>Votre commentaire sera affiché une fois validé par un modérateur.</p>
                 </div>
-                <div class="col-xs-10 col-sm-10 col-md-4">
-                    <a id="back" href="/job/{{ job.id }}" class="btn btn-lg pull-right">Revenir à la fiche métier</a>
+            </div>
+            <div class="row">
+                <div class="col-xs-offset-2 col-md-offset-2 col-xs-8 col-sm-4 col-md-4">
+                    <input type="submit" value="Envoyer mon commentaire" class="btn btn-lg btnComment">
+                </div>
+                <div class="col-xs-offset-2 col-xs-8 col-sm-offset-1 col-sm-3">
+                    <a id="back" href="/job/{{ job.id }}" class="btn btn-lg pull-right btnComment">Revenir à la fiche métier</a>
                 </div>
             </div>
         </form>

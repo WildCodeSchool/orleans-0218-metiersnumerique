@@ -1,24 +1,16 @@
 footer {
     background-color: #35383A;
     text-align: center;
-    color: white;
-    min-height: 50vh;
+    min-height: 20vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     padding: 30px 50px;
 }
 
-footer h4 {
-    font-size: calc(1vw + 1vh + 1vmin);
-}
 
-footer .logo {
-    width: 80px;
-}
-
-.blue {
-    color: #1FA597;
+#logo:hover {
+    box-shadow: 0 0px 0px 0 #272727;
 }
 
 .form-control {
@@ -37,14 +29,18 @@ footer .logo {
     justify-content: center;
 }
 
-#network div{
-    border-radius: 100px;
-    min-width: 40px;
-    min-height: 40px;
+#network div {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
     margin: 5px;
     background-size: contain;
     background-repeat: no-repeat;
     box-shadow: 0 5px 5px 0 #272727;
+}
+
+#logo {
+    background-image: url("/assets/images/footer/logo_wild.png");
 }
 
 #hover-fb {
@@ -93,4 +89,11 @@ footer .logo {
 
 #hover-gh:hover {
     background-image: url("/assets/images/footer/github.png");
+}
+
+@media screen and (max-width: 766px) {
+    #network div {
+        width: 30px;
+        height: 30px;
+    }
 }

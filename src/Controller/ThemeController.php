@@ -111,5 +111,6 @@ class ThemeController extends AbstractController
             }
         }
         header('Location: /admin/themes-jobs');
+        exit();
     }
 }

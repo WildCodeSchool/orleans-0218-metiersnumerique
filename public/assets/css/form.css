@@ -46,6 +46,7 @@ textarea {
 span.red {
     color: red;
     font-weight: bold;
+    font-size: 14px;
 }
 
 span.green {
@@ -55,6 +56,7 @@ span.green {
 
 .img-circle {
     display: inline-block;
+    object-fit: cover;
 }
 
 #avatar {
@@ -69,3 +71,10 @@ span.green {
     color: blue;
 }
 
+.btnComment {
+    margin-bottom: 10px;
+}
+
+hr {
+    border-top: 1px solid black;
+}

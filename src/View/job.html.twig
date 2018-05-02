@@ -25,7 +25,7 @@
             {% if job.video is not empty or job.image is not empty %}
             <div class="col-sm-12 col-md-8">
             {% endif %}
-                <p>{{job.description}}</p>
+                <p>{{job.description|nl2br}}</p>
             </div>
             <div class="col-sm-12 col-md-4">
                 {% if job.video %}
@@ -35,7 +35,7 @@
                 </div>
                 {% endif %}
                 {% if job.video is empty and job.image is not empty %}
-                    <img src="{{ job.image }}" alt="image du métier en cours" class="img-responsive" style="margin-bottom: 5vh">
+                    <img src="/{{ job.image }}" alt="image du métier en cours" class="img-responsive" style="margin-bottom: 5vh">
                 {% endif %}
 
             </div>
@@ -67,4 +67,5 @@
 
 {% block javascript %}
     <script src="/assets/js/load-comments.js"></script>
+    <script src="/assets/js/add-like.js"></script>
 {% endblock %}
