@@ -37,7 +37,7 @@
                         <img id="photo" src="/assets/images/avatar/default_avatar.jpg" class="img-circle" width="90" height="90" alt="image">
                         {% if errors is not empty %}
                             {% set countErrors = 0 %}
-                            {% for error in errors.image %}
+                            {% for error in errors.avatar %}
                                 {% for err in error if err is not empty %}
                                     <p class="text-danger">{{ err }}</p>
                                     {% set countErrors = countErrors + 1 %}
@@ -229,6 +229,11 @@
                     <textarea name="question3" id="q3" cols="0" rows="0"  maxlength="255"
                               placeholder="Votre réponse ici .. (*)" required
                     >{% if inputs.question3 is not empty %}{{ inputs.question3 }}{% endif %}</textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
+                    <p>Votre commentaire sera affiché une fois validé par un modérateur.</p>
                 </div>
             </div>
             <div class="row">

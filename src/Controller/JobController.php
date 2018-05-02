@@ -213,7 +213,7 @@ class JobController extends AbstractController
             if (!empty($_FILES['image']['tmp_name'])) {
                 $toValidate['image'] = [
                     new ExtensionUploadValidator($_FILES['image']['type']),
-                new SizeUploadValidator($_FILES['image']['size'])];
+                    new SizeUploadValidator($_FILES['image']['size'])];
             } else {
                 $data['image'] = null;
             }
