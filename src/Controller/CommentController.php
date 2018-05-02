@@ -149,7 +149,7 @@ class CommentController extends AbstractController
                 $comment = $commentManager->selectOneById($id);
                 $data['avatar'] = $comment->getAvatar();
             } else {
-                $data['avatar'] = '/assets/images/avatar/default_avatar.jpg';
+                $data['avatar'] = 'assets/images/avatar/default_avatar.jpg';
             }
             $data['valid'] = 1;
 
