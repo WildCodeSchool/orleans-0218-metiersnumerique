@@ -124,7 +124,7 @@ class JobController extends AbstractController
                 'name' => [new NotEmptyValidator($data['name']),
                     new MaxLengthValidator($data['name'], 255)],
                 'description' => [new NotEmptyValidator($data['description']),
-                    new MaxLengthValidator($data['description'], 1000)],
+                    new MaxLengthValidator($data['description'], 1700)],
                 'resum' => [new NotEmptyValidator($data['resum']),
                     new MaxLengthValidator($data['resum'], 140)],
             ];
@@ -191,7 +191,7 @@ class JobController extends AbstractController
                 'name' => [new NotEmptyValidator($data['name']),
                     new MaxLengthValidator($data['name'], 255)],
                 'description' => [new NotEmptyValidator($data['description']),
-                    new MaxLengthValidator($data['description'], 1000)],
+                    new MaxLengthValidator($data['description'], 1700)],
                 'resum' => [new NotEmptyValidator($data['resum']),
                     new MaxLengthValidator($data['resum'], 140)],
                 'thumbnail' => [new ExtensionUploadValidator($_FILES['thumbnail']['type']),
