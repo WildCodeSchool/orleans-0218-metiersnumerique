@@ -122,8 +122,6 @@ class CommentController extends AbstractController
                     if(move_uploaded_file($tempFile, $dirTarget)) {
                         $data['avatar'] = $dirTarget;
                     }
-                } else {
-                    $data['avatar'] = 'assets/images/avatar/default_avatar.jpg';
                 }
 
                 $commentManager = new CommentManager();
