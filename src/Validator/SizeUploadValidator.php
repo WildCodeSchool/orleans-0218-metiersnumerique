@@ -11,7 +11,9 @@ namespace Validator;
 
 class SizeUploadValidator extends AbstractValidator
 {
+
     const SIZE = 'L\'image ne doit pas dépasser ' . SELF::SIZEMAX/1000 . ' ko.';
+
 
     const SIZEMAX = '500000';
     /**

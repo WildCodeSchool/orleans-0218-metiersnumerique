@@ -108,9 +108,9 @@ class CommentController extends AbstractController
 
             $isValid = $commentValidator->isValid();
 
-
             if (!$isValid) {
                 $errors = $commentValidator->getErrors();
+
                 return $this->twig->render('comment.html.twig', ['job' => $job, 'inputs' => $data, 'errors' => $errors]);
             } else {
 
@@ -122,6 +122,8 @@ class CommentController extends AbstractController
                     if(move_uploaded_file($tempFile, $dirTarget)) {
                         $data['avatar'] = $dirTarget;
                     }
+                } else {
+                    $data['avatar'] = 'assets/images/avatar/default_avatar.jpg';
                 }
 
                 $commentManager = new CommentManager();
